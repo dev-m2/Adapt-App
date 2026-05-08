@@ -1,0 +1,6 @@
+pandas
+numpy==2.4.4
+sm-2
+sentence-transformers
+
+

@@ -5,6 +5,7 @@ import pandas as pd
 import math
 from textwrap import dedent #for removing indentatino from multiline input string
 import os #to check what's inside the neuromods folder
+from sentence_transformers import SentenceTransformer, util
 
 def init():
     with sqlite3.connect('flashcards.db') as db:
@@ -22,6 +23,8 @@ def init():
             import TEXT DEFAULT EMPTY)
         ''')
         db.commit()
+
+        model = SentenceTransformer("Alibaba-NLP/gte-Qwen2-7B-instruct")   # or any other strong model
 
 def createCard():
     cue = input("What is the cue?: ")
@@ -172,6 +175,19 @@ def importCards():
     else:
         print("That is not a valid neuromod!\n")
 
+def similarity():
+    
+
+    text1 = "The quick brown fox jumps over the lazy dog."
+    text2 = "A fast brown canine leaps above a sleepy puppy."
+
+    emb1 = model.encode(text1, normalize_embeddings=True)
+    emb2 = model.encode(text2, normalize_embeddings=True)
+
+    similarity = util.cos_sim(emb1, emb2).item()   # → ~0.78–0.92 depending on model
+    print(f"Similarity: {similarity}")
+
+
 def main():
     init()
     isRunning = True
@@ -183,7 +199,7 @@ def main():
         print("---------------------------")
         print("-Welcome-to-the-Adapt-App!-")
         print("---------------------------")
-        print(f"Options: 0 exit; 1 create new card; 2 view all; 3 delete card; 4 update; 5 edit card; 6 review ({n}); 7 import\n")
+        print(f"Options: 0 exit; 1 create new card; 2 view all; 3 delete card; 4 update; 5 edit card; 6 review ({n}); 7 import; 8 sim test\n")
 
         choice = input("Choice: ")
         print("")
@@ -206,6 +222,8 @@ def main():
                 review() if n > 0 else print("Nothing to review!\n")
             case "7":
                 importCards()
+            case "8":
+                similarity()
             case _:
                 "Invalid input!"
 
