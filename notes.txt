@@ -1,0 +1,19 @@
+1. Figure out running flashcard (mean of the best 5 times)
+
+2. history table
+
+3. all flags
+
+
+
+
+
+- TUI/GUI
+- destructive decay algorithm
+- - storing probabilty density graph?
+history
+
+
+Extra:
+- Evidence of 'relearning' state in sport science; i.e. you reaquire attributes faster;
+- Retention re probability density graph

@@ -1,0 +1,4 @@
+cue,response,type,source
+"{""content"": ""a = random.randint(1,9)\nb = random.randint(1,9)\ncue = f\""{a} + {b}?\""\nresponse = str(a + b)""}",embeddedWithinCue,pythonResponseEmbedded,mathAuto
+"{""content"": ""a = random.randint(1,9)\nb = random.randint(1,9)\ncue = f\""{a} * {b}?\""\nresponse = str(a * b)""}",embeddedWithinCue,pythonResponseEmbedded,mathAuto
+

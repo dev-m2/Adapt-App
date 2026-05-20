@@ -1,0 +1,2 @@
+cue,response,type,source
+"{""content"": ""initialV = round(random.uniform(2.0, 8.0),1)\ng = -9.8\ninitialH = round(random.uniform(1.40,2.00),2)\naddH = round((-initialV ** 2)/(2*g),2)\ncue=f\""What is the max height of a projectile thrown with initial velocity of {str(initialV)}m/s, from an initial height of {initialH}m, where g={str(g)}?\""\nresponse = str(round(initialH+addH,2))"",""path"":""neuromods/physics/images/max height.png""}",embeddedWithinCue,imageAuto,mathAuto
