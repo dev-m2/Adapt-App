@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import math
 import json
 import os
+import qrcode
+from io import BytesIO
 
 from fsrs import Card
 
@@ -23,14 +25,12 @@ st.set_page_config(
     layout="wide"
 )
 
-# Clean, minimal styling that works in both light and dark mode
 st.markdown("""
 <style>
     .main {padding-top: 2rem;}
     h1, h2, h3 {font-family: 'Segoe UI', system-ui, sans-serif;}
     .stButton>button {border-radius: 8px; height: 42px; font-weight: 500;}
     .card {background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);}
-    .metric-label {font-size: 0.9rem; color: #888;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -38,12 +38,7 @@ st.markdown("""
 TUNING_FILE = "tuning_settings.json"
 
 def load_tuning_settings():
-    defaults = {
-        "fitness_multiplier": 6.0,
-        "exertion_level": 12.0,
-        "kp": 0.055,
-        "fatigue_multiplier": 0.35
-    }
+    defaults = {"fitness_multiplier": 6.0, "exertion_level": 12.0, "kp": 0.055, "fatigue_multiplier": 0.35}
     if os.path.exists(TUNING_FILE):
         try:
             with open(TUNING_FILE, "r") as f:
@@ -51,9 +46,9 @@ def load_tuning_settings():
                 defaults.update(saved)
         except:
             pass
-    for key, value in defaults.items():
-        if key not in st.session_state:
-            st.session_state[key] = value
+    for k, v in defaults.items():
+        if k not in st.session_state:
+            st.session_state[k] = v
 
 def save_tuning_settings():
     data = {
@@ -77,6 +72,21 @@ if "test_data_loaded" not in st.session_state:
 if "revealed" not in st.session_state:
     st.session_state.revealed = set()
 
+# ========================== QR CODE GENERATOR ==========================
+def get_qr_code():
+    url = "https://adapt-app-qjvbekhs2r2a9tqjult9wd.streamlit.app"
+    qr = qrcode.QRCode(version=1, box_size=10, border=4)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="#1a1a1a", back_color="#ffffff")
+    buf = BytesIO()
+    img.save(buf, format="PNG")
+    return buf.getvalue()
+
+# ========================== SIDEBAR (with QR Code) ==========================
+st.sidebar.title("Adapt App")
+st.sidebar.image(get_qr_code(), caption="📱 Scan to open on phone", use_column_width=True)
+page = st.sidebar.radio("Navigation", ["Dashboard", "Review", "Create Card", "View All", "Graphs", "Tuning"])
 # ========================== HELPERS (unchanged) ==========================
 def reset_all_due_dates():
     now = datetime.now(timezone.utc).isoformat(timespec='milliseconds')

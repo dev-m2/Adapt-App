@@ -2,4 +2,4 @@ pandas
 fsrs
 plotly
 streamlit
-
+qrcode[pil]
