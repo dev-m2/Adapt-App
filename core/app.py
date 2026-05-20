@@ -72,7 +72,7 @@ if "test_data_loaded" not in st.session_state:
 if "revealed" not in st.session_state:
     st.session_state.revealed = set()
 
-# ========================== QR CODE GENERATOR ==========================
+# ========================== QR CODE ==========================
 def get_qr_code():
     url = "https://adapt-app-qjvbekhs2r2a9tqjult9wd.streamlit.app"
     qr = qrcode.QRCode(version=1, box_size=10, border=4)
@@ -83,11 +83,12 @@ def get_qr_code():
     img.save(buf, format="PNG")
     return buf.getvalue()
 
-# ========================== SIDEBAR (with QR Code) ==========================
+# ========================== SIDEBAR ==========================
 st.sidebar.title("Adapt App")
-st.sidebar.image(get_qr_code(), caption="📱 Scan to open on phone", use_column_width=True)
-page = st.sidebar.radio("Navigation", ["Dashboard", "Review", "Create Card", "View All", "Graphs", "Tuning"])
-# ========================== HELPERS (unchanged) ==========================
+st.sidebar.image(get_qr_code(), caption="📱 Scan to open on phone", use_container_width=True)
+page = st.sidebar.radio("Navigation", ["Dashboard", "Review", "Create Card", "View All", "Graphs", "Tuning", "About"])
+
+# ========================== HELPERS ==========================
 def reset_all_due_dates():
     now = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
     with connectDB() as conn:
@@ -123,28 +124,21 @@ def load_test_data():
     if len(toDF()) > 0:
         st.session_state.test_data_loaded = True
         return
-
     test_cards = [
         {"type": "text", "cue": "What is the capital of France?", "response": "Paris"},
         {"type": "text", "cue": "What is 7 × 8?", "response": "56"},
         {"type": "run", "cue": "5km run", "baseline": "1500", "target": "1200", "netDirection": "negative"},
         {"type": "run", "cue": "10km run", "baseline": "3000", "target": "2400", "netDirection": "negative"},
     ]
-
     for card in test_cards:
         content = CONTENT_EMPTY.copy()
         content.update(card)
         updateDB(content_dict=content, scheduling_dict=SCHEDULING_DEFAULT, state_dict=stateDefault())
-    
     st.session_state.test_data_loaded = True
-
-# ========================== SIDEBAR ==========================
-st.sidebar.title("Adapt App")
-page = st.sidebar.radio("Navigation", ["Dashboard", "Review", "Create Card", "View All", "Graphs", "Tuning"])
 
 load_test_data()
 
-# ========================== PAGES (clean & professional) ==========================
+# ========================== PAGES ==========================
 if page == "Dashboard":
     st.title("🏠 Dashboard")
     due_count = get_due_count()
@@ -166,7 +160,6 @@ elif page == "Review":
     st.title("📚 Review Session")
     df = toDF()
     due_df = df[df['due'] <= datetime.now(timezone.utc).isoformat(timespec='milliseconds')]
-
     if due_df.empty:
         st.success("🎉 No cards due right now!")
         st.info("Use the Reset button on the Dashboard to test again.")
@@ -176,10 +169,8 @@ elif page == "Review":
             data = getAdaptData(row['id'])
             content = data["content"]
             card_type = content.get("type")
-
             with st.container(border=True):
                 st.subheader(f"Card #{row['id']}")
-
                 if card_type == "text":
                     st.write(f"**Cue:** {content.get('cue')}")
                     st.text_input("Your answer", key=f"input_{row['id']}")
@@ -191,10 +182,17 @@ elif page == "Review":
                         if st.button("Submit Review", key=f"submit_{row['id']}"):
                             grade = {"Again (1)": 0, "Hard (2)": 1, "Good (3)": 2, "Easy (4)": 3}[rating]
                             scheduling_dict, state_dict, new_due = st.session_state.scheduler.SchedulerReview(data, grade)
+                            if "history" not in state_dict:
+                                state_dict["history"] = []
+                            state_dict["history"].append({
+                                "date": datetime.now(timezone.utc).isoformat(),
+                                "grade": grade,
+                                "stability": scheduling_dict.get("S"),
+                                "difficulty": scheduling_dict.get("D")
+                            })
                             updateDB(content_dict=None, scheduling_dict=scheduling_dict, state_dict=state_dict, adapt_id=row['id'], due=new_due)
                             st.success("✅ Review saved!")
                             st.rerun()
-
                 elif card_type == "run":
                     st.write(f"**Cue:** {content.get('cue')}")
                     if st.button("I finished the run", key=f"finished_{row['id']}"):
@@ -209,10 +207,17 @@ elif page == "Review":
                             state_dict["peakFitness"] = max(state_dict.get("peakFitness", 0), 25.0) * st.session_state.fitness_multiplier
                             state_dict["fitness"] = state_dict["peakFitness"]
                             state_dict["fatigue"] = max(state_dict.get("fatigue", 0), 12.0) * st.session_state.fatigue_multiplier
+                            if "history" not in state_dict:
+                                state_dict["history"] = []
+                            state_dict["history"].append({
+                                "date": datetime.now(timezone.utc).isoformat(),
+                                "grade": grade,
+                                "stability": scheduling_dict.get("S"),
+                                "difficulty": scheduling_dict.get("D")
+                            })
                             updateDB(content_dict=None, scheduling_dict=scheduling_dict, state_dict=state_dict, adapt_id=row['id'], due=new_due)
                             st.success("✅ Review saved!")
                             st.rerun()
-
                 st.divider()
 
 elif page == "Create Card":
@@ -244,16 +249,24 @@ elif page == "View All":
     df = toDF()
     st.dataframe(df, use_container_width=True)
 
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("📤 Export All Data"):
-            json_data = df.to_json(orient="records")
-            st.download_button("Download JSON", json_data, file_name="adaptations_backup.json", mime="application/json")
-    with col2:
-        uploaded = st.file_uploader("📥 Import JSON", type=["json"])
-        if uploaded:
-            imported = pd.read_json(uploaded)
-            st.success(f"Imported {len(imported)} cards")
+    st.subheader("Bulk Actions")
+    selected_ids = st.multiselect("Select cards to delete", options=df['id'].tolist(), format_func=lambda x: f"Card #{x}")
+    if st.button("🗑️ Delete Selected Cards", type="secondary"):
+        if selected_ids:
+            with connectDB() as conn:
+                placeholders = ','.join(['?'] * len(selected_ids))
+                conn.execute(f"DELETE FROM {MAIN_TABLE} WHERE id IN ({placeholders})", selected_ids)
+                conn.commit()
+            st.success(f"Deleted {len(selected_ids)} cards")
+            st.rerun()
+
+    st.subheader("Duplicate Card")
+    dup_id = st.number_input("Card ID to duplicate", min_value=1, step=1)
+    if st.button("📋 Duplicate"):
+        data = getAdaptData(dup_id)
+        updateDB(content_dict=data["content"], scheduling_dict=data["scheduling"], state_dict=data["state"])
+        st.success(f"Card #{dup_id} duplicated!")
+        st.rerun()
 
 elif page == "Graphs":
     st.title("📈 Performance Graphs")
@@ -273,6 +286,7 @@ elif page == "Graphs":
         st.subheader(f"Card #{card_id} — {content.get('cue', 'Untitled')}")
         st.caption(f"Peak Fitness: {state['peakFitness']:.1f} | Fatigue: {state['fatigue']:.1f}")
 
+        # === GRAPHS FIRST ===
         days = list(range(0, 366))
         fitness_values = []
         fatigue_values = []
@@ -349,6 +363,14 @@ elif page == "Graphs":
             fig2.update_layout(title="R_final (Sigmoid) — Second crossing of 0.9", xaxis_title="Days from today", yaxis_title="R_final (0–1)")
             st.plotly_chart(fig2, use_container_width=True)
 
+        # === HISTORY AT THE VERY BOTTOM ===
+        st.subheader("📜 Review History")
+        if "history" in state and state["history"]:
+            history_df = pd.DataFrame(state["history"])
+            st.dataframe(history_df, use_container_width=True)
+        else:
+            st.info("No review history yet for this card.")
+
 elif page == "Tuning":
     st.title("⚙️ Tuning Parameters")
     st.write("Adjust these values live — they affect reviews and graphs immediately.")
@@ -359,7 +381,31 @@ elif page == "Tuning":
     st.session_state.fatigue_multiplier = st.slider("Fatigue Gain Multiplier", 0.1, 2.0, st.session_state.fatigue_multiplier, 0.05)
 
     save_tuning_settings()
-
     st.info("✅ Settings are auto-saved.")
+
+elif page == "About":
+    st.title("ℹ️ About the Adapt App")
+    st.markdown("""
+    **Adapt App** combines the **FSRS-6** algorithm with the classic **fitness-fatigue** model from sport science. The main question beforehand was: "what makes sports have a super-compensation peak, unlike normal flashcards".
+    
+    **Here** are the assumptions that led to this new model:
+
+    - **R(t)** within FSRS is analogues to **fitness** within the FF model, **NOT** p(t), aka expected performance, as might seem at first!
+    - **This** makes sense if we assume that mental flashcards add negligble (0) fatigue, therefore FSRS is simply a more advanced model of fitness decay!
+    - **What** does this mean?: _in theory, we can use a **singular scheduler** for predicting retrievability/performance of both mental and physical "flashcards", we simply add **no** fatigue for the former, and add **substantial** fatigue for the latter!_
+
+    **After** reviewing a physical flashcard (i.e. a "run" flashcard), both fatigue and fitness get added depending on the Grade you selected, then:
+   
+    1. **Fitness** decays using FSRS-6.
+   
+    2. **Fatigue** decays via basic exponential decay with a time constant of 7 days.
+   
+    3. **Using** a baseline, and taking away fatigue from the fitness, we get an expected performance (which is the concept behind the classic fitness-fatigue model).
+   
+    4. **Finally**, using a target performance, we use a logistic function to turn the expected performance into a 0.0-1.0 chance of achieving the target. The next review gets scheduled for when that chance falls to 0.9 (like in FSRS), for a second time, i.e. after the supercompensation peak.
+
+    Use the Tuning page to adjust how aggressive the model.
+    """)
+    st.info("Built to be a horrible, yet passible, MVP.")
 
 st.sidebar.caption("Adapt App MVP • Streamlit")
