@@ -1,0 +1,5 @@
+#separator:tab
+#html:true
+#tags column:3
+"What is this flag?<br><img src=""ch.svg"">"	Switzerland	Flag
+"What is this flag?<br><img src=""jp.svg"">"	Japan	Flag

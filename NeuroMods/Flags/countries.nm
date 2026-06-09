@@ -1,0 +1,254 @@
+content,source
+"{""cue"": ""What is this flag?"", ""response"": ""Andorra"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ad.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""United Arab Emirates"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ae.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Afghanistan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/af.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Antigua and Barbuda"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ag.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Anguilla"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ai.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Albania"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/al.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Armenia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/am.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Angola"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ao.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Antarctica"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/aq.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Argentina"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ar.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""American Samoa"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/as.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Austria"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/at.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Australia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/au.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Aruba"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/aw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Åland Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ax.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Azerbaijan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/az.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bosnia and Herzegovina"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ba.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Barbados"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bb.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bangladesh"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bd.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Belgium"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/be.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Burkina Faso"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bulgaria"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bahrain"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Burundi"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bi.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Benin"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bj.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Barthélemy"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bermuda"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Brunei"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bolivia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bo.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Caribbean Netherlands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bq.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Brazil"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/br.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bahamas"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bs.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bhutan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Bouvet Island"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Botswana"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Belarus"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/by.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Belize"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/bz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Canada"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ca.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cocos (Keeling) Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Democratic Republic of the Congo"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cd.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Central African Republic"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Republic of the Congo"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Switzerland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ch.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Côte d'Ivoire"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ci.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cook Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ck.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Chile"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cameroon"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""China"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Colombia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/co.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Costa Rica"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cuba"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cape Verde"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Curaçao"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Christmas Island"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cx.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cyprus"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cy.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Czechia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/cz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Germany"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/de.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Djibouti"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/dj.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Denmark"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/dk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Dominica"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/dm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Dominican Republic"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/do.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Algeria"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/dz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Ecuador"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ec.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Estonia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ee.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Egypt"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/eg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Western Sahara"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/eh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Eritrea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/er.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Spain"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/es.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Ethiopia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/et.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Finland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fi.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Fiji"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fj.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Falkland Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Micronesia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Faroe Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fo.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""France"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/fr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Gabon"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ga.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""England"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gb-eng.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Northern Ireland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gb-nir.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Scotland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gb-sct.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Wales"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gb-wls.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""United Kingdom"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gb.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Grenada"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gd.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Georgia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ge.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""French Guiana"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guernsey"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Ghana"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Gibraltar"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gi.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Greenland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Gambia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guinea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guadeloupe"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gp.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Equatorial Guinea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gq.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Greece"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""South Georgia and the South Sandwich Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gs.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guatemala"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guam"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guinea-Bissau"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Guyana"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/gy.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Hong Kong"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/hk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Heard Island and McDonald Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/hm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Honduras"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/hn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Croatia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/hr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Haiti"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ht.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Hungary"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/hu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Indonesia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/id.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Ireland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ie.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Israel"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/il.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Isle of Man"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/im.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""India"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/in.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""British Indian Ocean Territory"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/io.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Iraq"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/iq.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Iran"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ir.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Iceland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/is.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Italy"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/it.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Jersey"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/je.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Jamaica"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/jm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Jordan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/jo.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Japan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/jp.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kenya"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ke.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kyrgyzstan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cambodia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kiribati"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ki.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Comoros"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/km.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Kitts and Nevis"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""North Korea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kp.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""South Korea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kuwait"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Cayman Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ky.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kazakhstan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/kz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Laos"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/la.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Lebanon"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lb.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Lucia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Liechtenstein"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/li.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Sri Lanka"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Liberia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Lesotho"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ls.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Lithuania"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Luxembourg"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Latvia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/lv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Libya"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ly.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Morocco"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ma.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Monaco"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Moldova"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/md.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Montenegro"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/me.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Martin"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Madagascar"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Marshall Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""North Macedonia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mali"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ml.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Myanmar"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mongolia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Macao"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mo.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Northern Mariana Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mp.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Martinique"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mq.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mauritania"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Montserrat"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ms.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Malta"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mauritius"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Maldives"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Malawi"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mexico"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mx.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Malaysia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/my.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mozambique"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/mz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Namibia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/na.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""New Caledonia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Niger"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ne.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Norfolk Island"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Nigeria"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ng.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Nicaragua"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ni.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Netherlands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Norway"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/no.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Nepal"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/np.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Nauru"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Niue"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""New Zealand"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/nz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Oman"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/om.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Panama"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pa.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Peru"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pe.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""French Polynesia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Papua New Guinea"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Philippines"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ph.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Pakistan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Poland"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Pierre and Miquelon"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Pitcairn Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Puerto Rico"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Palestine"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ps.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Portugal"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Palau"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/pw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Paraguay"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/py.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Qatar"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/qa.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Réunion"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/re.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Romania"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ro.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Serbia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/rs.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Russia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ru.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Rwanda"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/rw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saudi Arabia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sa.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Solomon Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sb.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Seychelles"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Sudan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sd.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Sweden"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/se.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Singapore"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Helena, Ascension and Tristan da Cunha"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sh.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Svalbard and Jan Mayen"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sj.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Slovakia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Sierra Leone"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""San Marino"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Senegal"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Somalia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/so.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Suriname"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""South Sudan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ss.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""São Tomé and Príncipe"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/st.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""El Salvador"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Sint Maarten"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sx.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Syria"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sy.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Eswatini"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/sz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Turks and Caicos Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Chad"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/td.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""French Southern and Antarctic Lands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Togo"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Thailand"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/th.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tajikistan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tj.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tokelau"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Timor-Leste"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tl.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Turkmenistan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tunisia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tonga"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/to.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Turkey"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tr.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Trinidad and Tobago"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tuvalu"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tv.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Taiwan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tw.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Tanzania"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/tz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Ukraine"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ua.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Uganda"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ug.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""United States Minor Outlying Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/um.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""United States"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/us.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Uruguay"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/uy.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Uzbekistan"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/uz.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Vatican City"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/va.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Saint Vincent and the Grenadines"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/vc.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Venezuela"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ve.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""British Virgin Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/vg.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""United States Virgin Islands"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/vi.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Vietnam"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/vn.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Vanuatu"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/vu.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Wallis and Futuna"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/wf.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Samoa"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ws.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Kosovo"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/xk.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Yemen"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/ye.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Mayotte"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/yt.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""South Africa"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/za.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Zambia"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/zm.svg""}",flags.nm
+"{""cue"": ""What is this flag?"", ""response"": ""Zimbabwe"", ""type"": ""image-text"", ""path"": ""NeuroMods/Flags/Countries/zw.svg""}",flags.nm   

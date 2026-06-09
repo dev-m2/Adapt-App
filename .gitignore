@@ -1,1 +1,6 @@
 Archive/
+build/
+dist/
+tasks.txt
+main.spec
+run_cli.py

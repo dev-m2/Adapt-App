@@ -6,6 +6,14 @@ import pandas as pd # for importNeuroMods()
 from textwrap import dedent # for getting a grade
 from datetime import datetime, timezone # for reviewAdaptations()
 
+# For PyInstaller???
+import sys
+import os
+from pathlib import Path
+from utils import NEURO_MODS_DIR, PROJECT_ROOT   # <-- Import the constants
+
+print(NEURO_MODS_DIR)
+
 
 def init():
     initDB() # initializes database
@@ -120,10 +128,10 @@ def reviewAdaptations():
             Again (1)  Hard (2)  Good (3)  Easy (4)
             How well did you do?: """)).strip().lower()
 
-        if   rating in ("1", "again"): grade = 0
-        elif rating in ("2", "hard"):  grade = 1
-        elif rating in ("3", "good"):  grade = 2
-        elif rating in ("4", "easy"):  grade = 3
+        if   rating in ("1", "again"): grade = 1
+        elif rating in ("2", "hard"):  grade = 2
+        elif rating in ("3", "good"):  grade = 3
+        elif rating in ("4", "easy"):  grade = 4
         else:
             print("Invalid input! Skipping.")
             return False
@@ -167,17 +175,57 @@ def reviewAdaptations():
             break
         
 
-def importNeuroMod():
-    Location = Path("../../NeuroMods")    # creates Path object
-    nmList = list(Location.rglob("*.nm")) # list of Path objects
+# def importNeuroMod():
+#     Location = Path("../../NeuroMods")    # creates Path object
+#     nmList = list(Location.rglob("*.nm")) # list of Path objects
 
-    if nmList:
-        print("Available NeuroMods:")
-        for i, file in enumerate(nmList):
-            print(f"{i} {file.name}") # prints index and name
-    else: 
-        print("No NeuroMods found!") # if empty
+#     if nmList:
+#         print("Available NeuroMods:")
+#         for i, file in enumerate(nmList):
+#             print(f"{i} {file.name}") # prints index and name
+#     else: 
+#         print("No NeuroMods found!") # if empty
+#         return
+
+#     try:
+#         choice = int(input("\nWhich one would you like to import (index)?: "))
+#         chosenFile = nmList[choice]
+#     except (ValueError, IndexError):
+#         print("Invalid selection!")
+#         return
+    
+#     # last safety check, might not be necessary due to above try
+#     if not chosenFile.is_file():
+#         print("That is not a valid NeuroMod!")
+#         return
+    
+#     df = pd.read_csv(chosenFile)
+#     df["content"] = df["content"].apply(json.loads) # necessary, or else there'll be excessive "
+#     for _, row in df.iterrows():
+#         updateDB(
+#             content_dict=row["content"],
+#             source=row["source"]
+#         )
+    
+#     viewAdaptations(option=0)
+
+def importNeuroMod():
+    """Import a .nm file from the NeuroMods folder."""
+    
+    if not NEURO_MODS_DIR.exists():
+        print(f"Error: NeuroMods folder not found at:\n{NEURO_MODS_DIR}")
+        print("Make sure the 'NeuroMods' folder is next to the executable.")
         return
+
+    nmList = list(NEURO_MODS_DIR.rglob("*.nm"))
+    
+    if not nmList:
+        print("No .nm files found in the NeuroMods folder!")
+        return
+
+    print("Available NeuroMods:")
+    for i, file in enumerate(nmList):
+        print(f"{i}  {file.name}")
 
     try:
         choice = int(input("\nWhich one would you like to import (index)?: "))
@@ -185,27 +233,32 @@ def importNeuroMod():
     except (ValueError, IndexError):
         print("Invalid selection!")
         return
-    
-    # last safety check, might not be necessary due to above try
-    if not chosenFile.is_file():
-        print("That is not a valid NeuroMod!")
-        return
-    
-    df = pd.read_csv(chosenFile)
-    df["content"] = df["content"].apply(json.loads) # necessary, or else there'll be excessive "
-    for _, row in df.iterrows():
-        updateDB(
-            content_dict=row["content"],
-            source=row["source"]
-        )
-    
-    viewAdaptations(option=0)
 
+    if not chosenFile.is_file():
+        print("That is not a valid NeuroMod file!")
+        return
+
+    try:
+        df = pd.read_csv(chosenFile)
+        df["content"] = df["content"].apply(json.loads)
+
+        print(f"Importing {chosenFile.name} ...")
+        
+        for _, row in df.iterrows():
+            updateDB(
+                content_dict=row["content"],
+                source=row["source"]
+            )
+        
+        print("Import completed successfully!")
+        viewAdaptations(option=0)
+        
+    except Exception as e:
+        print(f"Error importing file: {e}")
 
 def main():
     while True:
         n = dueCount()
-
         print("\n")
         print("=========================================================")
         print("                 Welcome to the Adapt App")
@@ -227,12 +280,13 @@ def main():
             case "4":
                 importNeuroMod()
             case "999":
-                test()
+                _test()
             case _:
                 print("Invalid input!")
 
-def test():
-    renderImage("NeuroMods/Flags/images/sweden.png")
+def _test():
+    print("YOU'VE TRIGGERED A TESTING FUNCTION!")
+    renderImage("NeuroMods/Flags/Countries/ad.svg")
 
 
 if __name__ == "__main__":
