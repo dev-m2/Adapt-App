@@ -1,0 +1,6 @@
+fsrs
+chafa.py
+pandas
+
+[dev]
+pyinstaller

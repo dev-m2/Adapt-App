@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/adapt.egg-info/PKG-INFO
+src/adapt.egg-info/SOURCES.txt
+src/adapt.egg-info/dependency_links.txt
+src/adapt.egg-info/requires.txt
+src/adapt.egg-info/top_level.txt
+src/core/__init__.py
+src/core/db.py
+src/core/main.py
+src/core/scheduler.py
+src/core/test.py
+src/core/utils.py

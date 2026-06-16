@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adapt"
+version = "0.0.1-alpha"
+dependencies = ["fsrs", "chafa.py", "pandas"]
+
+# pip install -e .
+
+[project.optional-dependencies]
+dev = [
+    "pyinstaller"
+]
+
+# pip install -e .[dev]

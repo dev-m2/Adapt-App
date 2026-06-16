@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: adapt
+Version: 0.0.1a0
+License-File: LICENSE
+Requires-Dist: fsrs
+Requires-Dist: chafa.py
+Requires-Dist: pandas
+Provides-Extra: dev
+Requires-Dist: pyinstaller; extra == "dev"
+Dynamic: license-file

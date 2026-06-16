@@ -1,0 +1,2083 @@
+{
+  "till_n": [
+    {
+      "rect": [
+        28,
+        217,
+        611,
+        172
+      ],
+      "label": "Lager + Cider",
+      "color": "cyan",
+      "action": "switch:till_lager"
+    },
+    {
+      "rect": [
+        24,
+        410,
+        604,
+        176
+      ],
+      "label": "Bitter + Ale",
+      "color": "cyan",
+      "action": "switch:till_bitter"
+    },
+    {
+      "rect": [
+        17,
+        610,
+        615,
+        183
+      ],
+      "label": "Softs",
+      "color": "cyan",
+      "action": "switch:till_soft"
+    },
+    {
+      "rect": [
+        21,
+        818,
+        614,
+        172
+      ],
+      "label": "Spirits",
+      "color": "cyan",
+      "action": "switch:till_spirits"
+    },
+    {
+      "rect": [
+        21,
+        1021,
+        618,
+        165
+      ],
+      "label": "Bottles",
+      "color": "cyan",
+      "action": "switch:till_bottles"
+    },
+    {
+      "rect": [
+        17,
+        1214,
+        615,
+        169
+      ],
+      "label": "Wines",
+      "color": "cyan",
+      "action": "switch:till_wine"
+    },
+    {
+      "rect": [
+        1288,
+        21,
+        295,
+        175
+      ],
+      "label": "Madri",
+      "color": "yellow",
+      "action": "add_order:Madri"
+    },
+    {
+      "rect": [
+        1285,
+        221,
+        305,
+        168
+      ],
+      "label": "Coors",
+      "color": "yellow",
+      "action": "add_order:Coors"
+    },
+    {
+      "rect": [
+        1295,
+        414,
+        288,
+        179
+      ],
+      "label": "Morreti",
+      "color": "yellow",
+      "action": "add_order:Moretti"
+    },
+    {
+      "rect": [
+        1295,
+        617,
+        295,
+        169
+      ],
+      "label": "Stella",
+      "color": "yellow",
+      "action": "add_order:Stella"
+    },
+    {
+      "rect": [
+        1302,
+        804,
+        281,
+        189
+      ],
+      "label": "Carling",
+      "color": "yellow",
+      "action": "add_order:Carling"
+    },
+    {
+      "rect": [
+        1608,
+        21,
+        302,
+        182
+      ],
+      "label": "H",
+      "color": "yellow",
+      "action": "add_order:Madri_half"
+    },
+    {
+      "rect": [
+        1608,
+        228,
+        305,
+        182
+      ],
+      "label": "H",
+      "color": "yellow",
+      "action": "add_order:Coors_half"
+    },
+    {
+      "rect": [
+        2854,
+        1407,
+        320,
+        338
+      ],
+      "label": "SEND",
+      "color": "transparent black",
+      "action": "send_order"
+    }
+  ],
+  "till_lager": [
+    {
+      "rect": [
+        972,
+        450,
+        320,
+        181
+      ],
+      "label": "Carling P",
+      "color": "light orange",
+      "action": "add_order:Carling"
+    },
+    {
+      "rect": [
+        1313,
+        461,
+        291,
+        170
+      ],
+      "label": "Coors P",
+      "color": "light orange",
+      "action": "add_order:Coors"
+    }
+  ],
+  "till_food_burgers": [
+    {
+      "rect": [
+        720,
+        252,
+        844,
+        191
+      ],
+      "label": "BGR Big Stack",
+      "color": "green",
+      "action": "add_order:BGR_Big_Stack"
+    },
+    {
+      "rect": [
+        1584,
+        256,
+        825,
+        199
+      ],
+      "label": "BGR Bombay",
+      "color": "green",
+      "action": "add_order:BGR_Bombay"
+    },
+    {
+      "rect": [
+        2424,
+        260,
+        790,
+        199
+      ],
+      "label": "BGR Chs+Bcn",
+      "color": "green",
+      "action": "add_order:BGR_Chs_Bcn"
+    },
+    {
+      "rect": [
+        739,
+        470,
+        802,
+        195
+      ],
+      "label": "BGR Korean",
+      "color": "green",
+      "action": "add_order:BGR_Korean"
+    },
+    {
+      "rect": [
+        1580,
+        490,
+        809,
+        198
+      ],
+      "label": "BGR Korean Grilled",
+      "color": "green",
+      "action": "add_order:BGR_Korean_grilled"
+    },
+    {
+      "rect": [
+        2401,
+        486,
+        802,
+        206
+      ],
+      "label": "BGR Vegan",
+      "color": "green",
+      "action": "add_order:BGR_Vegan"
+    }
+  ],
+  "till_food": [
+    {
+      "rect": [
+        16,
+        1115,
+        703,
+        190
+      ],
+      "label": "Burgers",
+      "color": "red",
+      "action": "switch:till_food_burgers"
+    },
+    {
+      "rect": [
+        20,
+        1557,
+        703,
+        195
+      ],
+      "label": "Desserts",
+      "color": "red",
+      "action": "switch:till_food_desserts"
+    }
+  ],
+  "1N0": [
+    {
+      "rect": [
+        652,
+        444,
+        599,
+        276
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:guiness_glass"
+    },
+    {
+      "rect": [
+        1872,
+        643,
+        594,
+        277
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:lamma_glass"
+    },
+    {
+      "rect": [
+        3073,
+        661,
+        327,
+        254
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:doombar_glass"
+    },
+    {
+      "rect": [
+        1826,
+        1650,
+        399,
+        281
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:caffreys_glass"
+    }
+  ],
+  "2N0": [
+    {
+      "rect": [
+        937,
+        811,
+        447,
+        235
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tall_glass"
+    },
+    {
+      "rect": [
+        2717,
+        685,
+        538,
+        161
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:short_glass"
+    },
+    {
+      "rect": [
+        959,
+        1606,
+        412,
+        165
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tall_glass"
+    },
+    {
+      "rect": [
+        2565,
+        1536,
+        330,
+        191
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:short_glass"
+    }
+  ],
+  "2S0": [
+    {
+      "rect": [
+        1237,
+        908,
+        712,
+        295
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:"
+    }
+  ],
+  "2S1": [
+    {
+      "rect": [
+        3785,
+        1468,
+        304,
+        141
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:"
+    },
+    {
+      "rect": [
+        3413,
+        1613,
+        295,
+        114
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tequila_el_jimador_blanco"
+    },
+    {
+      "rect": [
+        3078,
+        1613,
+        276,
+        132
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tequila_el_jimador_reposado"
+    },
+    {
+      "rect": [
+        2674,
+        1604,
+        327,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_jagermeister"
+    },
+    {
+      "rect": [
+        2312,
+        1622,
+        299,
+        155
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_antica_sambuca_classic"
+    },
+    {
+      "rect": [
+        1935,
+        1632,
+        277,
+        158
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_antica_sambuca_raspberry"
+    },
+    {
+      "rect": [
+        1600,
+        1641,
+        240,
+        190
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_antica_sambuca_liquorice"
+    },
+    {
+      "rect": [
+        1110,
+        1672,
+        304,
+        164
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_whitley_neill_raspberry"
+    },
+    {
+      "rect": [
+        684,
+        1768,
+        340,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_whitley_neill_black_cherry"
+    },
+    {
+      "rect": [
+        208,
+        1772,
+        354,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_whitley_neill_london_dry"
+    },
+    {
+      "rect": [
+        167,
+        1282,
+        340,
+        118
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:courvoisier_cognac"
+    },
+    {
+      "rect": [
+        553,
+        1292,
+        317,
+        81
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_bombay_sapphire"
+    },
+    {
+      "rect": [
+        911,
+        1292,
+        371,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_tarquin's_cornish_sunshine_blood_orange"
+    },
+    {
+      "rect": [
+        1446,
+        1260,
+        263,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_tarquin's_rhubarb&raspberry"
+    },
+    {
+      "rect": [
+        1994,
+        1187,
+        259,
+        154
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_malibu_original_coconut"
+    },
+    {
+      "rect": [
+        2380,
+        1169,
+        217,
+        141
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_archers_peach_schnapps"
+    },
+    {
+      "rect": [
+        2710,
+        1137,
+        318,
+        177
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_disaronno_originale"
+    },
+    {
+      "rect": [
+        3200,
+        1165,
+        218,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_cointreau"
+    },
+    {
+      "rect": [
+        3526,
+        1110,
+        209,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_tia_maria"
+    },
+    {
+      "rect": [
+        36,
+        865,
+        308,
+        159
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiskey_jameson"
+    },
+    {
+      "rect": [
+        457,
+        893,
+        259,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiskey_jack_daniel's"
+    },
+    {
+      "rect": [
+        811,
+        906,
+        254,
+        109
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_jj_london_dry"
+    },
+    {
+      "rect": [
+        1133,
+        870,
+        222,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_jj_whitley_pink"
+    },
+    {
+      "rect": [
+        1437,
+        829,
+        272,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_aperol"
+    },
+    {
+      "rect": [
+        1849,
+        838,
+        254,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:vermouth_martini_extra_dry"
+    },
+    {
+      "rect": [
+        2425,
+        788,
+        208,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_baileys_chocolat_luxe"
+    },
+    {
+      "rect": [
+        2738,
+        766,
+        263,
+        118
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:aperitif_pimm's"
+    },
+    {
+      "rect": [
+        3155,
+        757,
+        217,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:aperitif_pimm's_sundowner"
+    },
+    {
+      "rect": [
+        3436,
+        752,
+        258,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:"
+    }
+  ],
+  "3S1": [
+    {
+      "rect": [
+        2266,
+        1010,
+        209,
+        105
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:liqueur_southern_comfort"
+    },
+    {
+      "rect": [
+        1949,
+        965,
+        190,
+        132
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiskey_talisker"
+    },
+    {
+      "rect": [
+        1600,
+        933,
+        190,
+        100
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiskey_johnnie_walker_red_label"
+    },
+    {
+      "rect": [
+        1296,
+        924,
+        177,
+        118
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:"
+    },
+    {
+      "rect": [
+        1260,
+        1346,
+        204,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_captain_morgan_dark"
+    },
+    {
+      "rect": [
+        1491,
+        1305,
+        204,
+        91
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_captain_morgan_spiced_gold"
+    },
+    {
+      "rect": [
+        1817,
+        1314,
+        291,
+        114
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_captain_morgan_white"
+    },
+    {
+      "rect": [
+        2144,
+        1314,
+        236,
+        86
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_bacardi_carta_blanca"
+    },
+    {
+      "rect": [
+        2461,
+        1314,
+        254,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rum_dead_man's_fingers"
+    },
+    {
+      "rect": [
+        1468,
+        1672,
+        227,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:vodka_absolut"
+    },
+    {
+      "rect": [
+        1813,
+        1700,
+        308,
+        113
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:vodka_absolut_vanilla"
+    },
+    {
+      "rect": [
+        2652,
+        1727,
+        253,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:vodka_absolut_raspberri"
+    },
+    {
+      "rect": [
+        3037,
+        1722,
+        304,
+        100
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:gin_whitley_neill_london_dry"
+    },
+    {
+      "rect": [
+        2534,
+        856,
+        226,
+        164
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:"
+    },
+    {
+      "rect": [
+        1360,
+        2280,
+        240,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_coconut"
+    },
+    {
+      "rect": [
+        1645,
+        2302,
+        254,
+        132
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_yuzu_sherbet"
+    },
+    {
+      "rect": [
+        1899,
+        2284,
+        286,
+        105
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_watermelon"
+    },
+    {
+      "rect": [
+        2185,
+        2284,
+        290,
+        82
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:raspberry_shrub"
+    },
+    {
+      "rect": [
+        2756,
+        2321,
+        249,
+        90
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_disco_blue"
+    },
+    {
+      "rect": [
+        2488,
+        2298,
+        213,
+        109
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_sweetbird_raspberry_iced_tea"
+    },
+    {
+      "rect": [
+        3341,
+        2316,
+        226,
+        113
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_cherry&vanilla"
+    },
+    {
+      "rect": [
+        3023,
+        2293,
+        295,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_passionfruit"
+    },
+    {
+      "rect": [
+        1092,
+        2253,
+        272,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:syrup_bristol_lime_sherbet"
+    },
+    {
+      "rect": [
+        856,
+        1908,
+        250,
+        118
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:soda_schweppes"
+    }
+  ],
+  "4S1": [
+    {
+      "rect": [
+        108,
+        1722,
+        290,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:lemon_slice"
+    },
+    {
+      "rect": [
+        544,
+        1718,
+        235,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:lime_slice"
+    },
+    {
+      "rect": [
+        861,
+        1731,
+        263,
+        114
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:orange_slice"
+    },
+    {
+      "rect": [
+        1428,
+        1568,
+        240,
+        190
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:boston_shaker_tin"
+    },
+    {
+      "rect": [
+        1613,
+        226,
+        309,
+        191
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:chips_walkers_ready_salted"
+    },
+    {
+      "rect": [
+        1305,
+        267,
+        272,
+        159
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:chips_walkers_cheese&onion"
+    },
+    {
+      "rect": [
+        3617,
+        235,
+        281,
+        209
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:chips_walkers_salt&vinegar"
+    },
+    {
+      "rect": [
+        3286,
+        194,
+        250,
+        177
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:chips_walkers_prawn_coctail"
+    },
+    {
+      "rect": [
+        1958,
+        1083,
+        249,
+        177
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:125ml_thimble"
+    },
+    {
+      "rect": [
+        1904,
+        1446,
+        222,
+        140
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:50ml_thimble"
+    },
+    {
+      "rect": [
+        2339,
+        1496,
+        208,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:25ml_thimble"
+    }
+  ],
+  "5S0": [
+    {
+      "rect": [
+        1446,
+        630,
+        349,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:redbull"
+    },
+    {
+      "rect": [
+        738,
+        598,
+        354,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:schweppes_slimline_tonic_water"
+    },
+    {
+      "rect": [
+        734,
+        1228,
+        276,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:fruit_shoot_apple&blackberry"
+    },
+    {
+      "rect": [
+        1378,
+        1183,
+        308,
+        163
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:fruit_shoot_orange"
+    }
+  ],
+  "5S1": [
+    {
+      "rect": [
+        3216,
+        1283,
+        177,
+        117
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_andrew_peace_silhouette_chardonnay"
+    },
+    {
+      "rect": [
+        3018,
+        1311,
+        149,
+        77
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_jack_rabbit_pinot_grigio"
+    },
+    {
+      "rect": [
+        2582,
+        1315,
+        190,
+        93
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_jam_shed_chardonnay"
+    },
+    {
+      "rect": [
+        2376,
+        1331,
+        162,
+        81
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_ned_sauvignon_blanc"
+    },
+    {
+      "rect": [
+        2142,
+        1347,
+        158,
+        81
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:prosecco_sette_bello"
+    },
+    {
+      "rect": [
+        1928,
+        1343,
+        126,
+        105
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rose_jack_rabbit_white_zinfandel"
+    },
+    {
+      "rect": [
+        1743,
+        1335,
+        149,
+        121
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rose_vino_pomona_pinot_grigio"
+    },
+    {
+      "rect": [
+        1497,
+        1355,
+        177,
+        105
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rose_ned_marlborough_pinot"
+    },
+    {
+      "rect": [
+        1364,
+        1364,
+        141,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rose_vina_arroba_tempranillo_rosado"
+    },
+    {
+      "rect": [
+        1133,
+        1307,
+        174,
+        153
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_vina_arroba_tempranillo"
+    },
+    {
+      "rect": [
+        899,
+        1259,
+        158,
+        125
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_finca_del_alta_malbec"
+    },
+    {
+      "rect": [
+        734,
+        1271,
+        153,
+        117
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_flagstone_poetry_merlot"
+    },
+    {
+      "rect": [
+        560,
+        1359,
+        138,
+        105
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_jam_shed_shiraz"
+    },
+    {
+      "rect": [
+        347,
+        1585,
+        157,
+        138
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_campo_viejo_rioja_tempranillo"
+    },
+    {
+      "rect": [
+        145,
+        1622,
+        177,
+        113
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_andrew_peace_silhouette _shiraz"
+    },
+    {
+      "rect": [
+        20,
+        1133,
+        149,
+        97
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_matinal_merlot"
+    }
+  ],
+  "6S0": [
+    {
+      "rect": [
+        2819,
+        1323,
+        182,
+        127
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:pip_apple"
+    },
+    {
+      "rect": [
+        2593,
+        1369,
+        176,
+        95
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:pip_strawberry&blackcurrent"
+    },
+    {
+      "rect": [
+        2502,
+        680,
+        258,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:schweppes_pineapple_juice"
+    },
+    {
+      "rect": [
+        2955,
+        711,
+        268,
+        109
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:schweppes_orange_juice"
+    },
+    {
+      "rect": [
+        2017,
+        630,
+        245,
+        181
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:maybe_schweppes_tropical_soda"
+    },
+    {
+      "rect": [
+        1940,
+        1319,
+        258,
+        131
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:maybe_aqua_libra"
+    }
+  ],
+  "7S0": [
+    {
+      "rect": [
+        2475,
+        267,
+        340,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_rekorderlig_strawberry_lime_zero"
+    },
+    {
+      "rect": [
+        3468,
+        349,
+        376,
+        99
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:guiness_can_zero"
+    },
+    {
+      "rect": [
+        2438,
+        1292,
+        236,
+        104
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_zero"
+    },
+    {
+      "rect": [
+        2928,
+        1323,
+        295,
+        118
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:peroni_zero"
+    },
+    {
+      "rect": [
+        3549,
+        1292,
+        313,
+        90
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:heineken_zero"
+    },
+    {
+      "rect": [
+        281,
+        290,
+        371,
+        154
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:fever_tree_apple"
+    },
+    {
+      "rect": [
+        1151,
+        344,
+        317,
+        109
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:fever_tree_raspberry_lemonade"
+    },
+    {
+      "rect": [
+        1251,
+        1260,
+        335,
+        113
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:appletiser_apple_juice"
+    },
+    {
+      "rect": [
+        190,
+        2085,
+        295,
+        149
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_apple&mango"
+    },
+    {
+      "rect": [
+        770,
+        2067,
+        281,
+        163
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_dragon_berry"
+    },
+    {
+      "rect": [
+        1473,
+        2098,
+        231,
+        123
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_orange&passionfruit"
+    }
+  ],
+  "7S1": [
+    {
+      "rect": [
+        2468,
+        375,
+        367,
+        195
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_rekorderlig_strawberry_lime"
+    },
+    {
+      "rect": [
+        3311,
+        462,
+        313,
+        154
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_rekorderlig_wild_berries"
+    },
+    {
+      "rect": [
+        3311,
+        1300,
+        267,
+        122
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_old_mout_berries&cherries"
+    },
+    {
+      "rect": [
+        2885,
+        1313,
+        299,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_bulmers_original"
+    },
+    {
+      "rect": [
+        2351,
+        2074,
+        276,
+        168
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:peroni_bottle"
+    },
+    {
+      "rect": [
+        2772,
+        2079,
+        294,
+        140
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:heineken_bottle"
+    },
+    {
+      "rect": [
+        3143,
+        1816,
+        186,
+        100
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:sol_bottle"
+    },
+    {
+      "rect": [
+        2197,
+        1300,
+        231,
+        140
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:beavertown_brewery_lazer_crush_zero"
+    },
+    {
+      "rect": [
+        2441,
+        1010,
+        236,
+        181
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:brixton_reliance_pale_ale_can"
+    },
+    {
+      "rect": [
+        992,
+        1426,
+        380,
+        150
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:diet_coke_can"
+    },
+    {
+      "rect": [
+        588,
+        2106,
+        277,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_apple&mango"
+    },
+    {
+      "rect": [
+        996,
+        2029,
+        353,
+        226
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_orange&passionfruit"
+    },
+    {
+      "rect": [
+        1562,
+        2070,
+        250,
+        140
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:j20_dragon_berry"
+    },
+    {
+      "rect": [
+        1331,
+        706,
+        385,
+        213
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:coke_can"
+    }
+  ],
+  "6S1": [
+    {
+      "rect": [
+        177,
+        871,
+        290,
+        201
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:beavertown_brewery_lazer_crush_zero"
+    },
+    {
+      "rect": [
+        871,
+        907,
+        299,
+        178
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_bulmers_original"
+    },
+    {
+      "rect": [
+        1259,
+        907,
+        235,
+        147
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cider_old_mout_berries&cherries"
+    },
+    {
+      "rect": [
+        524,
+        867,
+        250,
+        151
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:brixton_reliance_pale_ale_can"
+    },
+    {
+      "rect": [
+        298,
+        1717,
+        258,
+        169
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:peroni_bottle"
+    },
+    {
+      "rect": [
+        778,
+        1832,
+        352,
+        170
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:heineken_bottle"
+    },
+    {
+      "rect": [
+        1419,
+        1592,
+        178,
+        129
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:sol_bottle"
+    },
+    {
+      "rect": [
+        2242,
+        1686,
+        227,
+        240
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_matinal_merlot"
+    },
+    {
+      "rect": [
+        2602,
+        1668,
+        263,
+        218
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_andrew_peace_silhouette _shiraz"
+    },
+    {
+      "rect": [
+        2891,
+        1717,
+        289,
+        147
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_campo_viejo_rioja_tempranillo"
+    },
+    {
+      "rect": [
+        3167,
+        1401,
+        200,
+        173
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_jam_shed_shiraz"
+    },
+    {
+      "rect": [
+        3541,
+        1757,
+        298,
+        173
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:red_flagstone_poetry_merlot"
+    }
+  ],
+  "6N0": [
+    {
+      "rect": [
+        290,
+        580,
+        494,
+        385
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:coors_glass"
+    },
+    {
+      "rect": [
+        1509,
+        616,
+        499,
+        249
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:shots_glass"
+    }
+  ],
+  "5N0": [
+    {
+      "rect": [
+        2659,
+        470,
+        592,
+        292
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:coors_glass"
+    },
+    {
+      "rect": [
+        744,
+        403,
+        664,
+        296
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:carling_glass"
+    },
+    {
+      "rect": [
+        771,
+        1538,
+        547,
+        224
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:carling_glass"
+    }
+  ],
+  "4S0": [
+    {
+      "rect": [
+        2044,
+        607,
+        222,
+        168
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_ned_sauvignon_blanc"
+    },
+    {
+      "rect": [
+        1636,
+        720,
+        200,
+        141
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_jack_rabbit_pinot_grigio"
+    },
+    {
+      "rect": [
+        145,
+        1690,
+        263,
+        146
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:rose_vina_arroba_tempranillo_rosado"
+    },
+    {
+      "rect": [
+        1940,
+        1704,
+        240,
+        172
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:prosecco_sette_bello"
+    },
+    {
+      "rect": [
+        1237,
+        1627,
+        358,
+        172
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:prosecco_small_bottle"
+    },
+    {
+      "rect": [
+        308,
+        716,
+        236,
+        168
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:white_jam_shed_chardonnay"
+    },
+    {
+      "rect": [
+        2937,
+        1709,
+        295,
+        190
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:orange_juice"
+    },
+    {
+      "rect": [
+        3041,
+        979,
+        209,
+        136
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tails_pina_colada"
+    },
+    {
+      "rect": [
+        3282,
+        988,
+        249,
+        158
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tails_rum_punch"
+    },
+    {
+      "rect": [
+        3536,
+        1001,
+        199,
+        164
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:tails_passion_fruit_martini"
+    }
+  ],
+  "4N0": [
+    {
+      "rect": [
+        1428,
+        1405,
+        568,
+        336
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_glass"
+    },
+    {
+      "rect": [
+        1423,
+        541,
+        416,
+        340
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_glass"
+    }
+  ],
+  "3S0": [
+    {
+      "rect": [
+        2606,
+        349,
+        602,
+        231
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:limitness_glass"
+    },
+    {
+      "rect": [
+        644,
+        1437,
+        631,
+        295
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:allegra_glass"
+    }
+  ],
+  "3N0": [
+    {
+      "rect": [
+        1228,
+        1596,
+        432,
+        270
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_glass"
+    },
+    {
+      "rect": [
+        1284,
+        693,
+        355,
+        231
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_glass"
+    },
+    {
+      "rect": [
+        2550,
+        1472,
+        514,
+        269
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:madri_glass"
+    },
+    {
+      "rect": [
+        2525,
+        603,
+        462,
+        270
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:capri_glass"
+    }
+  ],
+  "1S0": [
+    {
+      "rect": [
+        1650,
+        924,
+        508,
+        226
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:vina_juliette_champagne_glass"
+    },
+    {
+      "rect": [
+        2767,
+        890,
+        500,
+        336
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:martini_glass"
+    }
+  ]
+}
