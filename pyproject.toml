@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "adapt"
 version = "0.0.1-alpha"
-dependencies = ["fsrs", "chafa.py", "pandas"]
+dependencies = ["fsrs", "chafa.py", "pandas", "pygame"]
 
 # pip install -e .
 

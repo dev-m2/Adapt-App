@@ -1,274 +1,389 @@
 {
-  "till_n": [
+  "tillDrinks": [
     {
       "rect": [
-        28,
-        217,
-        611,
-        172
+        15,
+        23,
+        299,
+        174
       ],
-      "label": "Lager + Cider",
-      "color": "cyan",
-      "action": "switch:till_lager"
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
     },
     {
       "rect": [
-        24,
-        410,
-        604,
+        320,
+        23,
+        296,
         176
       ],
-      "label": "Bitter + Ale",
-      "color": "cyan",
-      "action": "switch:till_bitter"
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
     },
     {
       "rect": [
-        17,
-        610,
-        615,
-        183
+        23,
+        217,
+        593,
+        184
       ],
-      "label": "Softs",
-      "color": "cyan",
-      "action": "switch:till_soft"
-    },
-    {
-      "rect": [
-        21,
-        818,
-        614,
-        172
-      ],
-      "label": "Spirits",
-      "color": "cyan",
-      "action": "switch:till_spirits"
-    },
-    {
-      "rect": [
-        21,
-        1021,
-        618,
-        165
-      ],
-      "label": "Bottles",
-      "color": "cyan",
-      "action": "switch:till_bottles"
-    },
-    {
-      "rect": [
-        17,
-        1214,
-        615,
-        169
-      ],
-      "label": "Wines",
-      "color": "cyan",
-      "action": "switch:till_wine"
-    },
-    {
-      "rect": [
-        1288,
-        21,
-        295,
-        175
-      ],
-      "label": "Madri",
-      "color": "yellow",
-      "action": "add_order:Madri"
-    },
-    {
-      "rect": [
-        1285,
-        221,
-        305,
-        168
-      ],
-      "label": "Coors",
-      "color": "yellow",
-      "action": "add_order:Coors"
-    },
-    {
-      "rect": [
-        1295,
-        414,
-        288,
-        179
-      ],
-      "label": "Morreti",
-      "color": "yellow",
-      "action": "add_order:Moretti"
-    },
-    {
-      "rect": [
-        1295,
-        617,
-        295,
-        169
-      ],
-      "label": "Stella",
-      "color": "yellow",
-      "action": "add_order:Stella"
-    },
-    {
-      "rect": [
-        1302,
-        804,
-        281,
-        189
-      ],
-      "label": "Carling",
-      "color": "yellow",
-      "action": "add_order:Carling"
-    },
-    {
-      "rect": [
-        1608,
-        21,
-        302,
-        182
-      ],
-      "label": "H",
-      "color": "yellow",
-      "action": "add_order:Madri_half"
-    },
-    {
-      "rect": [
-        1608,
-        228,
-        305,
-        182
-      ],
-      "label": "H",
-      "color": "yellow",
-      "action": "add_order:Coors_half"
-    },
-    {
-      "rect": [
-        2854,
-        1407,
-        320,
-        338
-      ],
-      "label": "SEND",
-      "color": "transparent black",
-      "action": "send_order"
-    }
-  ],
-  "till_lager": [
-    {
-      "rect": [
-        972,
-        450,
-        320,
-        181
-      ],
-      "label": "Carling P",
-      "color": "light orange",
-      "action": "add_order:Carling"
-    },
-    {
-      "rect": [
-        1313,
-        461,
-        291,
-        170
-      ],
-      "label": "Coors P",
-      "color": "light orange",
-      "action": "add_order:Coors"
-    }
-  ],
-  "till_food_burgers": [
-    {
-      "rect": [
-        720,
-        252,
-        844,
-        191
-      ],
-      "label": "BGR Big Stack",
-      "color": "green",
-      "action": "add_order:BGR_Big_Stack"
-    },
-    {
-      "rect": [
-        1584,
-        256,
-        825,
-        199
-      ],
-      "label": "BGR Bombay",
-      "color": "green",
-      "action": "add_order:BGR_Bombay"
-    },
-    {
-      "rect": [
-        2424,
-        260,
-        790,
-        199
-      ],
-      "label": "BGR Chs+Bcn",
-      "color": "green",
-      "action": "add_order:BGR_Chs_Bcn"
-    },
-    {
-      "rect": [
-        739,
-        470,
-        802,
-        195
-      ],
-      "label": "BGR Korean",
-      "color": "green",
-      "action": "add_order:BGR_Korean"
-    },
-    {
-      "rect": [
-        1580,
-        490,
-        809,
-        198
-      ],
-      "label": "BGR Korean Grilled",
-      "color": "green",
-      "action": "add_order:BGR_Korean_grilled"
-    },
-    {
-      "rect": [
-        2401,
-        486,
-        802,
-        206
-      ],
-      "label": "BGR Vegan",
-      "color": "green",
-      "action": "add_order:BGR_Vegan"
-    }
-  ],
-  "till_food": [
-    {
-      "rect": [
-        16,
-        1115,
-        703,
-        190
-      ],
-      "label": "Burgers",
-      "color": "red",
-      "action": "switch:till_food_burgers"
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksLager"
     },
     {
       "rect": [
         20,
-        1557,
-        703,
-        195
+        412,
+        594,
+        184
       ],
-      "label": "Desserts",
-      "color": "red",
-      "action": "switch:till_food_desserts"
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksBitter"
+    },
+    {
+      "rect": [
+        10,
+        616,
+        606,
+        190
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSofts"
+    },
+    {
+      "rect": [
+        17,
+        824,
+        594,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpirits"
+    },
+    {
+      "rect": [
+        20,
+        1013,
+        591,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksBottlesLager"
+    },
+    {
+      "rect": [
+        15,
+        1210,
+        599,
+        190
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWine"
+    },
+    {
+      "rect": [
+        12,
+        1410,
+        599,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksKids"
+    },
+    {
+      "rect": [
+        20,
+        1623,
+        287,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksCrisps"
+    },
+    {
+      "rect": [
+        1251,
+        17,
+        287,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:madriGlassFull"
+    },
+    {
+      "rect": [
+        1246,
+        215,
+        287,
+        186
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:coorsGlassFull"
+    },
+    {
+      "rect": [
+        1249,
+        427,
+        281,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:morettiGlassFull"
+    },
+    {
+      "rect": [
+        1246,
+        619,
+        290,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cruzcampoGlassFull"
+    },
+    {
+      "rect": [
+        1244,
+        824,
+        292,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:carlingGlassFull"
+    },
+    {
+      "rect": [
+        1856,
+        23,
+        491,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:bottomlessGlass"
+    },
+    {
+      "rect": [
+        1858,
+        212,
+        486,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsCocktails"
+    },
+    {
+      "rect": [
+        2365,
+        227,
+        394,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsShots"
+    },
+    {
+      "rect": [
+        1861,
+        622,
+        284,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cokeCan"
+    },
+    {
+      "rect": [
+        2158,
+        629,
+        299,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:dietCokeCan"
+    },
+    {
+      "rect": [
+        2470,
+        622,
+        289,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cokeZeroCan"
+    },
+    {
+      "rect": [
+        2158,
+        816,
+        297,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Apple&Mango"
+    },
+    {
+      "rect": [
+        2467,
+        816,
+        279,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Orange&Passionfruit"
+    },
+    {
+      "rect": [
+        1850,
+        1016,
+        292,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:appletiserAppleJuice"
+    },
+    {
+      "rect": [
+        2155,
+        1024,
+        297,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootOrange"
+    },
+    {
+      "rect": [
+        1866,
+        1218,
+        281,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:pipApple"
+    },
+    {
+      "rect": [
+        2160,
+        1221,
+        292,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootApple&Blackberry"
+    },
+    {
+      "rect": [
+        632,
+        417,
+        292,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderRekorderligStrawberryLime"
+    },
+    {
+      "rect": [
+        939,
+        17,
+        292,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:guinessGlassFull"
+    },
+    {
+      "rect": [
+        934,
+        212,
+        297,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:doombarGlassFull"
+    },
+    {
+      "rect": [
+        632,
+        1013,
+        297,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJackRabbitPinotGrigio250"
+    },
+    {
+      "rect": [
+        634,
+        1216,
+        287,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFlagstonePoetryMerlot250"
+    },
+    {
+      "rect": [
+        624,
+        1410,
+        295,
+        190
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseJackRabbitWhiteZinfandel250"
+    },
+    {
+      "rect": [
+        2775,
+        1418,
+        291,
+        374
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "send_order"
+    },
+    {
+      "rect": [
+        2782,
+        624,
+        272,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "void:"
     }
   ],
   "1N0": [
@@ -281,7 +396,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:guiness_glass"
+      "action": "take:guinessGlass"
     },
     {
       "rect": [
@@ -292,7 +407,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:lamma_glass"
+      "action": "take:alpacalypseGlass"
     },
     {
       "rect": [
@@ -303,7 +418,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:doombar_glass"
+      "action": "take:doombarGlass"
     },
     {
       "rect": [
@@ -314,7 +429,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:caffreys_glass"
+      "action": "take:caffreysGlass"
     }
   ],
   "2N0": [
@@ -327,7 +442,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tall_glass"
+      "action": "take:tallGlass"
     },
     {
       "rect": [
@@ -338,7 +453,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:short_glass"
+      "action": "take:shortGlass"
     },
     {
       "rect": [
@@ -349,7 +464,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tall_glass"
+      "action": "take:tallGlass"
     },
     {
       "rect": [
@@ -360,7 +475,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:short_glass"
+      "action": "take:shortGlass"
     }
   ],
   "2S0": [
@@ -386,7 +501,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:"
+      "action": "take:tequilaRose"
     },
     {
       "rect": [
@@ -397,7 +512,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tequila_el_jimador_blanco"
+      "action": "take:tequilaElJimadorBlanco"
     },
     {
       "rect": [
@@ -408,7 +523,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tequila_el_jimador_reposado"
+      "action": "take:tequilaElJimadorReposado"
     },
     {
       "rect": [
@@ -419,7 +534,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_jagermeister"
+      "action": "take:liqueurJagermeister"
     },
     {
       "rect": [
@@ -430,7 +545,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_antica_sambuca_classic"
+      "action": "take:liqueurAnticaSambucaClassic"
     },
     {
       "rect": [
@@ -441,7 +556,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_antica_sambuca_raspberry"
+      "action": "take:liqueurAnticaSambucaRaspberry"
     },
     {
       "rect": [
@@ -452,7 +567,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_antica_sambuca_liquorice"
+      "action": "take:liqueurAnticaSambucaLiquorice"
     },
     {
       "rect": [
@@ -463,7 +578,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_whitley_neill_raspberry"
+      "action": "take:ginWhitleyNeillRaspberry"
     },
     {
       "rect": [
@@ -474,7 +589,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_whitley_neill_black_cherry"
+      "action": "take:ginWhitleyNeillBlackCherry"
     },
     {
       "rect": [
@@ -485,7 +600,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_whitley_neill_london_dry"
+      "action": "take:ginWhitleyNeillLondonDry"
     },
     {
       "rect": [
@@ -496,7 +611,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:courvoisier_cognac"
+      "action": "take:courvoisierCognac"
     },
     {
       "rect": [
@@ -507,7 +622,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_bombay_sapphire"
+      "action": "take:ginBombaySapphire"
     },
     {
       "rect": [
@@ -518,7 +633,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_tarquin's_cornish_sunshine_blood_orange"
+      "action": "take:ginTarquin'sCornishSunshineBloodOrange"
     },
     {
       "rect": [
@@ -529,7 +644,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_tarquin's_rhubarb&raspberry"
+      "action": "take:ginTarquin'sRhubarb&Raspberry"
     },
     {
       "rect": [
@@ -540,7 +655,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_malibu_original_coconut"
+      "action": "take:rumMalibuOriginalCoconut"
     },
     {
       "rect": [
@@ -551,7 +666,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_archers_peach_schnapps"
+      "action": "take:liqueurArchersPeachSchnapps"
     },
     {
       "rect": [
@@ -562,7 +677,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_disaronno_originale"
+      "action": "take:liqueurDisaronnoOriginale"
     },
     {
       "rect": [
@@ -573,7 +688,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_cointreau"
+      "action": "take:liqueurCointreau"
     },
     {
       "rect": [
@@ -584,7 +699,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_tia_maria"
+      "action": "take:liqueurTiaMaria"
     },
     {
       "rect": [
@@ -595,7 +710,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:whiskey_jameson"
+      "action": "take:whiskeyJameson"
     },
     {
       "rect": [
@@ -606,7 +721,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:whiskey_jack_daniel's"
+      "action": "take:whiskeyJackDaniel's"
     },
     {
       "rect": [
@@ -617,7 +732,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_jj_london_dry"
+      "action": "take:ginJjLondonDry"
     },
     {
       "rect": [
@@ -628,7 +743,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_jj_whitley_pink"
+      "action": "take:ginJjWhitleyPink"
     },
     {
       "rect": [
@@ -639,7 +754,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_aperol"
+      "action": "take:liqueurAperol"
     },
     {
       "rect": [
@@ -650,7 +765,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:vermouth_martini_extra_dry"
+      "action": "take:vermouthMartiniExtraDry"
     },
     {
       "rect": [
@@ -661,7 +776,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_baileys_chocolat_luxe"
+      "action": "take:liqueurBaileysChocolatLuxe"
     },
     {
       "rect": [
@@ -672,7 +787,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:aperitif_pimm's"
+      "action": "take:aperitifPimm's"
     },
     {
       "rect": [
@@ -683,7 +798,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:aperitif_pimm's_sundowner"
+      "action": "take:aperitifPimm'sSundowner"
     },
     {
       "rect": [
@@ -694,7 +809,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:"
+      "action": "take:cha"
     }
   ],
   "3S1": [
@@ -707,7 +822,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:liqueur_southern_comfort"
+      "action": "take:liqueurSouthernComfort"
     },
     {
       "rect": [
@@ -718,7 +833,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:whiskey_talisker"
+      "action": "take:whiskeyTalisker"
     },
     {
       "rect": [
@@ -729,7 +844,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:whiskey_johnnie_walker_red_label"
+      "action": "take:whiskeyJohnnieWalkerRedLabel"
     },
     {
       "rect": [
@@ -751,7 +866,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_captain_morgan_dark"
+      "action": "take:rumCaptainMorganDark"
     },
     {
       "rect": [
@@ -762,7 +877,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_captain_morgan_spiced_gold"
+      "action": "take:rumCaptainMorganSpicedGold"
     },
     {
       "rect": [
@@ -773,7 +888,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_captain_morgan_white"
+      "action": "take:rumCaptainMorganWhite"
     },
     {
       "rect": [
@@ -784,7 +899,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_bacardi_carta_blanca"
+      "action": "take:rumBacardiCartaBlanca"
     },
     {
       "rect": [
@@ -795,7 +910,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rum_dead_man's_fingers"
+      "action": "take:rumDeadMan'sFingers"
     },
     {
       "rect": [
@@ -806,7 +921,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:vodka_absolut"
+      "action": "take:vodkaAbsolut"
     },
     {
       "rect": [
@@ -817,7 +932,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:vodka_absolut_vanilla"
+      "action": "take:vodkaAbsolutVanilla"
     },
     {
       "rect": [
@@ -828,7 +943,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:vodka_absolut_raspberri"
+      "action": "take:vodkaAbsolutRaspberri"
     },
     {
       "rect": [
@@ -839,7 +954,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:gin_whitley_neill_london_dry"
+      "action": "take:ginWhitleyNeillLondonDry"
     },
     {
       "rect": [
@@ -861,7 +976,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_coconut"
+      "action": "take:syrupBristolCoconut"
     },
     {
       "rect": [
@@ -872,7 +987,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_yuzu_sherbet"
+      "action": "take:syrupBristolYuzuSherbet"
     },
     {
       "rect": [
@@ -883,7 +998,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_watermelon"
+      "action": "take:syrupBristolWatermelon"
     },
     {
       "rect": [
@@ -894,7 +1009,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:raspberry_shrub"
+      "action": "take:raspberryShrub"
     },
     {
       "rect": [
@@ -905,7 +1020,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_disco_blue"
+      "action": "take:syrupBristolDiscoBlue"
     },
     {
       "rect": [
@@ -916,7 +1031,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_sweetbird_raspberry_iced_tea"
+      "action": "take:syrupSweetbirdRaspberryIcedTea"
     },
     {
       "rect": [
@@ -927,7 +1042,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_cherry&vanilla"
+      "action": "take:syrupBristolCherry&Vanilla"
     },
     {
       "rect": [
@@ -938,7 +1053,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_passionfruit"
+      "action": "take:syrupBristolPassionfruit"
     },
     {
       "rect": [
@@ -949,7 +1064,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:syrup_bristol_lime_sherbet"
+      "action": "take:syrupBristolLimeSherbet"
     },
     {
       "rect": [
@@ -960,7 +1075,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:soda_schweppes"
+      "action": "take:sodaSchweppes"
     }
   ],
   "4S1": [
@@ -973,7 +1088,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:lemon_slice"
+      "action": "take:lemonSlice"
     },
     {
       "rect": [
@@ -984,7 +1099,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:lime_slice"
+      "action": "take:limeSlice"
     },
     {
       "rect": [
@@ -995,7 +1110,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:orange_slice"
+      "action": "take:orangeSlice"
     },
     {
       "rect": [
@@ -1006,7 +1121,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:boston_shaker_tin"
+      "action": "take:bostonShakerTin"
     },
     {
       "rect": [
@@ -1017,7 +1132,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:chips_walkers_ready_salted"
+      "action": "take:chipsWalkersReadySalted"
     },
     {
       "rect": [
@@ -1028,7 +1143,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:chips_walkers_cheese&onion"
+      "action": "take:chipsWalkersCheese&Onion"
     },
     {
       "rect": [
@@ -1039,7 +1154,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:chips_walkers_salt&vinegar"
+      "action": "take:chipsWalkersSalt&Vinegar"
     },
     {
       "rect": [
@@ -1050,7 +1165,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:chips_walkers_prawn_coctail"
+      "action": "take:chipsWalkersPrawnCoctail"
     },
     {
       "rect": [
@@ -1061,7 +1176,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:125ml_thimble"
+      "action": "take:125mlThimble"
     },
     {
       "rect": [
@@ -1072,7 +1187,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:50ml_thimble"
+      "action": "take:50mlThimble"
     },
     {
       "rect": [
@@ -1083,7 +1198,18 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:25ml_thimble"
+      "action": "take:25mlThimble"
+    },
+    {
+      "rect": [
+        1738,
+        1720,
+        1070,
+        402
+      ],
+      "label": "CRAFT",
+      "color": "transparent black",
+      "action": "craft:"
     }
   ],
   "5S0": [
@@ -1107,7 +1233,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:schweppes_slimline_tonic_water"
+      "action": "take:schweppesSlimlineTonicWater"
     },
     {
       "rect": [
@@ -1118,7 +1244,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:fruit_shoot_apple&blackberry"
+      "action": "take:fruitShootApple&Blackberry"
     },
     {
       "rect": [
@@ -1129,7 +1255,84 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:fruit_shoot_orange"
+      "action": "take:fruitShootOrange"
+    },
+    {
+      "rect": [
+        2359,
+        714,
+        344,
+        258
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiteAndrewPeaceSilhouetteChardonnay"
+    },
+    {
+      "rect": [
+        2954,
+        785,
+        286,
+        211
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:whiteJamShedChardonnay"
+    },
+    {
+      "rect": [
+        2363,
+        1849,
+        227,
+        177
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:roseNedMarlboroughPinot"
+    },
+    {
+      "rect": [
+        2597,
+        1825,
+        201,
+        164
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "order:roseJackRabbitWhiteZinfandel240"
+    },
+    {
+      "rect": [
+        2930,
+        1839,
+        330,
+        214
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:roseVinaArrobaTempranilloRosado"
+    },
+    {
+      "rect": [
+        3471,
+        1802,
+        265,
+        187
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:roseVinoPomonaPinotGrigio"
+    },
+    {
+      "rect": [
+        3362,
+        737,
+        357,
+        279
+      ],
+      "label": "",
+      "color": "red",
+      "action": "order:"
     }
   ],
   "5S1": [
@@ -1142,7 +1345,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_andrew_peace_silhouette_chardonnay"
+      "action": "take:whiteAndrewPeaceSilhouetteChardonnay"
     },
     {
       "rect": [
@@ -1153,7 +1356,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_jack_rabbit_pinot_grigio"
+      "action": "take:whiteJackRabbitPinotGrigio"
     },
     {
       "rect": [
@@ -1164,7 +1367,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_jam_shed_chardonnay"
+      "action": "take:whiteJamShedChardonnay"
     },
     {
       "rect": [
@@ -1175,7 +1378,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_ned_sauvignon_blanc"
+      "action": "take:whiteNedSauvignonBlanc"
     },
     {
       "rect": [
@@ -1186,7 +1389,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:prosecco_sette_bello"
+      "action": "take:proseccoSetteBello"
     },
     {
       "rect": [
@@ -1197,7 +1400,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rose_jack_rabbit_white_zinfandel"
+      "action": "take:roseJackRabbitWhiteZinfandel"
     },
     {
       "rect": [
@@ -1208,7 +1411,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rose_vino_pomona_pinot_grigio"
+      "action": "take:roseVinoPomonaPinotGrigio"
     },
     {
       "rect": [
@@ -1219,7 +1422,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rose_ned_marlborough_pinot"
+      "action": "take:roseNedMarlboroughPinot"
     },
     {
       "rect": [
@@ -1230,7 +1433,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rose_vina_arroba_tempranillo_rosado"
+      "action": "take:roseVinaArrobaTempranilloRosado"
     },
     {
       "rect": [
@@ -1241,7 +1444,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_vina_arroba_tempranillo"
+      "action": "take:redVinaArrobaTempranillo"
     },
     {
       "rect": [
@@ -1252,7 +1455,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_finca_del_alta_malbec"
+      "action": "take:redFincaDelAltaMalbec"
     },
     {
       "rect": [
@@ -1263,7 +1466,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_flagstone_poetry_merlot"
+      "action": "take:redFlagstonePoetryMerlot"
     },
     {
       "rect": [
@@ -1274,7 +1477,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_jam_shed_shiraz"
+      "action": "take:redJamShedShiraz"
     },
     {
       "rect": [
@@ -1285,7 +1488,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_campo_viejo_rioja_tempranillo"
+      "action": "take:redCampoViejoRiojaTempranillo"
     },
     {
       "rect": [
@@ -1296,7 +1499,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_andrew_peace_silhouette _shiraz"
+      "action": "take:redAndrewPeaceSilhouetteShiraz"
     },
     {
       "rect": [
@@ -1307,7 +1510,18 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_matinal_merlot"
+      "action": "take:redMatinalMerlot"
+    },
+    {
+      "rect": [
+        2666,
+        681,
+        160,
+        260
+      ],
+      "label": "",
+      "color": "red",
+      "action": "order:"
     }
   ],
   "6S0": [
@@ -1320,7 +1534,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:pip_apple"
+      "action": "take:pipApple"
     },
     {
       "rect": [
@@ -1331,7 +1545,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:pip_strawberry&blackcurrent"
+      "action": "take:pipStrawberry&Blackcurrent"
     },
     {
       "rect": [
@@ -1342,7 +1556,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:schweppes_pineapple_juice"
+      "action": "take:schweppesPineappleJuice"
     },
     {
       "rect": [
@@ -1353,7 +1567,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:schweppes_orange_juice"
+      "action": "take:schweppesOrangeJuice"
     },
     {
       "rect": [
@@ -1364,7 +1578,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:maybe_schweppes_tropical_soda"
+      "action": "take:maybeSchweppesTropicalSoda"
     },
     {
       "rect": [
@@ -1375,7 +1589,18 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:maybe_aqua_libra"
+      "action": "take:aqualibraCanSparkling"
+    },
+    {
+      "rect": [
+        2244,
+        1264,
+        261,
+        150
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "order:aqualibraCanStill"
     }
   ],
   "7S0": [
@@ -1388,7 +1613,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_rekorderlig_strawberry_lime_zero"
+      "action": "take:ciderRekorderligStrawberryLimeZero"
     },
     {
       "rect": [
@@ -1399,7 +1624,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:guiness_can_zero"
+      "action": "take:guinessCanZero"
     },
     {
       "rect": [
@@ -1410,7 +1635,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_zero"
+      "action": "take:madriZero"
     },
     {
       "rect": [
@@ -1421,7 +1646,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:peroni_zero"
+      "action": "take:peroniZero"
     },
     {
       "rect": [
@@ -1432,7 +1657,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:heineken_zero"
+      "action": "take:heinekenZero"
     },
     {
       "rect": [
@@ -1443,7 +1668,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:fever_tree_apple"
+      "action": "take:feverTreeApple"
     },
     {
       "rect": [
@@ -1454,7 +1679,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:fever_tree_raspberry_lemonade"
+      "action": "take:feverTreeRaspberryLemonade"
     },
     {
       "rect": [
@@ -1465,7 +1690,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:appletiser_apple_juice"
+      "action": "take:appletiserAppleJuice"
     },
     {
       "rect": [
@@ -1476,7 +1701,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_apple&mango"
+      "action": "take:j20Apple&Mango"
     },
     {
       "rect": [
@@ -1487,7 +1712,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_dragon_berry"
+      "action": "take:j20DragonBerry"
     },
     {
       "rect": [
@@ -1498,7 +1723,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_orange&passionfruit"
+      "action": "take:j20Orange&Passionfruit"
     }
   ],
   "7S1": [
@@ -1511,7 +1736,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_rekorderlig_strawberry_lime"
+      "action": "take:ciderRekorderligStrawberryLime"
     },
     {
       "rect": [
@@ -1522,7 +1747,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_rekorderlig_wild_berries"
+      "action": "take:ciderRekorderligWildBerries"
     },
     {
       "rect": [
@@ -1533,7 +1758,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_old_mout_berries&cherries"
+      "action": "take:ciderOldMoutBerries&Cherries"
     },
     {
       "rect": [
@@ -1544,7 +1769,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_bulmers_original"
+      "action": "take:ciderBulmersOriginal"
     },
     {
       "rect": [
@@ -1555,7 +1780,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:peroni_bottle"
+      "action": "take:peroniBottle"
     },
     {
       "rect": [
@@ -1566,7 +1791,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:heineken_bottle"
+      "action": "take:heinekenBottle"
     },
     {
       "rect": [
@@ -1577,7 +1802,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:sol_bottle"
+      "action": "take:solBottle"
     },
     {
       "rect": [
@@ -1588,7 +1813,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:beavertown_brewery_lazer_crush_zero"
+      "action": "take:beavertownBreweryLazerCrushZero"
     },
     {
       "rect": [
@@ -1599,7 +1824,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:brixton_reliance_pale_ale_can"
+      "action": "take:brixtonReliancePaleAleCan"
     },
     {
       "rect": [
@@ -1610,7 +1835,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:diet_coke_can"
+      "action": "take:dietCokeCan"
     },
     {
       "rect": [
@@ -1621,7 +1846,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_apple&mango"
+      "action": "take:j20Apple&Mango"
     },
     {
       "rect": [
@@ -1632,7 +1857,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_orange&passionfruit"
+      "action": "take:j20Orange&Passionfruit"
     },
     {
       "rect": [
@@ -1643,7 +1868,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:j20_dragon_berry"
+      "action": "take:j20DragonBerry"
     },
     {
       "rect": [
@@ -1654,7 +1879,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:coke_can"
+      "action": "take:cokeCan"
     }
   ],
   "6S1": [
@@ -1667,7 +1892,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:beavertown_brewery_lazer_crush_zero"
+      "action": "take:beavertownBreweryLazerCrushZero"
     },
     {
       "rect": [
@@ -1678,7 +1903,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_bulmers_original"
+      "action": "take:ciderBulmersOriginal"
     },
     {
       "rect": [
@@ -1689,7 +1914,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:cider_old_mout_berries&cherries"
+      "action": "take:ciderOldMoutBerries&Cherries"
     },
     {
       "rect": [
@@ -1700,7 +1925,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:brixton_reliance_pale_ale_can"
+      "action": "take:brixtonReliancePaleAleCan"
     },
     {
       "rect": [
@@ -1711,7 +1936,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:peroni_bottle"
+      "action": "take:peroniBottle"
     },
     {
       "rect": [
@@ -1722,7 +1947,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:heineken_bottle"
+      "action": "take:heinekenBottle"
     },
     {
       "rect": [
@@ -1733,7 +1958,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:sol_bottle"
+      "action": "take:solBottle"
     },
     {
       "rect": [
@@ -1744,7 +1969,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_matinal_merlot"
+      "action": "take:redMatinalMerlot"
     },
     {
       "rect": [
@@ -1755,7 +1980,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_andrew_peace_silhouette _shiraz"
+      "action": "take:redAndrewPeaceSilhouetteShiraz"
     },
     {
       "rect": [
@@ -1766,7 +1991,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_campo_viejo_rioja_tempranillo"
+      "action": "take:redCampoViejoRiojaTempranillo"
     },
     {
       "rect": [
@@ -1777,7 +2002,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_jam_shed_shiraz"
+      "action": "take:redJamShedShiraz"
     },
     {
       "rect": [
@@ -1788,7 +2013,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:red_flagstone_poetry_merlot"
+      "action": "take:redFlagstonePoetryMerlot"
     }
   ],
   "6N0": [
@@ -1801,7 +2026,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:coors_glass"
+      "action": "take:coorsGlass"
     },
     {
       "rect": [
@@ -1812,7 +2037,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:shots_glass"
+      "action": "take:shotsGlass"
     }
   ],
   "5N0": [
@@ -1825,7 +2050,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:coors_glass"
+      "action": "take:coorsGlass"
     },
     {
       "rect": [
@@ -1836,7 +2061,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:carling_glass"
+      "action": "take:carlingGlass"
     },
     {
       "rect": [
@@ -1847,7 +2072,29 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:carling_glass"
+      "action": "take:carlingGlass"
+    },
+    {
+      "rect": [
+        2175,
+        1087,
+        544,
+        299
+      ],
+      "label": "Take (temp)",
+      "color": "transparent black",
+      "action": "take:cruzcampoGlass"
+    },
+    {
+      "rect": [
+        2292,
+        1514,
+        556,
+        398
+      ],
+      "label": "Take (temp)",
+      "color": "transparent black",
+      "action": "take:morettiGlass"
     }
   ],
   "4S0": [
@@ -1860,7 +2107,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_ned_sauvignon_blanc"
+      "action": "take:whiteNedSauvignonBlanc"
     },
     {
       "rect": [
@@ -1871,7 +2118,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_jack_rabbit_pinot_grigio"
+      "action": "take:whiteJackRabbitPinotGrigio"
     },
     {
       "rect": [
@@ -1882,7 +2129,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:rose_vina_arroba_tempranillo_rosado"
+      "action": "take:roseVinaArrobaTempranilloRosado"
     },
     {
       "rect": [
@@ -1893,7 +2140,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:prosecco_sette_bello"
+      "action": "take:proseccoSetteBello"
     },
     {
       "rect": [
@@ -1904,7 +2151,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:prosecco_small_bottle"
+      "action": "take:proseccoSmallBottle"
     },
     {
       "rect": [
@@ -1915,7 +2162,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:white_jam_shed_chardonnay"
+      "action": "take:whiteJamShedChardonnay"
     },
     {
       "rect": [
@@ -1926,7 +2173,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:orange_juice"
+      "action": "take:orangeJuice"
     },
     {
       "rect": [
@@ -1937,7 +2184,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tails_pina_colada"
+      "action": "take:tailsPinaColada"
     },
     {
       "rect": [
@@ -1948,7 +2195,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tails_rum_punch"
+      "action": "take:tailsRumPunch"
     },
     {
       "rect": [
@@ -1959,7 +2206,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:tails_passion_fruit_martini"
+      "action": "take:tailsPassionFruitMartini"
     }
   ],
   "4N0": [
@@ -1972,7 +2219,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_glass"
+      "action": "take:madriGlass"
     },
     {
       "rect": [
@@ -1983,7 +2230,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_glass"
+      "action": "take:madriGlass"
     }
   ],
   "3S0": [
@@ -1996,7 +2243,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:limitness_glass"
+      "action": "take:botomlessGlass"
     },
     {
       "rect": [
@@ -2007,7 +2254,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:allegra_glass"
+      "action": "take:allegraGlass"
     }
   ],
   "3N0": [
@@ -2020,7 +2267,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_glass"
+      "action": "take:madriGlass"
     },
     {
       "rect": [
@@ -2031,7 +2278,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_glass"
+      "action": "take:madriGlass"
     },
     {
       "rect": [
@@ -2042,7 +2289,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:madri_glass"
+      "action": "take:madriGlass"
     },
     {
       "rect": [
@@ -2053,7 +2300,18 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:capri_glass"
+      "action": "take:capriGlass"
+    },
+    {
+      "rect": [
+        1953,
+        1842,
+        319,
+        145
+      ],
+      "label": "Take",
+      "color": "transparent black",
+      "action": "take:cruzcampoGlass"
     }
   ],
   "1S0": [
@@ -2066,7 +2324,7 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:vina_juliette_champagne_glass"
+      "action": "take:vinaJulietteChampagneGlass"
     },
     {
       "rect": [
@@ -2077,7 +2335,5700 @@
       ],
       "label": "Take",
       "color": "transparent black",
-      "action": "take:martini_glass"
+      "action": "take:martiniGlass"
+    }
+  ],
+  "1N1": [
+    {
+      "rect": [
+        1657,
+        1184,
+        362,
+        249
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:guinessGlass"
+    },
+    {
+      "rect": [
+        2364,
+        1164,
+        365,
+        244
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:caffreysGlass"
+    },
+    {
+      "rect": [
+        3011,
+        1046,
+        397,
+        432
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:doombarGlass"
+    },
+    {
+      "rect": [
+        3526,
+        1062,
+        256,
+        403
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:alpalypseGlass"
+    }
+  ],
+  "1W1": [
+    {
+      "rect": [
+        2249,
+        752,
+        659,
+        521
+      ],
+      "label": "Till",
+      "color": "transparent black",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillSoft": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        1657,
+        641,
+        318,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Apple&Mango"
+    },
+    {
+      "rect": [
+        1991,
+        632,
+        307,
+        188
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20DragonBerry"
+    },
+    {
+      "rect": [
+        2320,
+        649,
+        309,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Orange&Passionfruit"
+    },
+    {
+      "rect": [
+        2651,
+        652,
+        304,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redbull"
+    },
+    {
+      "rect": [
+        1994,
+        440,
+        315,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fever"
+    },
+    {
+      "rect": [
+        2311,
+        850,
+        307,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesPineappleJuice"
+    },
+    {
+      "rect": [
+        1985,
+        850,
+        307,
+        190
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesOrangeJuice"
+    },
+    {
+      "rect": [
+        654,
+        418,
+        332,
+        193
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:appletiserAppleJuice"
+    }
+  ],
+  "tillLager": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        982,
+        441,
+        309,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:carlingGlassPoured"
+    },
+    {
+      "rect": [
+        1304,
+        452,
+        301,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:coorsGlassPoured"
+    },
+    {
+      "rect": [
+        657,
+        641,
+        301,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:morettiGlassPoured"
+    },
+    {
+      "rect": [
+        2585,
+        444,
+        293,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:madriGlassPoured"
+    }
+  ],
+  "tillFoodBurgers": [
+    {
+      "rect": [
+        335,
+        7,
+        305,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        637,
+        179,
+        719,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBigstackBurger"
+    },
+    {
+      "rect": [
+        1356,
+        186,
+        702,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBombayBurger"
+    },
+    {
+      "rect": [
+        2068,
+        186,
+        689,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodClassicBurger"
+    },
+    {
+      "rect": [
+        650,
+        373,
+        688,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCowboyBurger"
+    },
+    {
+      "rect": [
+        1361,
+        384,
+        694,
+        151
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKoreanBurger"
+    },
+    {
+      "rect": [
+        2063,
+        373,
+        701,
+        162
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKoreanGrilledBurger"
+    },
+    {
+      "rect": [
+        640,
+        550,
+        698,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodVeganBurger"
+    }
+  ],
+  "tillFood": [
+    {
+      "rect": [
+        15,
+        222,
+        702,
+        222
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodDaytime"
+    },
+    {
+      "rect": [
+        9,
+        465,
+        708,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodBurgers"
+    },
+    {
+      "rect": [
+        15,
+        687,
+        706,
+        208
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodSides"
+    },
+    {
+      "rect": [
+        6,
+        913,
+        730,
+        216
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodDesserts"
+    },
+    {
+      "rect": [
+        24,
+        1153,
+        342,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodKids"
+    },
+    {
+      "rect": [
+        27,
+        1829,
+        354,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodBreakfast"
+    },
+    {
+      "rect": [
+        381,
+        1607,
+        355,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFoodCarvery"
+    },
+    {
+      "rect": [
+        9,
+        9,
+        345,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        730,
+        231,
+        240,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSharingPlatter"
+    },
+    {
+      "rect": [
+        976,
+        243,
+        231,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTomatoSoup"
+    },
+    {
+      "rect": [
+        1228,
+        243,
+        229,
+        216
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTomatosoupVegan"
+    },
+    {
+      "rect": [
+        1475,
+        234,
+        234,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChickenGoujon"
+    },
+    {
+      "rect": [
+        1727,
+        249,
+        216,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCalamari"
+    },
+    {
+      "rect": [
+        1952,
+        246,
+        235,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBreadedMushrooms"
+    },
+    {
+      "rect": [
+        2202,
+        246,
+        225,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBread"
+    },
+    {
+      "rect": [
+        2439,
+        255,
+        228,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadCheese"
+    },
+    {
+      "rect": [
+        2691,
+        249,
+        214,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodLoadedNachos"
+    },
+    {
+      "rect": [
+        2917,
+        255,
+        228,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMac&CheeseBites"
+    },
+    {
+      "rect": [
+        742,
+        456,
+        231,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCrispyPrawns"
+    },
+    {
+      "rect": [
+        982,
+        453,
+        222,
+        213
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIndianNibbles"
+    },
+    {
+      "rect": [
+        1225,
+        471,
+        229,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIndianNibblesVegan"
+    },
+    {
+      "rect": [
+        1466,
+        468,
+        228,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodWingRoulette"
+    },
+    {
+      "rect": [
+        1715,
+        471,
+        228,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFalafel"
+    },
+    {
+      "rect": [
+        742,
+        693,
+        240,
+        211
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCobbSalad"
+    },
+    {
+      "rect": [
+        994,
+        702,
+        207,
+        202
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCobbSaladVegan"
+    },
+    {
+      "rect": [
+        1225,
+        702,
+        232,
+        199
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBurritoBowl"
+    },
+    {
+      "rect": [
+        1481,
+        699,
+        222,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBurritoRump"
+    },
+    {
+      "rect": [
+        1724,
+        699,
+        216,
+        193
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBurritoChicken"
+    },
+    {
+      "rect": [
+        736,
+        922,
+        228,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBeef&AlePie"
+    },
+    {
+      "rect": [
+        973,
+        928,
+        243,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBeefLasagne"
+    },
+    {
+      "rect": [
+        1228,
+        913,
+        223,
+        219
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSpinashLasagne"
+    },
+    {
+      "rect": [
+        1478,
+        934,
+        222,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFishCake"
+    },
+    {
+      "rect": [
+        1724,
+        940,
+        216,
+        183
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodHaddock&Chips"
+    },
+    {
+      "rect": [
+        751,
+        1141,
+        219,
+        213
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTikkaCurry"
+    },
+    {
+      "rect": [
+        988,
+        1153,
+        225,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKatsuCurry"
+    },
+    {
+      "rect": [
+        1234,
+        1156,
+        220,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodThaiCurry"
+    },
+    {
+      "rect": [
+        1469,
+        1153,
+        222,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBombayHash"
+    },
+    {
+      "rect": [
+        1712,
+        1162,
+        228,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBombayHashVegan"
+    },
+    {
+      "rect": [
+        751,
+        1607,
+        225,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChipsSide"
+    },
+    {
+      "rect": [
+        982,
+        1616,
+        240,
+        183
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKatsuChipsSide"
+    },
+    {
+      "rect": [
+        1234,
+        1610,
+        229,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadSide"
+    },
+    {
+      "rect": [
+        1469,
+        1607,
+        219,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadCheeseSide"
+    },
+    {
+      "rect": [
+        1703,
+        1613,
+        237,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodOnionRingsSide"
+    },
+    {
+      "rect": [
+        1949,
+        1607,
+        229,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSaladSide"
+    },
+    {
+      "rect": [
+        2193,
+        1613,
+        222,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodColeslawSide"
+    },
+    {
+      "rect": [
+        751,
+        1387,
+        225,
+        199
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMargheritaPizza"
+    },
+    {
+      "rect": [
+        985,
+        1384,
+        228,
+        193
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPepperoniPizza"
+    },
+    {
+      "rect": [
+        1222,
+        1372,
+        229,
+        214
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTikkaPizza"
+    },
+    {
+      "rect": [
+        1460,
+        1378,
+        240,
+        190
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBBQPizza"
+    },
+    {
+      "rect": [
+        1709,
+        1393,
+        225,
+        178
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodVeggiePizza"
+    },
+    {
+      "rect": [
+        2072,
+        699,
+        229,
+        214
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:food8ozRump"
+    },
+    {
+      "rect": [
+        2319,
+        690,
+        234,
+        217
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:food8ozSirlloin"
+    },
+    {
+      "rect": [
+        2559,
+        699,
+        219,
+        202
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMixedGrill"
+    },
+    {
+      "rect": [
+        2790,
+        699,
+        229,
+        205
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMixedGrillUpgrade"
+    },
+    {
+      "rect": [
+        2063,
+        919,
+        232,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSmotheredPlatter"
+    },
+    {
+      "rect": [
+        2304,
+        925,
+        243,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSmotheredPlatterUpgrade"
+    },
+    {
+      "rect": [
+        2556,
+        928,
+        219,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSmotheredChicken"
+    },
+    {
+      "rect": [
+        2796,
+        931,
+        217,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:food7ozGammon"
+    },
+    {
+      "rect": [
+        2081,
+        1153,
+        205,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodLambKofta"
+    },
+    {
+      "rect": [
+        3265,
+        699,
+        343,
+        202
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "void:"
+    },
+    {
+      "rect": [
+        3256,
+        1598,
+        321,
+        408
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "send_order"
+    }
+  ],
+  "tillFoodPromo": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    }
+  ],
+  "tillFoodMealDeal": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    }
+  ],
+  "tillFoodKidsFood": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        723,
+        242,
+        587,
+        209
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsGarlicFlatbread"
+    },
+    {
+      "rect": [
+        1328,
+        253,
+        584,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsTortillaChips"
+    },
+    {
+      "rect": [
+        2048,
+        239,
+        576,
+        209
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsTortillaChipsVegan"
+    },
+    {
+      "rect": [
+        2635,
+        250,
+        576,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsVeggieSticks"
+    },
+    {
+      "rect": [
+        737,
+        802,
+        334,
+        201
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTPorkSausage&Mash"
+    },
+    {
+      "rect": [
+        1083,
+        805,
+        466,
+        192
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTPorkSausage&MashVegan"
+    },
+    {
+      "rect": [
+        1573,
+        811,
+        327,
+        186
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTPoppinChicken"
+    },
+    {
+      "rect": [
+        723,
+        1038,
+        351,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsFishBites"
+    },
+    {
+      "rect": [
+        1092,
+        1021,
+        463,
+        200
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTTomatoPasta"
+    },
+    {
+      "rect": [
+        1570,
+        1015,
+        330,
+        206
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTChickenBreast"
+    },
+    {
+      "rect": [
+        2039,
+        799,
+        342,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYSpagBowl"
+    },
+    {
+      "rect": [
+        2396,
+        799,
+        464,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYMargheritaPizza"
+    },
+    {
+      "rect": [
+        2871,
+        796,
+        328,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYFishBites"
+    },
+    {
+      "rect": [
+        2039,
+        1033,
+        585,
+        203
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYBeefBurger"
+    },
+    {
+      "rect": [
+        2638,
+        1024,
+        564,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYChickenBreastBurger"
+    },
+    {
+      "rect": [
+        2866,
+        1587,
+        333,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsPancakes"
+    },
+    {
+      "rect": [
+        2511,
+        1585,
+        325,
+        194
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsVanillaIceCream"
+    },
+    {
+      "rect": [
+        2154,
+        1579,
+        343,
+        203
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBerryBlastSundae"
+    },
+    {
+      "rect": [
+        1806,
+        1582,
+        333,
+        197
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsFruitSalad"
+    },
+    {
+      "rect": [
+        1446,
+        1593,
+        336,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsChocolateBrownie"
+    },
+    {
+      "rect": [
+        729,
+        1587,
+        348,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsRainbowLolly"
+    }
+  ],
+  "tillFoodDesserts": [
+    {
+      "rect": [
+        322,
+        12,
+        287,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        627,
+        217,
+        704,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodAppleBetty"
+    },
+    {
+      "rect": [
+        1338,
+        212,
+        720,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBanoffeeCheeseCake"
+    },
+    {
+      "rect": [
+        2060,
+        215,
+        694,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBrownie"
+    },
+    {
+      "rect": [
+        637,
+        409,
+        701,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFruitSalad"
+    },
+    {
+      "rect": [
+        1354,
+        412,
+        696,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSemifreddo"
+    },
+    {
+      "rect": [
+        2065,
+        409,
+        694,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCadburySundae"
+    },
+    {
+      "rect": [
+        627,
+        599,
+        709,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChocolateCake"
+    },
+    {
+      "rect": [
+        1349,
+        604,
+        701,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChocolateCakeVegan"
+    },
+    {
+      "rect": [
+        2058,
+        604,
+        709,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCinamonSundae"
+    },
+    {
+      "rect": [
+        627,
+        806,
+        714,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCrumbleSundae"
+    }
+  ],
+  "tillFoodMeatFree": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    }
+  ],
+  "tillFoodSides": [
+    {
+      "rect": [
+        314,
+        17,
+        285,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        622,
+        25,
+        294,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChipsSide"
+    },
+    {
+      "rect": [
+        924,
+        33,
+        294,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBurgerChipsSide"
+    },
+    {
+      "rect": [
+        1236,
+        33,
+        297,
+        156
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKatsuChipsSide"
+    },
+    {
+      "rect": [
+        1541,
+        28,
+        297,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKoreanChipsSide"
+    },
+    {
+      "rect": [
+        1848,
+        28,
+        281,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMexicanChipsSide"
+    },
+    {
+      "rect": [
+        2150,
+        33,
+        299,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodColeslawSide"
+    },
+    {
+      "rect": [
+        2449,
+        23,
+        297,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadSide"
+    },
+    {
+      "rect": [
+        622,
+        238,
+        289,
+        148
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadCheeseSide"
+    },
+    {
+      "rect": [
+        939,
+        222,
+        284,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodHoneyrachaSide"
+    },
+    {
+      "rect": [
+        1233,
+        232,
+        297,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIndianNibblesSide"
+    },
+    {
+      "rect": [
+        1543,
+        217,
+        284,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKoreanChilliSide"
+    },
+    {
+      "rect": [
+        1845,
+        209,
+        279,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodNaanBreadSide"
+    },
+    {
+      "rect": [
+        2152,
+        215,
+        287,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodOnionRingsSide"
+    },
+    {
+      "rect": [
+        2455,
+        220,
+        294,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSausage1XSide"
+    },
+    {
+      "rect": [
+        622,
+        407,
+        297,
+        186
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSaladSide"
+    },
+    {
+      "rect": [
+        929,
+        414,
+        289,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIceCreamVeganSide"
+    },
+    {
+      "rect": [
+        1231,
+        417,
+        299,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPigsInBlankets?Side"
+    },
+    {
+      "rect": [
+        1546,
+        419,
+        274,
+        154
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSproutsSide"
+    },
+    {
+      "rect": [
+        1848,
+        427,
+        302,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBaconExtra"
+    },
+    {
+      "rect": [
+        2150,
+        419,
+        305,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBeansExtra"
+    },
+    {
+      "rect": [
+        2462,
+        409,
+        287,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBread&ButterExtra"
+    },
+    {
+      "rect": [
+        619,
+        601,
+        292,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCheeseExtra"
+    },
+    {
+      "rect": [
+        929,
+        614,
+        297,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChickenBreastExtra"
+    },
+    {
+      "rect": [
+        1231,
+        601,
+        302,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCustardExtra"
+    },
+    {
+      "rect": [
+        1536,
+        609,
+        289,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodEggExtra"
+    },
+    {
+      "rect": [
+        1845,
+        604,
+        295,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGravyExtra"
+    },
+    {
+      "rect": [
+        2152,
+        606,
+        287,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIceCreamExtra"
+    },
+    {
+      "rect": [
+        2460,
+        619,
+        297,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKatsuCurrySauceExtra"
+    },
+    {
+      "rect": [
+        629,
+        816,
+        290,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPeppercornSauceExtra"
+    },
+    {
+      "rect": [
+        921,
+        821,
+        300,
+        149
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPoppadomExtra"
+    }
+  ],
+  "tillFoodCarvery": [
+    {
+      "rect": [
+        314,
+        5,
+        310,
+        151
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        1141,
+        184,
+        1001,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCarvery"
+    },
+    {
+      "rect": [
+        1141,
+        463,
+        1009,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCarveryLarge"
+    },
+    {
+      "rect": [
+        1139,
+        755,
+        998,
+        158
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCarveryVegan"
+    },
+    {
+      "rect": [
+        1131,
+        1039,
+        1011,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCarveryVegetarian"
+    },
+    {
+      "rect": [
+        1131,
+        1320,
+        1006,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCarveryKids"
+    }
+  ],
+  "tillPromo": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    }
+  ],
+  "tillKids": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        2566,
+        50,
+        331,
+        216
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:pipApple"
+    },
+    {
+      "rect": [
+        1482,
+        32,
+        350,
+        219
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootApple&Blackberry"
+    },
+    {
+      "rect": [
+        1847,
+        44,
+        349,
+        210
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootOrange"
+    },
+    {
+      "rect": [
+        2909,
+        59,
+        341,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:pipStrawberry&Blackcurrent"
+    }
+  ],
+  "tillCrisps": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        693,
+        457,
+        823,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersSalt&Vinegar"
+    },
+    {
+      "rect": [
+        1518,
+        241,
+        812,
+        202
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersPrawnCoctail"
+    },
+    {
+      "rect": [
+        690,
+        247,
+        814,
+        193
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersCheese&Onion"
+    },
+    {
+      "rect": [
+        2344,
+        253,
+        791,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersReadySalted"
+    }
+  ],
+  "tillBottles": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        1035,
+        661,
+        353,
+        198
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:peroniZero"
+    },
+    {
+      "rect": [
+        692,
+        655,
+        343,
+        207
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:heinekenZero"
+    },
+    {
+      "rect": [
+        2785,
+        439,
+        328,
+        196
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:heinekenBottle"
+    },
+    {
+      "rect": [
+        1403,
+        672,
+        333,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:peroniBottle"
+    }
+  ],
+  "tillWine": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    }
+  ],
+  "tillSpirits": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    }
+  ],
+  "tillBitter": [
+    {
+      "rect": [
+        23,
+        21,
+        298,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        337,
+        21,
+        302,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        23,
+        215,
+        614,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillLager"
+    },
+    {
+      "rect": [
+        23,
+        416,
+        611,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBitter"
+    },
+    {
+      "rect": [
+        21,
+        616,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSoft"
+    },
+    {
+      "rect": [
+        21,
+        811,
+        613,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillSpirits"
+    },
+    {
+      "rect": [
+        21,
+        1011,
+        613,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillBottles"
+    },
+    {
+      "rect": [
+        23,
+        1213,
+        609,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillWine"
+    },
+    {
+      "rect": [
+        28,
+        1414,
+        606,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillKids"
+    },
+    {
+      "rect": [
+        23,
+        1608,
+        295,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillCrisps"
+    },
+    {
+      "rect": [
+        2348,
+        660,
+        321,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:guinessGlassPoured"
+    },
+    {
+      "rect": [
+        635,
+        693,
+        323,
+        202
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:doombarGlassPoured"
+    },
+    {
+      "rect": [
+        2688,
+        439,
+        310,
+        185
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:doombarGlassPoured"
+    }
+  ],
+  "3N1": [
+    {
+      "rect": [
+        422,
+        905,
+        566,
+        339
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:madriGlass"
+    }
+  ],
+  "4N1": [
+    {
+      "rect": [
+        3187,
+        982,
+        637,
+        522
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:morettiGlass"
+    },
+    {
+      "rect": [
+        2665,
+        608,
+        237,
+        281
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:carlingGlass"
+    },
+    {
+      "rect": [
+        2336,
+        656,
+        182,
+        256
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:strongbowGlass"
+    },
+    {
+      "rect": [
+        1984,
+        630,
+        227,
+        221
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:cruzcampoGlass"
+    },
+    {
+      "rect": [
+        1676,
+        646,
+        212,
+        208
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:coorsGlass"
+    }
+  ],
+  "2W1": [
+    {
+      "rect": [
+        1958,
+        801,
+        318,
+        261
+      ],
+      "label": "Till",
+      "color": "transparent black",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "3W1": [
+    {
+      "rect": [
+        1931,
+        784,
+        233,
+        206
+      ],
+      "label": "Till",
+      "color": "transparent black",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "4W1": [
+    {
+      "rect": [
+        1797,
+        717,
+        161,
+        134
+      ],
+      "label": "Till",
+      "color": "transparent black",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksLager": [
+    {
+      "rect": [
+        28,
+        5,
+        289,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        944,
+        386,
+        295,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:carlingGlassFull"
+    },
+    {
+      "rect": [
+        1256,
+        378,
+        287,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:coorsGlassFull"
+    },
+    {
+      "rect": [
+        1553,
+        381,
+        297,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cruzcampoGlassFull"
+    },
+    {
+      "rect": [
+        2173,
+        386,
+        279,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:madriGlassFull"
+    },
+    {
+      "rect": [
+        2472,
+        381,
+        290,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:morettiGlassFull"
+    },
+    {
+      "rect": [
+        1264,
+        560,
+        272,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:strongbowGlassFull"
+    }
+  ],
+  "tillDrinksBitter": [
+    {
+      "rect": [
+        2,
+        66,
+        249,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        2683,
+        433,
+        326,
+        194
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:doombarGlassFull"
+    },
+    {
+      "rect": [
+        2346,
+        654,
+        315,
+        188
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:guinessGlassFull"
+    }
+  ],
+  "tillDrinksSofts": [
+    {
+      "rect": [
+        2,
+        15,
+        289,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        616,
+        194,
+        297,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSoftsDraught"
+    },
+    {
+      "rect": [
+        921,
+        207,
+        399,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSoftsMocktail"
+    },
+    {
+      "rect": [
+        1748,
+        207,
+        392,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSoftsMixers"
+    },
+    {
+      "rect": [
+        2160,
+        207,
+        284,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSoftsWater"
+    },
+    {
+      "rect": [
+        2465,
+        204,
+        292,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSoftsDashes"
+    },
+    {
+      "rect": [
+        622,
+        394,
+        284,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:appletiserAppleJuice"
+    },
+    {
+      "rect": [
+        924,
+        401,
+        297,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cokeCan"
+    },
+    {
+      "rect": [
+        1239,
+        389,
+        289,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:dietCokeCan"
+    },
+    {
+      "rect": [
+        1541,
+        407,
+        304,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cokeZeroCan"
+    },
+    {
+      "rect": [
+        2158,
+        399,
+        291,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:feverTreeRaspberryLemonade"
+    },
+    {
+      "rect": [
+        926,
+        588,
+        295,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Apple&Mango"
+    },
+    {
+      "rect": [
+        1226,
+        583,
+        299,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20DragonBerry"
+    },
+    {
+      "rect": [
+        1548,
+        591,
+        295,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:j20Orange&Passionfruit"
+    },
+    {
+      "rect": [
+        1853,
+        586,
+        289,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redbull"
+    },
+    {
+      "rect": [
+        622,
+        773,
+        294,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesOrangeJuice"
+    },
+    {
+      "rect": [
+        924,
+        773,
+        309,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesPineappleJuice"
+    },
+    {
+      "rect": [
+        1538,
+        785,
+        297,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesSlimlineTonicWater"
+    }
+  ],
+  "tillDrinksSoftsDraught": [
+    {
+      "rect": [
+        2,
+        5,
+        294,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksSoftsMocktail": [
+    {
+      "rect": [
+        15,
+        2,
+        292,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksSpirits": [
+    {
+      "rect": [
+        1031,
+        28,
+        487,
+        158
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsGin"
+    },
+    {
+      "rect": [
+        7,
+        20,
+        292,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        1538,
+        25,
+        499,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsLiqueur"
+    },
+    {
+      "rect": [
+        2048,
+        17,
+        401,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsWhiskey"
+    },
+    {
+      "rect": [
+        2465,
+        15,
+        289,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsCocktails"
+    },
+    {
+      "rect": [
+        2467,
+        212,
+        292,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksSpiritsShots"
+    },
+    {
+      "rect": [
+        919,
+        417,
+        299,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:vodkaAbsolutSingle"
+    },
+    {
+      "rect": [
+        1228,
+        417,
+        292,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurAperolSingle"
+    },
+    {
+      "rect": [
+        1840,
+        409,
+        289,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:rumCaptainMorganDarkSingle"
+    },
+    {
+      "rect": [
+        2147,
+        414,
+        300,
+        162
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:rumCaptainMorganSpicedGoldSingle"
+    },
+    {
+      "rect": [
+        2460,
+        399,
+        292,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:rumCaptainMorganWhiteSingle"
+    },
+    {
+      "rect": [
+        616,
+        599,
+        292,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:courvoisierCognacSingle"
+    },
+    {
+      "rect": [
+        916,
+        596,
+        302,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:rumDeadMan'sFingersSingle"
+    }
+  ],
+  "tillDrinksBottlesAle": [
+    {
+      "rect": [
+        17,
+        17,
+        290,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksBottlesLager": [
+    {
+      "rect": [
+        5,
+        5,
+        302,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        1344,
+        189,
+        686,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksBottlesAle"
+    },
+    {
+      "rect": [
+        2055,
+        204,
+        699,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksBottlesCider"
+    },
+    {
+      "rect": [
+        1861,
+        399,
+        291,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:heinekenZero"
+    },
+    {
+      "rect": [
+        1541,
+        399,
+        309,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:heinekenBottle"
+    },
+    {
+      "rect": [
+        2457,
+        404,
+        300,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:peroniZero"
+    },
+    {
+      "rect": [
+        622,
+        578,
+        302,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:peroniBottle"
+    },
+    {
+      "rect": [
+        1233,
+        412,
+        303,
+        148
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:guinessCanZero"
+    },
+    {
+      "rect": [
+        2160,
+        394,
+        289,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:madriZero"
+    },
+    {
+      "rect": [
+        1239,
+        576,
+        297,
+        181
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:solBottle"
+    },
+    {
+      "rect": [
+        624,
+        394,
+        295,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:beavertownBreweryLazerCrushZero"
+    },
+    {
+      "rect": [
+        929,
+        396,
+        287,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:brixtonReliancePaleAleCan"
+    }
+  ],
+  "tillDrinksBottlesCider": [
+    {
+      "rect": [
+        2,
+        38,
+        297,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        926,
+        407,
+        287,
+        158
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderBulmersOriginal"
+    },
+    {
+      "rect": [
+        616,
+        401,
+        285,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderRekorderligStrawberryLimeZero"
+    },
+    {
+      "rect": [
+        1543,
+        422,
+        282,
+        148
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderRekorderligStrawberryLime"
+    },
+    {
+      "rect": [
+        1236,
+        412,
+        287,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderOldMoutBerries&Cherries"
+    },
+    {
+      "rect": [
+        1850,
+        414,
+        292,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ciderRekorderligWildBerries"
+    }
+  ],
+  "tillDrinksWine": [
+    {
+      "rect": [
+        2,
+        17,
+        305,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        676,
+        229,
+        227,
+        200
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineWhite125"
+    },
+    {
+      "rect": [
+        920,
+        223,
+        233,
+        209
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineWhite175"
+    },
+    {
+      "rect": [
+        1162,
+        220,
+        348,
+        204
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineWhite250"
+    },
+    {
+      "rect": [
+        1525,
+        232,
+        209,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRed125"
+    },
+    {
+      "rect": [
+        1754,
+        226,
+        221,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRed175"
+    },
+    {
+      "rect": [
+        1984,
+        223,
+        351,
+        206
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRed250"
+    },
+    {
+      "rect": [
+        2341,
+        214,
+        229,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRose125"
+    },
+    {
+      "rect": [
+        2582,
+        206,
+        218,
+        209
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRose175"
+    },
+    {
+      "rect": [
+        2814,
+        214,
+        329,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinksWineRose250"
+    }
+  ],
+  "tillDrinksWineWhite125": [
+    {
+      "rect": [
+        12,
+        2,
+        284,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        619,
+        391,
+        714,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJackRabbitPinotGrigio125"
+    },
+    {
+      "rect": [
+        1344,
+        404,
+        696,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJamShedChardonnay125"
+    },
+    {
+      "rect": [
+        624,
+        599,
+        699,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteNedSauvignonBlanc125"
+    },
+    {
+      "rect": [
+        1341,
+        593,
+        714,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteAndrewPeaceSilhouetteChardonnay125"
+    }
+  ],
+  "tillDrinksWineWhite175": [
+    {
+      "rect": [
+        5,
+        5,
+        294,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        629,
+        399,
+        704,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJackRabbitPinotGrigio175"
+    },
+    {
+      "rect": [
+        632,
+        593,
+        694,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteNedSauvignonBlanc175"
+    },
+    {
+      "rect": [
+        1346,
+        401,
+        709,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJamShedChardonnay175"
+    },
+    {
+      "rect": [
+        1346,
+        593,
+        702,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteAndrewPeaceSilhouetteChardonnay175"
+    }
+  ],
+  "tillDrinksWineWhite250": [
+    {
+      "rect": [
+        5,
+        25,
+        289,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        622,
+        414,
+        704,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJackRabbitPinotGrigio250"
+    },
+    {
+      "rect": [
+        611,
+        606,
+        720,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteNedSauvignonBlanc250"
+    },
+    {
+      "rect": [
+        1331,
+        424,
+        704,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteJamShedChardonnay250"
+    },
+    {
+      "rect": [
+        1333,
+        609,
+        704,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiteAndrewPeaceSilhouetteChardonnay250"
+    }
+  ],
+  "tillDrinksWineRed125": [
+    {
+      "rect": [
+        23,
+        5,
+        294,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        637,
+        384,
+        689,
+        189
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redCampoViejoRiojaTempranillo125"
+    },
+    {
+      "rect": [
+        1349,
+        394,
+        709,
+        182
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFlagstonePoetryMerlot250"
+    },
+    {
+      "rect": [
+        2065,
+        404,
+        704,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redJamShedShiraz125"
+    },
+    {
+      "rect": [
+        629,
+        583,
+        715,
+        187
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redAndrewPeaceSilhouetteShiraz125"
+    },
+    {
+      "rect": [
+        1351,
+        593,
+        704,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redVinaArrobaTempranillo125"
+    },
+    {
+      "rect": [
+        634,
+        785,
+        704,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFincaDelAltaMalbec125"
+    }
+  ],
+  "tillDrinksWineRed175": [
+    {
+      "rect": [
+        2,
+        20,
+        292,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        616,
+        399,
+        710,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redCampoViejoRiojaTempranillo175"
+    },
+    {
+      "rect": [
+        1346,
+        409,
+        699,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFlagstonePoetryMerlot175"
+    },
+    {
+      "rect": [
+        2073,
+        409,
+        707,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redJamShedShiraz175"
+    },
+    {
+      "rect": [
+        627,
+        588,
+        699,
+        180
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redAndrewPeaceSilhouetteShiraz175"
+    },
+    {
+      "rect": [
+        1341,
+        591,
+        707,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redVinaArrobaTempranillo175"
+    },
+    {
+      "rect": [
+        619,
+        775,
+        714,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFincaDelAltaMalbec175"
+    }
+  ],
+  "tillDrinksWineRed250": [
+    {
+      "rect": [
+        5,
+        23,
+        291,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        624,
+        419,
+        709,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redCampoViejoRiojaTempranillo250"
+    },
+    {
+      "rect": [
+        1349,
+        427,
+        704,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFlagstonePoetryMerlot250"
+    },
+    {
+      "rect": [
+        2060,
+        424,
+        694,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redJamShedShiraz250"
+    },
+    {
+      "rect": [
+        627,
+        616,
+        704,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redAndrewPeaceSilhouetteShiraz250"
+    },
+    {
+      "rect": [
+        1331,
+        614,
+        711,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redVinaArrobaTempranillo250"
+    },
+    {
+      "rect": [
+        627,
+        816,
+        706,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:redFincaDelAltaMalbec250"
+    }
+  ],
+  "tillDrinksWineRose125": [
+    {
+      "rect": [
+        1,
+        2,
+        109,
+        66
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        228,
+        142,
+        239,
+        59
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseJackRabbitWhiteZinfandel125"
+    },
+    {
+      "rect": [
+        476,
+        143,
+        246,
+        64
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseNedMarlboroughPinot125"
+    },
+    {
+      "rect": [
+        728,
+        145,
+        249,
+        61
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinoPomonaPinotGrigio125"
+    },
+    {
+      "rect": [
+        221,
+        211,
+        246,
+        57
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinaArrobaTempranilloRosado125"
+    }
+  ],
+  "tillDrinksWineRose175": [
+    {
+      "rect": [
+        17,
+        17,
+        292,
+        146
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        627,
+        337,
+        699,
+        141
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseJackRabbitWhiteZinfandel175"
+    },
+    {
+      "rect": [
+        627,
+        488,
+        688,
+        141
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinaArrobaTempranilloRosado175"
+    },
+    {
+      "rect": [
+        1344,
+        343,
+        701,
+        128
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseNedMarlboroughPinot175"
+    },
+    {
+      "rect": [
+        2053,
+        335,
+        701,
+        141
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinoPomonaPinotGrigio175"
+    }
+  ],
+  "tillDrinksWineRose250": [
+    {
+      "rect": [
+        0,
+        20,
+        294,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        614,
+        407,
+        704,
+        163
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseJackRabbitWhiteZinfandel250"
+    },
+    {
+      "rect": [
+        1333,
+        409,
+        715,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseNedMarlboroughPinot250"
+    },
+    {
+      "rect": [
+        2055,
+        407,
+        704,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinoPomonaPinotGrigio250"
+    },
+    {
+      "rect": [
+        619,
+        601,
+        691,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:roseVinaArrobaTempranilloRosado250"
+    }
+  ],
+  "tillDrinksKids": [
+    {
+      "rect": [
+        15,
+        20,
+        302,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        934,
+        15,
+        302,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootApple&Blackberry"
+    },
+    {
+      "rect": [
+        1241,
+        20,
+        300,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:fruitShootOrange"
+    },
+    {
+      "rect": [
+        2168,
+        20,
+        297,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:pipApple"
+    },
+    {
+      "rect": [
+        2493,
+        25,
+        279,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:pipStrawberry&Blackcurrent"
+    }
+  ],
+  "tillDrinksCrisps": [
+    {
+      "rect": [
+        0,
+        28,
+        279,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        606,
+        222,
+        704,
+        154
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersCheese&Onion"
+    },
+    {
+      "rect": [
+        1323,
+        222,
+        699,
+        156
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersPrawnCoctail"
+    },
+    {
+      "rect": [
+        2053,
+        212,
+        704,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersReadySalted"
+    },
+    {
+      "rect": [
+        619,
+        412,
+        709,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:chipsWalkersReadySalted"
+    }
+  ],
+  "tillDrinksSpiritsCocktails": [
+    {
+      "rect": [
+        0,
+        23,
+        294,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        622,
+        417,
+        291,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailBluelagoon"
+    },
+    {
+      "rect": [
+        1233,
+        412,
+        292,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailPassionfruitmartini"
+    },
+    {
+      "rect": [
+        1543,
+        409,
+        292,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailPinacolada"
+    },
+    {
+      "rect": [
+        1845,
+        422,
+        290,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailTropicalwoowoo"
+    },
+    {
+      "rect": [
+        2160,
+        422,
+        302,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailAperolspritz"
+    },
+    {
+      "rect": [
+        924,
+        407,
+        299,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:cocktailMojito"
+    }
+  ],
+  "tillDrinksSoftsMixers": [
+    {
+      "rect": [
+        1246,
+        427,
+        290,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesOrangeJuice"
+    },
+    {
+      "rect": [
+        1553,
+        419,
+        285,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesPineappleJuice"
+    },
+    {
+      "rect": [
+        1863,
+        412,
+        284,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:schweppesSlimlineTonicWater"
+    },
+    {
+      "rect": [
+        17,
+        15,
+        292,
+        179
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksSoftsWater": [
+    {
+      "rect": [
+        2,
+        25,
+        277,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        611,
+        401,
+        285,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:aqualibraCanSparkling"
+    },
+    {
+      "rect": [
+        911,
+        399,
+        305,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:aqualibraCanStill"
+    }
+  ],
+  "tillDrinksSoftsDashes": [
+    {
+      "rect": [
+        0,
+        23,
+        299,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksSpiritsGin": [
+    {
+      "rect": [
+        2,
+        10,
+        302,
+        194
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        627,
+        419,
+        286,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ginBombaySapphireSingle"
+    },
+    {
+      "rect": [
+        1239,
+        407,
+        291,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ginJjLondonDrySingle"
+    },
+    {
+      "rect": [
+        1543,
+        414,
+        295,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:ginJjWhitleyPinkSingle"
+    }
+  ],
+  "tillDrinksSpiritsLiqueur": [
+    {
+      "rect": [
+        627,
+        407,
+        292,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurArchersPeachSchnappsSingle"
+    },
+    {
+      "rect": [
+        1241,
+        593,
+        295,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurTiaMariaSingle"
+    },
+    {
+      "rect": [
+        1856,
+        396,
+        291,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurJagermeisterSingle"
+    },
+    {
+      "rect": [
+        936,
+        593,
+        290,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurSouthernComfortSingle"
+    },
+    {
+      "rect": [
+        632,
+        593,
+        281,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:aperitifPimm'sSingle"
+    },
+    {
+      "rect": [
+        1233,
+        399,
+        300,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurCointreauSingle"
+    },
+    {
+      "rect": [
+        2467,
+        401,
+        290,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:rumMalibuOriginalCoconutSingle"
+    },
+    {
+      "rect": [
+        2,
+        23,
+        307,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    }
+  ],
+  "tillDrinksSpiritsWhiskey": [
+    {
+      "rect": [
+        5,
+        10,
+        279,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        924,
+        399,
+        297,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:whiskeyJackDaniel'sSingle"
+    }
+  ],
+  "tillDrinksSpiritsShots": [
+    {
+      "rect": [
+        1546,
+        622,
+        292,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:shotBabyGuiness"
+    },
+    {
+      "rect": [
+        624,
+        619,
+        287,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:tequilaElJimadorBlancoSingle"
+    },
+    {
+      "rect": [
+        2160,
+        619,
+        292,
+        195
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:tequilaElJimadorReposadoSingle"
+    },
+    {
+      "rect": [
+        1244,
+        632,
+        286,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:tequilaRoseSingle"
+    },
+    {
+      "rect": [
+        15,
+        23,
+        287,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillDrinks"
+    },
+    {
+      "rect": [
+        1543,
+        422,
+        302,
+        184
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurAnticaSambucaClassicSingle"
+    },
+    {
+      "rect": [
+        926,
+        427,
+        302,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:liqueurAnticaSambucaLiquoriceSingle"
+    }
+  ],
+  "tillFoodDaytime": [
+    {
+      "rect": [
+        652,
+        217,
+        284,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBBQChickenWingsDaytime"
+    },
+    {
+      "rect": [
+        957,
+        220,
+        284,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGarlicBreadCheeseDaytime"
+    },
+    {
+      "rect": [
+        1264,
+        207,
+        284,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBreadedMushroomsDaytime"
+    },
+    {
+      "rect": [
+        1566,
+        215,
+        290,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTomatoSoupDaytime"
+    },
+    {
+      "rect": [
+        1871,
+        225,
+        284,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodTomatoSoupVeganDaytime"
+    },
+    {
+      "rect": [
+        2178,
+        215,
+        284,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFalafelDaytime"
+    },
+    {
+      "rect": [
+        642,
+        601,
+        294,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGammonDaytime"
+    },
+    {
+      "rect": [
+        960,
+        606,
+        289,
+        162
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodGammonUpgradedDaytime"
+    },
+    {
+      "rect": [
+        1264,
+        604,
+        287,
+        156
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSausage&MashDaytime"
+    },
+    {
+      "rect": [
+        1564,
+        601,
+        289,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSausage&MashVeganDaytime"
+    },
+    {
+      "rect": [
+        1871,
+        604,
+        281,
+        158
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFish&ChipsDaytime"
+    },
+    {
+      "rect": [
+        2170,
+        601,
+        290,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodHaddockDaytime"
+    },
+    {
+      "rect": [
+        2467,
+        596,
+        290,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChickenTikkaCurryDaytime"
+    },
+    {
+      "rect": [
+        647,
+        796,
+        289,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSmotheredChickenDaytime"
+    },
+    {
+      "rect": [
+        957,
+        801,
+        284,
+        153
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodSmotheredChickenUpgradeDaytime"
+    },
+    {
+      "rect": [
+        1264,
+        788,
+        287,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodLasagneDaytime"
+    },
+    {
+      "rect": [
+        1571,
+        793,
+        282,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMargheritaPizzaDaytime"
+    },
+    {
+      "rect": [
+        1861,
+        778,
+        291,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPeperoniPizzaDaytime"
+    },
+    {
+      "rect": [
+        2176,
+        788,
+        286,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodThaiCurryDaytime"
+    },
+    {
+      "rect": [
+        2475,
+        791,
+        279,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFlatbreadBreakfastDaytime"
+    },
+    {
+      "rect": [
+        645,
+        983,
+        294,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFlatbreadChickenDaytime"
+    },
+    {
+      "rect": [
+        1259,
+        988,
+        282,
+        158
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFishCakeDaytime"
+    },
+    {
+      "rect": [
+        1569,
+        975,
+        281,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodClassicCheeseburgerDaytime"
+    },
+    {
+      "rect": [
+        647,
+        1361,
+        192,
+        177
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMiniCadburySundaeDaytime"
+    },
+    {
+      "rect": [
+        849,
+        1364,
+        192,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMiniCinamonSundaeDaytime"
+    },
+    {
+      "rect": [
+        1049,
+        1359,
+        192,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodMiniCrumbleSundaeDaytime"
+    },
+    {
+      "rect": [
+        1254,
+        1364,
+        197,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCadburySundaeDaytime"
+    },
+    {
+      "rect": [
+        1456,
+        1369,
+        192,
+        156
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCinnamonSundaeDaytime"
+    },
+    {
+      "rect": [
+        1664,
+        1359,
+        197,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCrumbleSundaeDaytime"
+    },
+    {
+      "rect": [
+        1871,
+        1356,
+        179,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFruitSaladDaytime"
+    },
+    {
+      "rect": [
+        2060,
+        1349,
+        185,
+        163
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodCaramelAppleBettyDaytime"
+    },
+    {
+      "rect": [
+        2273,
+        1351,
+        179,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChocolateBrownieDaytime"
+    },
+    {
+      "rect": [
+        332,
+        17,
+        300,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    }
+  ],
+  "tillFoodKids": [
+    {
+      "rect": [
+        327,
+        10,
+        297,
+        176
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        637,
+        207,
+        499,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsTortillaChips"
+    },
+    {
+      "rect": [
+        1141,
+        209,
+        604,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsTortillaChipsVegan"
+    },
+    {
+      "rect": [
+        1756,
+        209,
+        509,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsGarlicFlatbread"
+    },
+    {
+      "rect": [
+        2268,
+        215,
+        501,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsVeggieSticks"
+    },
+    {
+      "rect": [
+        637,
+        683,
+        287,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTSausage&Mash"
+    },
+    {
+      "rect": [
+        931,
+        683,
+        407,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTSausage&MashVegan"
+    },
+    {
+      "rect": [
+        1351,
+        680,
+        289,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTPoppinChicken"
+    },
+    {
+      "rect": [
+        627,
+        872,
+        302,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTFishBites"
+    },
+    {
+      "rect": [
+        942,
+        890,
+        391,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTTomatoPasta"
+    },
+    {
+      "rect": [
+        1354,
+        883,
+        297,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsSTChickenBreast"
+    },
+    {
+      "rect": [
+        1758,
+        691,
+        290,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYSpagBowl"
+    },
+    {
+      "rect": [
+        2060,
+        686,
+        400,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYMargheritaPizza"
+    },
+    {
+      "rect": [
+        2478,
+        696,
+        271,
+        161
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYFishBites"
+    },
+    {
+      "rect": [
+        1768,
+        880,
+        474,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYBeefBurger"
+    },
+    {
+      "rect": [
+        2275,
+        878,
+        477,
+        166
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsBYChickenBreastBurger"
+    },
+    {
+      "rect": [
+        637,
+        1361,
+        289,
+        172
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodKidsRainbowLolly"
+    },
+    {
+      "rect": [
+        1241,
+        1356,
+        300,
+        167
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodChocolateBrownieKids"
+    },
+    {
+      "rect": [
+        1548,
+        1344,
+        297,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFruitSaladKids"
+    },
+    {
+      "rect": [
+        1853,
+        1359,
+        302,
+        169
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodBerryBlastSundaeKids"
+    },
+    {
+      "rect": [
+        2170,
+        1354,
+        290,
+        174
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodIceCreamKids"
+    },
+    {
+      "rect": [
+        2470,
+        1364,
+        287,
+        159
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodPancakesKids"
+    }
+  ],
+  "tillFoodBreakfast": [
+    {
+      "rect": [
+        312,
+        20,
+        289,
+        154
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "switch:tillFood"
+    },
+    {
+      "rect": [
+        729,
+        407,
+        906,
+        171
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodFullBreakfast"
+    },
+    {
+      "rect": [
+        1745,
+        412,
+        912,
+        164
+      ],
+      "label": "",
+      "color": "transparent border",
+      "action": "order:foodContinentalBreakfast"
+    }
+  ],
+  "2N1": [
+    {
+      "rect": [
+        662,
+        1174,
+        390,
+        298
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:carlingGlass"
+    },
+    {
+      "rect": [
+        307,
+        1168,
+        259,
+        297
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:cruzcampoGlass"
+    },
+    {
+      "rect": [
+        19,
+        1174,
+        233,
+        298
+      ],
+      "label": "Pour",
+      "color": "transparent black",
+      "action": "pour:alpalypseGlass"
     }
   ]
 }
