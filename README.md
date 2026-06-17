@@ -5,8 +5,8 @@ My plan is to build a flashcards app that supports much more than a front and ba
 1. Press the green **<> Code** button above, and click **Download Zip**
 2. **Extract** the project folder, and place it anywhere
 3. Open **terminal**, navigate to the project folder using `cd` (change directory)
-4. **Create** a virtual python environment in the project folder using `python -m venv venv` (type `exit` to leave)
-5. **Enter** the virtual environment using `source venv/bin/activate` (Linux), `.\venv\Scripts\Activate.ps1` (Windows PowerShell) or `.\venv\Scripts\activate.bat` (Windows Command Prompt)
+4. **Create** a virtual python environment in the project folder using `python -m venv venv`
+5. **Enter** the virtual environment using `source venv/bin/activate` (Linux), `.\venv\Scripts\Activate.ps1` (Windows PowerShell) or `.\venv\Scripts\activate.bat` (Windows Command Prompt); type `exit` to leave
 6. **Run** `python -m src.core.main` from the main project directory.
 7. **Enjoy!**
 
