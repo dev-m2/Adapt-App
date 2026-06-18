@@ -1,5 +1,5 @@
 from .db import *
-from .utils import inputCode, renderImage
+from .utils import AIpromptReviewAnswer, AIreadNeuromodCSV, AIreviewAnswerPrompt, inputCode, renderImage
 from .scheduler import schedulerReview
 from pathlib import Path # for importNeuroMods()
 import pandas as pd # for importNeuroMods()
@@ -50,21 +50,20 @@ def createAdaptation():
 
 
 def viewAdaptations(option: int = 1):
-    def _view():
-        print(df.to_string(max_colwidth=50), "\n")
-    
-    df = dbDataFrame()
+    def _view(data_frame):
+        print(data_frame.to_string(max_colwidth=50), "\n")
 
     if option == 0: # view only
-        _view()
+        _view(dbDataFrame())
         return
 
     while True:
+        df = dbDataFrame()
         if df.empty:
             print("You have no adaptations!")
             break
         else:
-            _view()
+            _view(df)
 
         print("Options: 0 Exit; 1 View Full; 2 Delete;\n")
         choice = input("Choice: ").strip()
@@ -121,13 +120,13 @@ def reviewAdaptations():
         match adaptType:
             case "text":
                 print(f"Cue: {content.get('cue')}")
-                input("Your answer: ")
+                AIpromptReviewAnswer(content, AIreviewAnswerPrompt(content))
                 print(f"Response: {content.get('response')}")
             
             case "image-text":
                 renderImage(content.get('path'))
                 print(content.get('cue'))
-                answer = input("Answer: ")
+                AIpromptReviewAnswer(content, AIreviewAnswerPrompt(content))
                 print(f"Response: {content.get('response')}")
 
             case "run":
@@ -141,13 +140,14 @@ def reviewAdaptations():
         
         # Asks for rating
         rating = input(dedent("""
-            Again (1)  Hard (2)  Good (3)  Easy (4)
+            Skip (0) Again (1)  Hard (2)  Good (3)  Easy (4)
             How well did you do?: """)).strip().lower()
 
         if   rating in ("1", "again"): grade = 1
         elif rating in ("2", "hard"):  grade = 2
         elif rating in ("3", "good"):  grade = 3
         elif rating in ("4", "easy"):  grade = 4
+        elif rating in ("0", "skip"): return False
         else:
             print("Invalid input! Skipping.")
             return False
@@ -255,8 +255,7 @@ def importNeuroMod():
         return
 
     try:
-        df = pd.read_csv(chosenFile)
-        df["content"] = df["content"].apply(json.loads)
+        df = AIreadNeuromodCSV(chosenFile)
 
         print(f"Importing {chosenFile.name} ...")
         
@@ -279,7 +278,7 @@ def main():
         print("=========================================================")
         print("                 Welcome to the Adapt App")
         print("=========================================================")
-        print(f"Options: 0 Exit; 1 Create; 2 View; 3 Review ({n}); 4 Import;\n")
+        print(f"Options: 0 Exit; 1 Create; 2 View; 3 Review ({n}); 4 Import; 5 Bar (practice);\n")
 
         choice = input("Choice: ").strip()
 
@@ -295,10 +294,23 @@ def main():
                  reviewAdaptations()
             case "4":
                 importNeuroMod()
+            case "5":
+                playBarPractice()
             case "999":
                 _test()
             case _:
                 print("Invalid input!")
+
+def playBarPractice():
+    """Launch the bar trainer in practice mode (no FSRS / due-card review)."""
+    try:
+        from ..bar.game import run_demo
+        print("\nLaunching bar trainer (practice mode)...")
+        run_demo()
+        print("Returned to main menu.")
+    except Exception as e:
+        print(f"Could not launch bar game: {e}")
+
 
 def _test():
     print("YOU'VE TRIGGERED A TESTING FUNCTION!")

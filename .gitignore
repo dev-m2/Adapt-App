@@ -6,3 +6,5 @@ main.spec
 run_cli.py
 **/__pycache__
 requirements.txt
+src/adaptations.db
+.grok/

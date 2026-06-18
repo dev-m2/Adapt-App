@@ -1,6 +1,6 @@
 
-
-
+from .db import updateDB
+from .utils import AIreadNeuromodCSV, NEURO_MODS_DIR
 
 
 def importNeuroMod():
@@ -33,8 +33,7 @@ def importNeuroMod():
         return
 
     try:
-        df = pd.read_csv(chosenFile)
-        df["content"] = df["content"].apply(json.loads)
+        df = AIreadNeuromodCSV(chosenFile)
 
         print(f"Importing {chosenFile.name} ...")
         

@@ -90,9 +90,11 @@ def main():
     screen = pygame.display.set_mode((1100, 700), pygame.RESIZABLE)
     pygame.display.set_caption("Item Icon Mapper - Assign icons to take: items (Shift+Click or buttons)")
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont(None, 18)
-    small_font = pygame.font.SysFont(None, 14)
-    title_font = pygame.font.SysFont(None, 24)
+    from .ui_fonts import ui_font
+
+    font = ui_font(18)
+    small_font = ui_font(14)
+    title_font = ui_font(24)
 
     items = load_items_from_buttons()
     available_icons = load_available_icons()

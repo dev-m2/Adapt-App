@@ -22,11 +22,14 @@ Controls (in addition to the on-screen help):
 - Arrow keys: move absolute west/east
 - Q/E: turn
 - Ctrl (or C): toggle crouch/stand (single button toggle when relevant)
-- All photo buttons (including any top BAR/FOOD switch buttons) now come from the editor tool (JSON); take: actions use scheme take:wordNewThing&AnotherThing (autocomplete cross with order: in tool); void: undoes the last added order item; thimble:25/50/125 for measuring wines in-hand
+- All photo buttons (including any top BAR/FOOD switch buttons) now come from the editor tool (JSON); take: actions use scheme take:wordNewThing&AnotherThing (autocomplete cross with order: in tool); void: undoes the last added order item; opener: opens sealed bottles in-hand to *Opened; thimble:25/50/125 for measuring wines and spirits in-hand (not softs, cans, beer, crisps, etc.)
 - Click: print original image coords for hotspots
 - Shift+O: toggle console log (for seeing prints in fullscreen)
 - Shift+I: toggle hand icons (text mode is default)
 - Ctrl+Q: quit
+- W (on any till screen): go to customer screen
+- S (on any till screen): leave the till to the bar (re-opens at tillDrinks next time)
+- S (on customer screen): return to the till screen you came from
 - ESC: return from till sub-menus to tillDrinks (not used for quitting)
 
 The view graph now models multiple positions + north/south facing + stand/crouch
@@ -35,12 +38,47 @@ The view graph now models multiple positions + north/south facing + stand/crouch
 
 from __future__ import annotations
 
+import csv
+import os
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Optional
 import random
 import json
+
+from .customer_screen import (
+    AIcomputeCustomerLayout,
+    AIdrawCustomerBackground,
+    AIdrawCustomerPortrait,
+    AIloadCustomerRoster,
+    AIpickRandomCustomer,
+    CustomerEntry,
+    load_customer_frame_surface,
+    load_customer_headshot_surface,
+    load_customer_viewport,
+)
+from .demand_display import format_counter_item, format_customer_demand
+from .ui_fonts import font_status, ui_font
+from . import ui_theme
+from .till_frame import (
+    blit_rounded_surface,
+    layout_view_photo,
+    load_till_frame_surface,
+    load_till_viewport,
+)
+from .item_types import (
+    BEER_GLASS_BASES,
+    DEMAND_WEIGHT_MAP,
+    can_open_with_opener,
+    can_thimble,
+    classify_item_type,
+    combine_measured_pours,
+    is_measured_pour,
+    strip_thimble_suffix,
+    try_open_bottle,
+    try_spirit_shot_pour,
+)
 
 # Pygame is imported lazily inside run_demo() so that you can import this module
 # for path testing / data inspection without needing pygame installed.
@@ -56,6 +94,17 @@ _due_map: dict = {}          # demand_key (from response) -> adapt_id (str)
 _practice_mode = False
 
 
+def _session_mode_label() -> str:
+    """Human-readable session mode for UI (window title, loading screen)."""
+    if _review_mode and not _practice_mode:
+        return "Review Mode"
+    return "Practice Mode"
+
+
+def _window_caption() -> str:
+    return f"Adapt App - Bar Trainer ({_session_mode_label()})"
+
+
 def _sample_next_demands():
     """Choose 3-6 demands. While there are still due bar cards in review mode,
     prefer sampling from the remaining due ones. Falls back to weighted sampling
@@ -63,7 +112,7 @@ def _sample_next_demands():
     a take:/pour: and an order: button).
 
     Weights come from the 'type' of the order:
-      food=1.0, side=0.25, extra=0.25, other=1.0, wine=1.0, beer=1.0
+      food=1.0, side=0.25, extra=0.25, wine/spirit/beer/soft/can/bottleBeer/barFood/kids/other=1.0
     """
     global _review_mode, _due_map, _practice_mode
     if _review_mode and _due_map:
@@ -103,60 +152,61 @@ def load_potential_orders():
     """Load the list of valid potential customer orders.
 
     Returns list of dicts:
-      {'key': 'foodBigstackBurger', 'display_name': 'Bigstack Burger', 'type': 'food', 'weight': 1.0}
+      {'key': 'foodBigstackBurger', 'Display': 'a Bigstack Burger', 'type': 'food', 'weight': 1.0}
       ...
 
     These are items for which the till_buttons.json defines BOTH:
       - A take: or pour: button (so you can acquire/place the item in a hand)
       - An order: button (so the item can be sent from the till)
 
-    Non-food items are given type='other' (unless they match wine or beer criteria).
-    Food items have type 'food'/'side'/'extra'.
-    Wine items (take:red*/white*/rose* excl. redbull) have type 'wine'.
-    Thimble wine variants (redXXX25 etc.) also get type 'wine' (via thimble: transform).
-    Beer glass BASES (guinessGlass etc. from take:) are type 'emptyGlass' (never included).
-    Half/Full/Poured variants (e.g. madriGlassFull) have type 'beer'.
-    Empty glass items (tallGlass, shortGlass, capriGlass, shotsGlass from take:) have type 'emptyGlass' (never included in potential orders).
+    Item types (see src/bar/item_types.py): wine, spirit, beer, soft, can, bottleBeer,
+    barFood (crisps), kids, food/side/extra, emptyGlass (excluded), other.
+    Thimble works on wine and spirit only (not softs, cans, beer, crisps, kids drinks, etc.).
 
     The list is maintained by running src/bar/genOrders.py (python -m src.bar.genOrders)
-    (which also writes NeuroMods/Bar/potentialOrders.nm with columns key|display_name|type|weight).
+    (which also writes NeuroMods/Bar/BarGame.nm as content,source CSV rows).
+
+    Each BarGame.nm row stores {"type": "bar", "cue": customer line, "response": order key}.
+    Item category and practice weights are derived from the response key at load time.
 
     Used for (weighted) practice-mode (non-review) customer demand generation.
     """
     try:
         bar_root = _get_bar_images_root()
-        nm_path = bar_root / "potentialOrders.nm"
+        nm_path = bar_root / "BarGame.nm"
         if nm_path.exists():
             items = []
-            with open(nm_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line or line.startswith("#") or line.startswith("key|"):
+            with open(nm_path, "r", encoding="utf-8", newline="") as f:
+                for row in csv.DictReader(f):
+                    raw = (row.get("content") or "").strip()
+                    if not raw:
                         continue
-                    parts = [p.strip() for p in line.split("|")]
-                    if not parts or not parts[0]:
-                        continue
-                    key = parts[0]
-                    disp = parts[1] if len(parts) > 1 else key
-                    typ = parts[2] if len(parts) > 2 else "other"
                     try:
-                        w = float(parts[3]) if len(parts) > 3 else 1.0
-                    except:
-                        w = 1.0
+                        content = json.loads(raw)
+                    except json.JSONDecodeError:
+                        continue
+                    if content.get("type") != "bar":
+                        continue
+                    key = content.get("response")
+                    if not isinstance(key, str) or not key:
+                        continue
+                    display = content.get("cue") or format_customer_demand(key)
+                    typ = classify_item_type(key)
+                    w = DEMAND_WEIGHT_MAP.get(typ, 1.0)
                     items.append({
                         "key": key,
-                        "display_name": disp,
+                        "Display": display,
                         "type": typ,
-                        "weight": w
+                        "weight": w,
                     })
             if items:
                 return items
     except Exception as e:
-        print("Warning: could not load potentialOrders.nm:", e)
+        print("Warning: could not load BarGame.nm:", e)
     # Fallback: a few common ones (as structured) so the game is still playable
     # (avoid using beer glass bases, which have emptyGlass type and are excluded)
     fallback_keys = ["cokeCan", "chipsWalkersCheese&Onion", "foodBigstackBurger", "guinessCanZero"]
-    return [{"key": k, "display_name": k, "type": "other", "weight": 1.0} for k in fallback_keys]
+    return [{"key": k, "Display": format_customer_demand(k), "type": "other", "weight": 1.0} for k in fallback_keys]
 
 
 
@@ -686,8 +736,8 @@ VIEWS: Dict[str, View] = {
     "tillDrinksWineRose250": View(key="tillDrinksWineRose250", image_path="Till Images/tillDrinksWineRose250.jpg", name="Till Submenu: Wine Rose 250", neighbors={"left": None, "right": None, "forward": None, "back": None, "turn_left": None, "turn_right": None, "crouch": None, "stand": None}),
     "tillFoodBreakfast": View(key="tillFoodBreakfast", image_path="Till Images/tillFoodBreakfast.jpg", name="Till Food: Breakfast", neighbors={"left": None, "right": None, "forward": None, "back": None, "turn_left": None, "turn_right": None, "crouch": None, "stand": None}),
     "tillFoodDaytime": View(key="tillFoodDaytime", image_path="Till Images/tillFoodDaytime.jpg", name="Till Food: Daytime", neighbors={"left": None, "right": None, "forward": None, "back": None, "turn_left": None, "turn_right": None, "crouch": None, "stand": None}),
-    # Customer screen - accessed by 'forward' from tillDrinks (looking up from the till towards the customer)
-    # No left/right/turn/crouch from here. Only back to till.
+    # Customer screen - W from any till screen; S returns to the till you came from.
+    # No left/right/turn/crouch from here.
     # Blank for now with placeholder text box for customer demands.
     "customer": View(
         key="customer",
@@ -731,6 +781,10 @@ except Exception:
 # Back button area for submenu screens (top right, approximate)
 TILL_SUB_BACK_RECT = (2750, 60, 360, 110)
 
+# Default till home + bar position when leaving any till screen with S.
+TILL_HOME = "tillDrinks"
+TILL_BAR_EXIT = "1W1"
+
 # (Persistent top-left BAR/FOOD navigation buttons have been removed.
 # They are now expected to be added by the user via the till_button_tool
 # using "switch:tillDrinks" / "switch:tillFood" etc. actions.)
@@ -739,98 +793,475 @@ TILL_SUB_BACK_RECT = (2750, 60, 360, 110)
 # These are now *recomputed every frame* from the current window size (see run_demo)
 # for fullscreen / resizable support. The values below are only "base" / documentation.
 # (Dynamic right column under sent box, left placed box, etc.)
-GRADE_AGAIN_RECT = (950, 265, 220, 38)
-GRADE_HARD_RECT  = (950, 306, 220, 38)
-GRADE_GOOD_RECT  = (950, 347, 220, 38)
-GRADE_EASY_RECT  = (950, 388, 220, 38)
-RESET_BUTTON_RECT = (950, 435, 220, 40)
-FINISH_BUTTON_RECT = (950, 480, 220, 40)
+# Customer screen layout (recomputed each frame in run_demo; defaults below).
 PLACED_ITEMS_BOX = (20, 50, 300, 300)
-SENT_ITEMS_BOX = (960, 50, 300, 180)
+SENT_ITEMS_BOX = (960, 50, 300, 300)
+GRADE_AGAIN_RECT = (20, 370, 300, 38)
+GRADE_HARD_RECT  = (20, 412, 300, 38)
+GRADE_GOOD_RECT  = (20, 454, 300, 38)
+GRADE_EASY_RECT  = (20, 496, 300, 38)
+RESET_BUTTON_RECT = (20, 546, 300, 40)
+RESET_TILL_BUTTON_RECT = (960, 365, 300, 40)
+FINISH_BUTTON_RECT = (960, 415, 300, 40)
 
-# Possible customer demands are now loaded dynamically from NeuroMods/Bar/potentialOrders.nm
+# Possible customer demands are now loaded dynamically from NeuroMods/Bar/BarGame.nm
 # (generated by src/bar/genOrders.py).
 #
 # Only items that have BOTH a take:/pour: button (to acquire the item) AND an order: button
 # (to send it) are included (with special rule for food items).
-# The .nm contains key|display_name|type|weight .
+# BarGame.nm is content,source CSV (type=bar, cue, response per row).
 # This list (of dicts) is used for (weighted) practice-mode (non-review) customer
 # demand generation via load_potential_orders() above.
 # Weights: food=1.0, side=0.25, extra=0.25, other=1.0, wine=1.0, beer=1.0
 # (beer bases emptyGlass excluded; *Full/*Poured beer and *25/*50/*125 thimble wines included as beer/wine)
 #
 # Run the generator script after editing buttons in the till editor.
-POSSIBLE_DEMANDS = load_potential_orders()  # list of dicts: key, display_name, type, weight
-
+POSSIBLE_DEMANDS = load_potential_orders()  # list of dicts: key, Display, type, weight
+DEMAND_LOOKUP = {d["key"]: d for d in POSSIBLE_DEMANDS if isinstance(d, dict) and d.get("key")}
 
 
 def format_demand(demand: str) -> str:
-    """Format raw demand key (from take: actions) to nice display name.
-    Removes underscores, applies title case, fixes common brand spellings,
-    and adds 'a' or 'an'.
-    """
-    name = demand.replace('_', ' ').title()
+    """Return the customer demand line for a key (from lookup or computed)."""
+    return format_customer_demand(demand, lookup=DEMAND_LOOKUP)
 
-    # Brand and name fixes (expand as you add more via the tool)
-    fixes = {
-        'Guiness Glass': 'Guinness Glass',
-        'Guinessglass': 'Guinness Glass',
-        'GuinessGlass': 'Guinness Glass',
-        'Jimador Blanco': 'El Jimador Blanco',
-        'Jimador Reposado': 'El Jimador Reposado',
-        'Jj London': 'JJ London',
-        'Antica Classic': 'Antica Classic',
-        'Antica Liquorice': 'Antica Liquorice',
-        'Antica Raspberry': 'Antica Raspberry',
-        'Doombar Glass': 'Doom Bar Glass',
-        'Doombarglass': 'Doom Bar Glass',
-        'DoombarGlass': 'Doom Bar Glass',
-        'Madri Glass': 'Madri Glass',
-        'Madriglass': 'Madri Glass',
-        'MadriGlass': 'Madri Glass',
-        'Jack Daniels': "Jack Daniel's",
-        'Jagermeister': 'Jägermeister',
-        'Martini': 'Martini',
-        'Tequila Rose': 'Tequila Rose',
-        'Red Campo Viejo': 'Campo Viejo Red',
-        'Red Finca Del Alta Malbec': 'Finca del Alta Malbec',
-        'Red Flagstone Poetry': 'Flagstone Poetry',
-        'Red Gut Oggau': 'Gut Oggau',
-        'Red Jam Shed Shiraz': 'Jam Shed Shiraz',
-        'Red Matinal Merlot': 'Matinal Merlot',
-        'Rose Vino Pomona Pinot Grigio': 'Vino Pomona Pinot Grigio Rosé',
-        'Vina Arroba Tempranillo': 'Viña Arroba Tempranillo',
-        'White Andrew Peace Silhouette': 'Andrew Peace Silhouette',
-        'White Jack Rabbit Pinot Grigio': 'Jack Rabbit Pinot Grigio',
-        'White Jam Shed Chardonnay': 'Jam Shed Chardonnay',
-        'White Matinal Sauvignon Blanc': 'Matinal Sauvignon Blanc',
-        'White Ned Sauvignon Blanc': 'Ned Sauvignon Blanc',
-        'Whitley Black Cherry': 'Whitley Black Cherry',
-        'Whitley Raspberry': 'Whitley Raspberry',
-        'Bgr Big Stack': 'BGR Big Stack',
-        'Bgr Bombay': 'BGR Bombay',
-        'Bgr Chs Bcn': 'BGR Cheese + Bacon',
-        'Bgr Korean': 'BGR Korean',
-        'Bgr Korean Grilled': 'BGR Korean Grilled',
-        'Bgr Vegan': 'BGR Vegan',
-        # New scheme camel& formatted titles (common ones)
-        'LammaGlass': 'Lamma Glass',
-        'CaffreysGlass': 'Caffreys Glass',
-        'TallGlass': 'Tall Glass',
-        'ShortGlass': 'Short Glass',
-        'LemonSlice': 'Lemon Slice',
-        'LimeSlice': 'Lime Slice',
-        'OrangeSlice': 'Orange Slice',
-    }
-    for old, new in fixes.items():
-        name = name.replace(old, new)
 
-    # Add article
-    if name and name[0].lower() in 'aeiou':
-        name = 'an ' + name
+def format_item_label(item_key: str) -> str:
+    """Placed/sent box label: customer wording without a/an (not raw key)."""
+    return format_counter_item(item_key, lookup=DEMAND_LOOKUP)
+
+
+def _beer_glass_base_key(demand: str) -> str | None:
+    if demand in BEER_GLASS_BASES:
+        return demand
+    for suf in ("Poured", "Full", "Half"):
+        if demand.endswith(suf):
+            base = demand[: -len(suf)]
+            if base in BEER_GLASS_BASES:
+                return base
+    return None
+
+
+def _is_beer_demand(demand: str, beer_glass_to_drink: dict) -> bool:
+    if demand in beer_glass_to_drink:
+        return True
+    meta = DEMAND_LOOKUP.get(demand, {})
+    return meta.get("type") == "beer" or _beer_glass_base_key(demand) is not None
+
+
+def _demand_sent_only(demand: str, burger_demands: set) -> bool:
+    if demand in burger_demands:
+        return True
+    meta = DEMAND_LOOKUP.get(demand, {})
+    if meta.get("type") in ("food", "side", "extra"):
+        return True
+    return str(demand).lower().startswith("food")
+
+
+def _check_demand_fulfilled(
+    demand: str,
+    placed: list,
+    sent_orders: list,
+    beer_glass_to_drink: dict,
+    burger_demands: set,
+) -> tuple[bool, str, str, str]:
+    """Return (ok, rule, expected_desc, got_desc). Order of placed/sent does not matter."""
+    placed_set = set(placed)
+    sent_set = set(sent_orders)
+
+    if _is_beer_demand(demand, beer_glass_to_drink):
+        base = _beer_glass_base_key(demand) or demand
+        drink = beer_glass_to_drink.get(demand) or beer_glass_to_drink.get(base, "")
+        glass_ok = demand in placed_set or base in placed_set
+        sent_ok = demand in sent_set or bool(drink and drink in sent_set)
+        ok = glass_ok and sent_ok
+        need_send = demand if demand in sent_set or demand in beer_glass_to_drink else (drink or demand)
+        expected = f"place {base} + send {need_send}"
+        got_placed = [x for x in placed if x in (demand, base)]
+        got_sent = [x for x in sent_orders if x == demand or (drink and x == drink)]
+        got = f"placed [{', '.join(got_placed) or '—'}]; sent [{', '.join(got_sent) or '—'}]"
+        return ok, "beer", expected, got
+
+    if _demand_sent_only(demand, burger_demands):
+        ok = demand in sent_set
+        expected = f"send {demand}"
+        got_sent = [x for x in sent_orders if x == demand]
+        got = f"sent [{', '.join(got_sent) or '—'}]"
+        return ok, "sent", expected, got
+
+    ok = demand in placed_set
+    expected = f"place {demand}"
+    got_placed = [x for x in placed if x == demand]
+    got = f"placed [{', '.join(got_placed) or '—'}]"
+    return ok, "placed", expected, got
+
+
+def _items_accounted_for(
+    current_demands: list[str],
+    placed: list,
+    sent_orders: list,
+    beer_glass_to_drink: dict,
+    burger_demands: set,
+) -> tuple[set[str], set[str]]:
+    """Placed/sent item ids that count toward a demand (not extras)."""
+    used_placed: set[str] = set()
+    used_sent: set[str] = set()
+    for demand in current_demands:
+        if _is_beer_demand(demand, beer_glass_to_drink):
+            base = _beer_glass_base_key(demand) or demand
+            drink = beer_glass_to_drink.get(demand) or beer_glass_to_drink.get(base, "")
+            for item in placed:
+                if item in (demand, base):
+                    used_placed.add(item)
+            for item in sent_orders:
+                if item == demand or (drink and item == drink):
+                    used_sent.add(item)
+        elif _demand_sent_only(demand, burger_demands):
+            if demand in sent_orders:
+                used_sent.add(demand)
+        else:
+            for item in placed:
+                if item == demand:
+                    used_placed.add(item)
+    return used_placed, used_sent
+
+
+def _score_customer_demands(
+    current_demands: list[str],
+    placed: list,
+    sent_orders: list,
+    beer_glass_to_drink: dict,
+    burger_demands: set,
+) -> tuple[int, int, set[str], list[str]]:
+    """Score finish; return success count, total, succeeded set, report lines."""
+    total = len(current_demands)
+    success = 0
+    succeeded: set[str] = set()
+    lines: list[str] = []
+    for demand in current_demands:
+        ok, _rule, _expected, _got = _check_demand_fulfilled(
+            demand, placed, sent_orders, beer_glass_to_drink, burger_demands)
+        if ok:
+            lines.append(f"OK {demand}")
+            success += 1
+            succeeded.add(demand)
+        else:
+            lines.append(f"MISSING {demand}")
+
+    used_placed, used_sent = _items_accounted_for(
+        current_demands, placed, sent_orders, beer_glass_to_drink, burger_demands)
+    seen_extra: set[str] = set()
+    for item in placed:
+        if item not in used_placed and item not in seen_extra:
+            lines.append(f"EXTRA {item}")
+            seen_extra.add(item)
+    for item in sent_orders:
+        if item not in used_sent and item not in seen_extra:
+            lines.append(f"EXTRA {item}")
+            seen_extra.add(item)
+
+    header = f"{success}/{total} orders successful"
+    return success, total, succeeded, [header, ""] + lines
+
+
+GRADE_LABELS: dict[int, str] = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy"}
+GRADE_OPTIONS: list[tuple[int, str]] = [(g, GRADE_LABELS[g]) for g in (1, 2, 3, 4)]
+# FSRS-style: Again → Hard → Good → Easy = red → orange → blue → green
+GRADE_COLORS: dict[int, tuple[int, int, int]] = {
+    1: (178, 48, 48),
+    2: (204, 118, 42),
+    3: (48, 102, 198),
+    4: (48, 158, 82),
+}
+
+
+def grade_label(grade: int | None) -> str:
+    if grade is None:
+        return ""
+    return GRADE_LABELS.get(grade, str(grade))
+
+
+def _grade_fill_color(
+    grade: int,
+    *,
+    selected: bool = False,
+    hover_blend: float = 0.0,
+) -> tuple[int, int, int]:
+    base = GRADE_COLORS.get(grade, (55, 55, 55))
+    if selected:
+        base = tuple(min(255, c + 40) for c in base)
+    elif hover_blend > 0:
+        base = ui_theme._shift(base, int(10 * hover_blend))
+    return base
+
+
+def _draw_photo_button(
+    screen,
+    sx: int,
+    sy: int,
+    sw: int,
+    sh: int,
+    btn: dict,
+    small_font,
+    *,
+    hover_blend: float = 0.0,
+    bar_view: bool,
+) -> None:
+    """Draw an editor-defined photo hotspot; bar views get hover polish."""
+    color_name = btn.get("color", "blue")
+    rgb = _BUTTON_COLORS.get(color_name, (0, 0, 0))
+    blend = hover_blend if bar_view else 0.0
+    if blend > 0:
+        grow = 1.0 + blend * ui_theme.PHOTO_HOVER_GROW_AMOUNT
+        sx, sy, sw, sh = ui_theme.AIscaleRectAroundCenter((sx, sy, sw, sh), grow)
+
+    radius = max(2, min(6, sw // 2, sh // 2))
+    text_color = None
+
+    if color_name == "transparent border":
+        border_alpha = int(190 + 20 * blend)
+        border_col = (70, 70, 75, border_alpha)
+        if blend > 0:
+            border_col = (*ui_theme.YELLOW_BORDER, border_alpha)
+        border_surf = pygame.Surface((sw, sh), pygame.SRCALPHA)
+        pygame.draw.rect(
+            border_surf, border_col, (0, 0, sw, sh), width=2, border_radius=radius)
+        screen.blit(border_surf, (sx, sy))
+    elif color_name == "transparent black":
+        fill_alpha = int(128 + 20 * blend)
+        s = pygame.Surface((sw, sh), pygame.SRCALPHA)
+        pygame.draw.rect(s, (0, 0, 0, fill_alpha), (0, 0, sw, sh), border_radius=radius)
+        screen.blit(s, (sx, sy))
+        text_color = (255, 255, 255)
     else:
-        name = 'a ' + name
-    return name
+        pygame.draw.rect(screen, rgb, (sx, sy, sw, sh), border_radius=radius)
+        if blend > 0:
+            s = pygame.Surface((sw, sh), pygame.SRCALPHA)
+            hover_rgb = tuple(min(255, int(c + 25 * blend)) for c in rgb)
+            overlay_alpha = int(200 * blend)
+            pygame.draw.rect(
+                s, (*hover_rgb, overlay_alpha), (0, 0, sw, sh), border_radius=radius)
+            screen.blit(s, (sx, sy))
+        text_color = (0, 0, 0) if color_name != "black" else (255, 255, 255)
+
+    if text_color is not None:
+        label_surf = small_font.render(btn.get("label", "?"), True, text_color)
+        text_x = sx + (sw - label_surf.get_width()) // 2
+        text_y = sy + (sh - label_surf.get_height()) // 2
+        screen.blit(label_surf, (text_x, text_y))
+
+
+def _draw_grade_button(
+    screen,
+    rect: tuple[int, int, int, int],
+    grade: int,
+    label: str,
+    font,
+    *,
+    selected: bool = False,
+    hover_blend: float = 0.0,
+) -> None:
+    """Draw a single FSRS-coloured grade button (fill + border + centred label)."""
+    fill = _grade_fill_color(grade, selected=selected, hover_blend=hover_blend)
+    pygame.draw.rect(screen, fill, rect, border_radius=ui_theme.BTN_RADIUS)
+    border = tuple(max(0, c - 50) for c in fill)
+    pygame.draw.rect(screen, border, rect, 1, border_radius=ui_theme.BTN_RADIUS)
+    text_col = (255, 255, 255) if not selected else (255, 255, 220)
+    gtxt = font.render(label, True, text_col)
+    gx = rect[0] + (rect[2] - gtxt.get_width()) // 2
+    gy = rect[1] + (rect[3] - gtxt.get_height()) // 2
+    screen.blit(gtxt, (gx, gy))
+
+
+def _grade_for_fulfilled_demand(
+    demand: str,
+    placed_grades: dict,
+    sent_grades: dict,
+    beer_glass_to_drink: dict,
+) -> int:
+    """User-assigned grade for a correctly fulfilled demand (default Good)."""
+    if demand in placed_grades:
+        return placed_grades[demand]
+    if demand in sent_grades:
+        return sent_grades[demand]
+    drink = beer_glass_to_drink.get(demand)
+    if drink and drink in sent_grades:
+        return sent_grades[drink]
+    return 3
+
+
+def _send_grade_popup_layout(
+    win_w: int,
+    win_h: int,
+    n_items: int,
+) -> tuple[int, int, int, int, list[tuple[tuple[int, int, int, int], int]]]:
+    """Centre modal geometry and clickable grade rows (autocomplete-style)."""
+    panel_w = 320
+    row_h = 28
+    header_h = 36
+    shown = min(n_items, 6)
+    items_h = shown * 18 + 8
+    if n_items > 6:
+        items_h += 14
+    opts_h = len(GRADE_OPTIONS) * row_h + 8
+    footer_h = 20
+    panel_h = header_h + items_h + opts_h + footer_h + 16
+    panel_x = (win_w - panel_w) // 2
+    panel_y = (win_h - panel_h) // 2
+
+    y = panel_y + header_h + 18 + shown * 16
+    if n_items > 6:
+        y += 14
+    y += 28
+
+    option_rects: list[tuple[tuple[int, int, int, int], int]] = []
+    for grade, _label in GRADE_OPTIONS:
+        opt_rect = (panel_x + 12, y, panel_w - 24, row_h - 4)
+        option_rects.append((opt_rect, grade))
+        y += row_h
+    return panel_x, panel_y, panel_w, panel_h, option_rects
+
+
+def _draw_send_grade_popup(
+    screen,
+    font,
+    small_font,
+    win_w: int,
+    win_h: int,
+    pending_items: list[str],
+    selection_index: int,
+    *,
+    mx: int,
+    my: int,
+    hover_grow: ui_theme.AIHoverGrow,
+    dt_seconds: float,
+) -> None:
+    """Draw dim overlay + centre grade picker after send_order."""
+    ui_theme.draw_modal_overlay(screen, win_w, win_h)
+
+    panel_x, panel_y, panel_w, panel_h, option_rects = _send_grade_popup_layout(
+        win_w, win_h, len(pending_items))
+
+    ui_theme.draw_panel(
+        screen,
+        (panel_x, panel_y, panel_w, panel_h),
+        fill=ui_theme.MODAL_FILL,
+        border=ui_theme.MODAL_BORDER,
+    )
+
+    title = font.render("Send order — choose grade", True, ui_theme.PANEL_HEADER)
+    screen.blit(title, (panel_x + 12, panel_y + 10))
+
+    y = panel_y + 36
+    screen.blit(small_font.render("Items:", True, ui_theme.PANEL_MUTED), (panel_x + 12, y))
+    y += 18
+    for item in pending_items[:6]:
+        line = f"• {format_item_label(item)}"
+        if small_font.size(line)[0] > panel_w - 28:
+            while line and small_font.size(line + "…")[0] > panel_w - 28:
+                line = line[:-1]
+            line += "…"
+        screen.blit(small_font.render(line, True, ui_theme.PANEL_BODY), (panel_x + 16, y))
+        y += 16
+    if len(pending_items) > 6:
+        extra = small_font.render(f"  +{len(pending_items) - 6} more", True, ui_theme.PANEL_HINT)
+        screen.blit(extra, (panel_x + 16, y))
+
+    y = option_rects[0][0][1] - 20
+    screen.blit(
+        small_font.render("Grade (↑/↓  Enter  Esc=cancel):", True, ui_theme.PANEL_MUTED),
+        (panel_x + 12, y),
+    )
+
+    for ii, (opt_rect, grade) in enumerate(option_rects):
+        opt_hover = ui_theme.point_in_rect(mx, my, opt_rect)
+        opt_blend = hover_grow.update(f"send_grade:{grade}", opt_hover, dt_seconds)
+        draw_rect = ui_theme.AIscaleRectAroundCenter(
+            opt_rect, hover_grow.scale(opt_blend))
+        _draw_grade_button(
+            screen,
+            draw_rect,
+            grade,
+            GRADE_LABELS[grade],
+            small_font,
+            selected=(ii == selection_index),
+            hover_blend=opt_blend,
+        )
+
+    hint = small_font.render("Click a grade to send", True, ui_theme.PANEL_HINT)
+    screen.blit(hint, (panel_x + 12, panel_y + panel_h - 22))
+
+
+def _wrap_text_lines(font, text: str, max_width: int) -> list[str]:
+    """Word-wrap a single paragraph to fit max_width (pixels)."""
+    words = text.split()
+    if not words:
+        return [""]
+    lines: list[str] = []
+    current = words[0]
+    for word in words[1:]:
+        trial = f"{current} {word}"
+        if font.size(trial)[0] <= max_width:
+            current = trial
+        else:
+            lines.append(current)
+            current = word
+    lines.append(current)
+    return lines
+
+
+def _wrap_bullet_lines(font, text: str, max_width: int, bullet: str = "• ") -> list[str]:
+    """Wrap a bullet item; continuation lines are indented under the bullet."""
+    indent = " " * len(bullet)
+    inner_w = max(40, max_width - font.size(bullet)[0])
+    body_lines = _wrap_text_lines(font, text, inner_w)
+    if not body_lines:
+        return [bullet]
+    wrapped = [bullet + body_lines[0]]
+    wrapped.extend(indent + line for line in body_lines[1:])
+    return wrapped
+
+
+def _customer_demands_content_height(
+    *,
+    small_font,
+    console_font,
+    text_width: int,
+    demand_keys: list[str],
+    report_lines: list[str],
+    showing_report: bool,
+    line_h: int = 18,
+    pad_y: int = 12,
+) -> int:
+    """Pixel height needed to show all demands-panel lines without clipping."""
+    if showing_report and report_lines:
+        lines: list[str] = []
+        for line in report_lines:
+            lines.extend(_wrap_text_lines(console_font, line, text_width))
+        return pad_y * 2 + line_h * len(lines)
+    formatted = [format_demand(k) for k in demand_keys]
+    return pad_y * 2 + line_h * len(
+        _build_customer_demands_lines(small_font, formatted, text_width))
+
+
+def _build_customer_demands_lines(font, formatted_demands: list[str], text_width: int) -> list[str]:
+    """Build wrapped line list for the customer demands panel."""
+    help_lines = [
+        "Left-click take buttons (on position views) to put glass in left hand; right-click for right hand.",
+        "On customer: click a grade button to place from hand (prefers right hand, then left) + rate recall.",
+    ]
+    lines: list[str] = []
+    lines.extend(_wrap_text_lines(font, "Customer demands:", text_width))
+    lines.append("")
+    for demand in formatted_demands:
+        lines.extend(_wrap_bullet_lines(font, demand, text_width))
+    lines.append("")
+    for paragraph in help_lines:
+        lines.extend(_wrap_text_lines(font, paragraph, text_width))
+        lines.append("")
+    if lines and lines[-1] == "":
+        lines.pop()
+    return lines
+
 
 # (TILL_FOOD_TABS removed - all buttons now come from the editor tool via JSON)
 
@@ -951,6 +1382,35 @@ def load_image_surface(view: View, images_dir: Path):
     return pygame.image.load(str(full_path)).convert()
 
 
+def _blit_loading_preview(screen, surface, win_w: int, win_h: int) -> int:
+    """Draw the last loaded view as a small centred thumbnail; return bottom y."""
+    max_w = min(420, int(win_w * 0.38))
+    max_h = min(236, int(win_h * 0.32))
+    src_w, src_h = surface.get_size()
+    scale = min(max_w / src_w, max_h / src_h)
+    tw = max(1, int(src_w * scale))
+    th = max(1, int(src_h * scale))
+    thumb = pygame.transform.smoothscale(surface, (tw, th))
+    x = (win_w - tw) // 2
+    y = (win_h - th) // 2 - 24
+    pad = 3
+    pygame.draw.rect(
+        screen,
+        ui_theme.PANEL_FILL,
+        (x - pad, y - pad, tw + pad * 2, th + pad * 2),
+        border_radius=6,
+    )
+    pygame.draw.rect(
+        screen,
+        ui_theme.PANEL_BORDER,
+        (x - pad, y - pad, tw + pad * 2, th + pad * 2),
+        2,
+        border_radius=6,
+    )
+    screen.blit(thumb, (x, y))
+    return y + th + 20
+
+
 def scale_and_center(
     surface,
     target_size: tuple[int, int],
@@ -1007,12 +1467,117 @@ def screen_to_image_coords(
 
 
 # ---------------------------------------------------------------------------
+# Display (maximized window with title bar; Wayland-friendly)
+# ---------------------------------------------------------------------------
+
+_WINDOWED_SIZE = (1280, 720)
+
+
+def _desktop_size(pygame_module) -> tuple[int, int]:
+    info = pygame_module.display.Info()
+    w, h = info.current_w, info.current_h
+    if w > 0 and h > 0:
+        return w, h
+    return _WINDOWED_SIZE
+
+
+def AIgetSdlWindow(pygame_module):
+    """Return the SDL window for the active display surface, if available."""
+    try:
+        from pygame._sdl2 import Window
+
+        return Window.from_display_module()
+    except Exception:
+        return None
+
+
+def _pump_display_resize(pygame_module, *, attempts: int = 8) -> None:
+    """Let the window manager apply maximize/restore before we read get_size()."""
+    pygame_module.event.pump()
+    for _ in range(attempts):
+        pygame_module.time.wait(16)
+        pygame_module.event.pump()
+
+
+def AIsyncDisplaySurface(pygame_module, surf) -> object:
+    """Recreate the drawable surface at the window's current size.
+
+    After SDL_Window.maximize() on KDE/Wayland the window can report a larger
+    size while the backing framebuffer is still the old dimensions — the next
+    blit/flip then segfaults. Always call set_mode again with the reported size.
+    """
+    got_w, got_h = surf.get_size()
+    if got_w <= 0 or got_h <= 0:
+        return surf
+    try:
+        return pygame_module.display.set_mode(
+            (got_w, got_h), pygame_module.RESIZABLE)
+    except pygame_module.error:
+        return surf
+
+
+def AIsetGameDisplay(pygame_module, *, fullscreen: bool) -> tuple[object, bool, str]:
+    """Open windowed or maximized display. Returns (surface, is_fullscreen, mode_label)."""
+    if not fullscreen:
+        surf = pygame_module.display.set_mode(_WINDOWED_SIZE, pygame_module.RESIZABLE)
+        sdl_window = AIgetSdlWindow(pygame_module)
+        if sdl_window is not None:
+            try:
+                sdl_window.restore()
+            except Exception:
+                pass
+        _pump_display_resize(pygame_module)
+        surf = AIsyncDisplaySurface(pygame_module, surf)
+        got_w, got_h = surf.get_size()
+        return surf, False, f"windowed {got_w}x{got_h}"
+
+    # Create a normal decorated window, then ask the WM to maximize it. This is
+    # more reliable on KDE/Wayland than SDL_WINDOW_MAXIMIZED alone at creation.
+    surf = pygame_module.display.set_mode(_WINDOWED_SIZE, pygame_module.RESIZABLE)
+    sdl_window = AIgetSdlWindow(pygame_module)
+    if sdl_window is not None:
+        try:
+            sdl_window.maximize()
+            _pump_display_resize(pygame_module)
+            got_w, got_h = surf.get_size()
+            if got_w > _WINDOWED_SIZE[0] or got_h > _WINDOWED_SIZE[1]:
+                surf = AIsyncDisplaySurface(pygame_module, surf)
+                got_w, got_h = surf.get_size()
+                return surf, True, f"maximized {got_w}x{got_h}"
+        except Exception:
+            pass
+
+    maximized_flags = pygame_module.RESIZABLE | pygame_module.WINDOWMAXIMIZED
+    try:
+        surf = pygame_module.display.set_mode(_WINDOWED_SIZE, maximized_flags)
+        _pump_display_resize(pygame_module)
+        got_w, got_h = surf.get_size()
+        if got_w > _WINDOWED_SIZE[0] or got_h > _WINDOWED_SIZE[1]:
+            surf = AIsyncDisplaySurface(pygame_module, surf)
+            got_w, got_h = surf.get_size()
+            return surf, True, f"maximized {got_w}x{got_h}"
+    except pygame_module.error:
+        pass
+
+    w, h = _desktop_size(pygame_module)
+    try:
+        surf = pygame_module.display.set_mode((w, h), pygame_module.RESIZABLE)
+        got_w, got_h = surf.get_size()
+        return surf, True, f"large window {got_w}x{got_h}"
+    except pygame_module.error:
+        pass
+
+    surf = pygame_module.display.set_mode(_WINDOWED_SIZE, pygame_module.RESIZABLE)
+    return surf, False, f"windowed {_WINDOWED_SIZE[0]}x{_WINDOWED_SIZE[1]} (maximized unavailable)"
+
+
+# ---------------------------------------------------------------------------
 # The actual demo
 # ---------------------------------------------------------------------------
 
 def run_demo() -> None:
     """Launch the interactive bar explorer demo."""
-    global pygame
+    global pygame, _review_mode, _due_map, _practice_mode
     if pygame is None:
         import pygame as _pygame
         pygame = _pygame
@@ -1024,8 +1589,7 @@ def run_demo() -> None:
     orders = []
 
     # Hand state for take actions (e.g. holding glasses). Left-click take: puts in left_hand,
-    # right-click take: puts in right_hand. Both can be used; customer grade buttons place
-    # preferring right hand then left hand.
+    # right-click take: puts in right_hand. PLACE grade buttons empty both hands onto the counter.
     left_hand = None
     right_hand = None
 
@@ -1046,8 +1610,14 @@ def run_demo() -> None:
     # In review mode this will draw from remaining due bar cards until exhausted.
     current_demands = _sample_next_demands()
 
-    # Message after finish
-    finish_message = ""
+    # After FINISH: report replaces demands panel until CONTINUE is pressed.
+    finish_report_lines: list[str] = []
+    customer_awaiting_continue = False
+
+    # Send-grade popup (after send_order till button)
+    pending_send_items: list[str] | None = None
+    send_popup_selection = 2  # default highlight: Good
+    send_popup_option_rects: list[tuple[tuple[int, int, int, int], int]] = []
 
     # Mapping for beer glass demands to the drink name sent from till
     # Keys updated to new take: naming scheme (see normalize in till_button_tool)
@@ -1139,59 +1709,21 @@ def run_demo() -> None:
         # frozenset({"boston_shaker_tin", "tails_pina_colada"}): "shaken_pina_colada",
     }
 
-    # Helpers for thimble: actions (wine measuring)
-    def _is_wine_item(it):
-        if not it:
-            return False
-        s = str(it).lower()
-        if s.startswith("redbull"):
-            return False
-        return s.startswith(("red", "white", "rose"))
-
     def _apply_thimble(it, num):
-        base = str(it)
-        for s in ("125", "50", "25"):
-            if base.endswith(s):
-                base = base[:-len(s)]
-                break
-        else:
-            # fallback: strip any trailing digits
-            while base and base[-1].isdigit():
-                base = base[:-1]
+        base, _ = strip_thimble_suffix(str(it))
         return base + str(num)
-
-    # Helpers for dynamic wine crafting (combining measured amounts)
-    def _parse_wine_amount(it):
-        """Return (base_name, amount) for a thimbled wine like 'redFlagstonePoetryMerlot125',
-        or (None, None) if not a measured wine (no amount suffix or not a wine prefix)."""
-        if not it:
-            return None, None
-        s = str(it)
-        # find trailing digits
-        i = len(s)
-        while i > 0 and s[i-1].isdigit():
-            i -= 1
-        if i == len(s) or i == 0:
-            # no suffix digits, or only digits
-            return None, None
-        base = s[:i]
-        amt_str = s[i:]
-        try:
-            amt = int(amt_str)
-        except ValueError:
-            return None, None
-        base_lower = base.lower()
-        if base_lower.startswith("redbull") or not base_lower.startswith(("red", "white", "rose")):
-            return None, None
-        return base, amt
-
-    def _is_measured_wine(it):
-        base, amt = _parse_wine_amount(it)
-        return base is not None and amt is not None
 
     # Helpful startup info for the current layout
     print("\n=== Current known layout (new Bar Images/ SpotDirH photos) ===")
     print("Spots 1(west)-7(east). Keys: e.g. 1N1=spot1 North stand, 7S0=spot7 South crouch.")
+    print(font_status())
+    print(f"Session mode: {_session_mode_label()}")
+    if not _review_mode:
+        print("  (Practice — demands from NeuroMods/Bar/BarGame.nm, no FSRS updates)")
+    elif _practice_mode:
+        print("  (Practice — due bar cards finished; still no FSRS updates)")
+    else:
+        print(f"  (Review — {len(_due_map)} due bar card(s) in queue)")
     print("Till at west of spot 1. Customer forward from tillDrinks.")
     print()
     print("Controls:")
@@ -1203,36 +1735,102 @@ def run_demo() -> None:
     print("  Top BAR/FOOD + photo buttons : (add your own via the tool with switch: actions; all other photo buttons come from JSON)")
     print("  To visually design buttons   : run  python -m src.bar.till_button_tool")
     print("  To map items to icons        : run  python -m src.bar.item_icon_tool")
+    print("  To position till on frame    : run  python -m src.bar.till_viewport_tool")
+    print("  To position customer portrait: run  python -m src.bar.customer_viewport_tool")
     print("  pour: buttons                : click with the hand holding BASE/BASEHalf on 'pour:BASE' (left-click=left hand, right-click=right) to progress to Half then Full")
+    print("  take: spirit (with shot glass): shotsGlass + take:spirit → spiritSingle; same spirit again → spiritDouble; then no more")
     print("  crafting: buttons            : left-click while holding the exact pair of items for the result (in either hand)  [predefined recipes]")
-    print("  craft: buttons               : left-click while holding two measured wines of same type (e.g. redXXX25 + redXXX125) to combine amounts → redXXX150 in right hand")
-    print("  thimble: buttons             : click with hand holding wine (red*/white*/rose*) on thimble:25/50/125 to get e.g. redWine25 in that hand")
+    print("  craft: buttons               : left-click while holding two measured wines/spirits of the same base (e.g. redXXX25 + redXXX125) → combined amount in right hand")
+    print("  thimble: buttons             : click with hand holding wine or spirit on thimble:25/50/125 (not softs/cans/beer/crisps/kids drinks)")
+    print("  opener: buttons              : click with hand holding a bottle (j20, *Zero, softs, etc.) → *Opened in that hand")
     print("  void: buttons                : left-click to remove the most recently added order item")
     print("  Buttons are loaded from      : NeuroMods/Bar/till_buttons.json")
-    print("  F11                : toggle fullscreen / resizable window")
+    print("  F11                : toggle windowed / maximized (starts maximized)")
     print("  Shift+O            : toggle console log (shows print() output in fullscreen)")
     print("  Shift+I            : toggle hand icons (text mode is default)")
     print("  Hover over buttons : show their action (from editor tool)")
     print("  Ctrl+Q             : quit")
+    print("  W (till)           : face the customer")
+    print("  S (till)           : leave till to bar (till re-opens at tillDrinks)")
+    print("  S (customer)       : back to the till screen you came from")
     print("  ESC                : return from till sub-menu to tillDrinks")
     print("============================================================================\n")
 
-    pygame.init()
-    pygame.display.set_caption("Adapt Bar Trainer — Movement Prototype (F11: fullscreen, hover buttons for actions)")
+    if sys.platform.startswith("linux"):
+        os.environ.setdefault("SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS", "0")
 
-    # Start resizable so fullscreen toggle (F11) and window resizing work.
-    # All layout (image scaling, customer UI panels, help, hand boxes, etc.) is dynamic.
-    screen = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
+    pygame.init()
+    pygame.display.set_caption(_window_caption())
+
+    # Start maximized (title bar kept). F11 toggles windowed 1280×720.
+    screen, is_fullscreen, display_mode = AIsetGameDisplay(pygame, fullscreen=True)
+    print(f"Display: {display_mode}  (F11 toggles windowed)")
     clock = pygame.time.Clock()
 
+    vx, vy, vw, vh, border_radius, frame_image = load_till_viewport(images_dir)
+    till_frame_surf = load_till_frame_surface(
+        images_dir, pygame, frame_image=frame_image)
+    customer_frame_surf = load_customer_frame_surface(images_dir, pygame)
+    if customer_frame_surf is not None:
+        print("Customer frame: Bar Images/customerFrame.*")
+    else:
+        print("Customer frame: flat background (add Bar Images/customerFrame.jpg)")
+    customer_roster = AIloadCustomerRoster(images_dir)
+    cv_x, cv_y, cv_w, cv_h, cv_name_gap, cv_name_height = load_customer_viewport(images_dir)
+    customer_headshot_cache: dict[str, object] = {}
+    current_customer: CustomerEntry | None = None
+    current_customer_surf = None
+
+    def _load_customer_headshot(entry: CustomerEntry):
+        cached = customer_headshot_cache.get(entry.image_file)
+        if cached is not None:
+            return cached
+        surf = load_customer_headshot_surface(images_dir, entry.image_file, pygame)
+        if surf is not None:
+            customer_headshot_cache[entry.image_file] = surf
+        return surf
+
+    def _pick_new_customer(*, exclude_name: str | None = None) -> None:
+        nonlocal current_customer, current_customer_surf
+        current_customer = AIpickRandomCustomer(
+            customer_roster, exclude_name=exclude_name)
+        current_customer_surf = None
+        if current_customer is not None:
+            current_customer_surf = _load_customer_headshot(current_customer)
+            print(f"Customer: {current_customer.display_name}")
+
+    _pick_new_customer()
+    if customer_roster:
+        print(f"Customer roster: {len(customer_roster)} in customers.txt / Customer Images/")
+        print(
+            f"Portrait viewport: x={cv_x:.3f} y={cv_y:.3f} width={cv_w:.3f} "
+            f"height={cv_h:.3f}"
+        )
+        print("  Tune with: python -m src.bar.customer_viewport_tool")
+    else:
+        print("Customer roster: empty (add Customer Images/ + customers.txt)")
+    if till_frame_surf is not None:
+        print(f"Till frame: Till Images/{frame_image}")
+        print(
+            f"Till viewport: x={vx:.3f} y={vy:.3f} width={vw:.3f} "
+            f"height={vh:.3f} border_radius={border_radius:.3f}"
+        )
+        print("  Tune with: python -m src.bar.till_viewport_tool")
+    else:
+        print(
+            "Till frame: uniform margin around till screens "
+            f"(add Till Images/tillFrame.jpg to use a bezel image)"
+        )
+
     # Create fonts early so we can use them for the loading screen
-    font = pygame.font.SysFont(None, 28)
-    small_font = pygame.font.SysFont(None, 20)
-    console_font = pygame.font.SysFont(None, 15)
+    font = ui_font(28)
+    small_font = ui_font(20)
+    console_font = ui_font(15)
 
     # Load pixel art item icons for hand display (from NeuroMods/Bar/Item Images/)
     item_icon_dir = _get_bar_images_root() / "Item Images"
     item_icons = {}
+    _icon_max_load = 288  # largest on-screen hand icon; avoid loading 1024² textures
     icon_map = {
         "empty_beer_glass": "empty_beer_glass.png",
         "full_beer_glass": "full_beer_glass.png",
@@ -1281,6 +1879,12 @@ def run_demo() -> None:
         if p.exists():
             try:
                 img = pygame.image.load(str(p)).convert_alpha()
+                iw, ih = img.get_size()
+                if max(iw, ih) > _icon_max_load:
+                    scale = _icon_max_load / max(iw, ih)
+                    nw = max(1, int(iw * scale))
+                    nh = max(1, int(ih * scale))
+                    img = pygame.transform.smoothscale(img, (nw, nh))
                 item_icons[key] = img
             except Exception as e:
                 print(f"Warning: could not load {p}: {e}")
@@ -1416,6 +2020,7 @@ def run_demo() -> None:
     loadable_keys = [k for k in VIEW_ORDER if k != "customer"]
     total = len(loadable_keys)
     loaded_count = 0
+    last_loaded_surf = None
 
     for key in VIEW_ORDER:
         if key == "customer":
@@ -1424,34 +2029,54 @@ def run_demo() -> None:
             continue
 
         # --- Basic loading screen ---
-        screen.fill((25, 25, 30))
+        screen.fill(ui_theme.LOAD_BG)
+        win_w, win_h = screen.get_size()
 
-        # Title
-        title_surf = font.render("Loading Adapt Bar Trainer", True, (220, 220, 180))
-        screen.blit(title_surf, (screen.get_width() // 2 - title_surf.get_width() // 2, 180))
+        title_col = (
+            ui_theme.LOAD_TITLE_PRACTICE
+            if _practice_mode or not _review_mode
+            else ui_theme.LOAD_TITLE_REVIEW
+        )
+        title_surf = font.render(
+            f"Loading Bar Trainer ({_session_mode_label()})", True, title_col
+        )
+        screen.blit(title_surf, (win_w // 2 - title_surf.get_width() // 2, 48))
+
+        if last_loaded_surf is not None:
+            details_y = _blit_loading_preview(screen, last_loaded_surf, win_w, win_h)
+        else:
+            details_y = win_h // 2 - 50
 
         # What we're currently loading
-        loading_surf = small_font.render(f"Loading {key} ...", True, (210, 210, 220))
-        screen.blit(loading_surf, (screen.get_width() // 2 - loading_surf.get_width() // 2, 235))
+        loading_surf = small_font.render(f"Loading {key} ...", True, ui_theme.PANEL_BODY)
+        screen.blit(loading_surf, (win_w // 2 - loading_surf.get_width() // 2, details_y))
 
         # Progress text
-        prog_text = small_font.render(f"Images loaded: {loaded_count} / {total}", True, (190, 190, 190))
-        screen.blit(prog_text, (screen.get_width() // 2 - prog_text.get_width() // 2, 275))
+        prog_y = details_y + 28
+        prog_text = small_font.render(
+            f"Images loaded: {loaded_count} / {total}", True, ui_theme.PANEL_MUTED)
+        screen.blit(prog_text, (win_w // 2 - prog_text.get_width() // 2, prog_y))
 
         # Simple progress bar
-        bar_w = 480
+        bar_w = min(480, win_w - 80)
         bar_h = 16
-        bar_x = (screen.get_width() - bar_w) // 2
-        bar_y = 310
-        pygame.draw.rect(screen, (45, 45, 52), (bar_x, bar_y, bar_w, bar_h))
+        bar_x = (win_w - bar_w) // 2
+        bar_y = prog_y + 28
+        pygame.draw.rect(
+            screen, ui_theme.LOAD_BAR_BG, (bar_x, bar_y, bar_w, bar_h), border_radius=4)
         fill_w = int(bar_w * (loaded_count / max(1, total)))
         if fill_w > 0:
-            pygame.draw.rect(screen, (85, 155, 85), (bar_x, bar_y, fill_w, bar_h))
-        pygame.draw.rect(screen, (150, 150, 158), (bar_x, bar_y, bar_w, bar_h), 1)
+            pygame.draw.rect(
+                screen, ui_theme.LOAD_BAR_FILL, (bar_x, bar_y, fill_w, bar_h), border_radius=4)
+        pygame.draw.rect(
+            screen, ui_theme.LOAD_BAR_BORDER, (bar_x, bar_y, bar_w, bar_h), 1, border_radius=4)
 
         # Helpful note
-        note = small_font.render("High-resolution photos — first run can take several seconds", True, (135, 135, 135))
-        screen.blit(note, (screen.get_width() // 2 - note.get_width() // 2, 355))
+        note = small_font.render(
+            "High-resolution photos — first run can take several seconds",
+            True, ui_theme.LOAD_MUTED,
+        )
+        screen.blit(note, (win_w // 2 - note.get_width() // 2, bar_y + 36))
 
         pygame.display.flip()
 
@@ -1468,43 +2093,48 @@ def run_demo() -> None:
         surf = load_image_surface(view, images_dir)
         surface_cache[key] = surf
         original_sizes[key] = surf.get_size()
+        last_loaded_surf = surf
         print(f"  Loaded {key}: {original_sizes[key][0]}x{original_sizes[key][1]}")
         loaded_count += 1
 
     current_key = "1W1"  # Start at spot 1 facing West (standing) — facing the till
+    till_return_key = TILL_HOME  # till screen to restore when leaving customer (S)
 
-    is_fullscreen = False
     show_console = False  # console box hidden by default; toggle with Shift+O
     show_hand_icons = False  # text fallback by default; toggle with Shift+I for (pixel art) hand icons
 
     running = True
+    hover_grow = ui_theme.AIHoverGrow()
     while running:
+        dt_seconds = clock.tick(60) / 1000.0
         # Dynamic size each frame (supports resizing and F11 fullscreen toggle)
         win_w, win_h = screen.get_size()
         mx, my = pygame.mouse.get_pos()
         tooltip_text = None
 
-        # Recompute screen-space UI rects (customer boxes/buttons + top nav) for the *current* window size.
-        # This keeps everything visible and non-overlapping in fullscreen or arbitrary resized windows.
-        # Right column (for grades, reset, finish, sent box) - stays on the right
-        right_col_x = max(200, win_w - 260)
-        btn_w = 220
-        btn_h = 38
+        if pending_send_items is not None:
+            _, _, _, _, send_popup_option_rects = _send_grade_popup_layout(
+                win_w, win_h, len(pending_send_items))
+            for ii, (rect, _grade) in enumerate(send_popup_option_rects):
+                rx, ry, rw, rh = rect
+                if rx <= mx < rx + rw and ry <= my < ry + rh:
+                    send_popup_selection = ii
+                    break
+        else:
+            send_popup_option_rects = []
 
-        # Placed (left) and sent (right upper) boxes - widths adapt a little for small windows
-        placed_w = min(300, max(160, (win_w - 300) // 3))
-        placed_h = min(340, win_h - 80)
-        PLACED_ITEMS_BOX = (20, 50, placed_w, placed_h)
-        SENT_ITEMS_BOX = (right_col_x, 50, 240, 180)
-
-        # Stack the grade/reset/finish controls dynamically under the "Sent" box (adapts to any win height)
-        g_start_y = SENT_ITEMS_BOX[1] + SENT_ITEMS_BOX[3] + 15
-        GRADE_AGAIN_RECT = (right_col_x, g_start_y, btn_w, btn_h)
-        GRADE_HARD_RECT  = (right_col_x, g_start_y + 41, btn_w, btn_h)
-        GRADE_GOOD_RECT  = (right_col_x, g_start_y + 82, btn_w, btn_h)
-        GRADE_EASY_RECT  = (right_col_x, g_start_y + 123, btn_w, btn_h)
-        RESET_BUTTON_RECT = (right_col_x, g_start_y + 164 + 8, btn_w, 40)
-        FINISH_BUTTON_RECT = (right_col_x, g_start_y + 164 + 8 + 45, btn_w, 40)
+        # Customer screen: U-shaped overlay (empty top centre, sides + bottom panel).
+        cust_layout = AIcomputeCustomerLayout(win_w, win_h)
+        PLACED_ITEMS_BOX = cust_layout.placed_box
+        SENT_ITEMS_BOX = cust_layout.sent_box
+        DEMANDS_BOX = cust_layout.demands_box
+        GRADE_AGAIN_RECT = cust_layout.grade_again
+        GRADE_HARD_RECT = cust_layout.grade_hard
+        GRADE_GOOD_RECT = cust_layout.grade_good
+        GRADE_EASY_RECT = cust_layout.grade_easy
+        RESET_BUTTON_RECT = cust_layout.reset_placed
+        RESET_TILL_BUTTON_RECT = cust_layout.reset_till
+        FINISH_BUTTON_RECT = cust_layout.finish_button
 
         # (Top BAR/FOOD tabs are now expected to be user-added via the editor tool
         # using actions like "switch:tillDrinks", "switch:tillFood", etc.)
@@ -1513,13 +2143,58 @@ def run_demo() -> None:
             if event.type == pygame.QUIT:
                 running = False
 
+            elif event.type == pygame.VIDEORESIZE:
+                screen = pygame.display.set_mode(event.size, pygame.RESIZABLE)
+                continue
+
+            elif pending_send_items is not None:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        send_popup_selection = (send_popup_selection - 1) % len(GRADE_OPTIONS)
+                        continue
+                    if event.key == pygame.K_DOWN:
+                        send_popup_selection = (send_popup_selection + 1) % len(GRADE_OPTIONS)
+                        continue
+                    if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+                        grade = GRADE_OPTIONS[send_popup_selection][0]
+                        for item in pending_send_items:
+                            sent_orders.append(item)
+                            sent_grades[item] = grade
+                        print("=== SENDING ORDER ===")
+                        for item in pending_send_items:
+                            print(f"  - {item} ({grade_label(grade)})")
+                        print("Order sent to kitchen!")
+                        orders.clear()
+                        pending_send_items = None
+                        continue
+                    if event.key == pygame.K_ESCAPE:
+                        print("Send cancelled — order kept on till.")
+                        pending_send_items = None
+                        continue
+                elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    mx, my = event.pos
+                    for rect, grade in send_popup_option_rects:
+                        rx, ry, rw, rh = rect
+                        if rx <= mx < rx + rw and ry <= my < ry + rh:
+                            for item in pending_send_items:
+                                sent_orders.append(item)
+                                sent_grades[item] = grade
+                            print("=== SENDING ORDER ===")
+                            for item in pending_send_items:
+                                print(f"  - {item} ({grade_label(grade)})")
+                            print("Order sent to kitchen!")
+                            orders.clear()
+                            pending_send_items = None
+                            break
+                    if pending_send_items is not None:
+                        continue
+
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F11:
                     is_fullscreen = not is_fullscreen
-                    if is_fullscreen:
-                        screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-                    else:
-                        screen = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
+                    screen, is_fullscreen, display_mode = AIsetGameDisplay(
+                        pygame, fullscreen=is_fullscreen)
+                    print(f"Display: {display_mode}")
                     continue
 
                 if event.key == pygame.K_o and (event.mod & pygame.KMOD_SHIFT):
@@ -1536,40 +2211,42 @@ def run_demo() -> None:
                     running = False
                     continue
 
-                TILL_HOMES = ("tillDrinks", "tillFood")
+                TILL_HOMES = (TILL_HOME, "tillFood")
                 if event.key == pygame.K_ESCAPE:
                     if current_key.startswith("till") and current_key not in TILL_HOMES:
                         # ESC in till submenus returns to tillDrinks (no longer used for quitting)
-                        current_key = "tillDrinks"
-                        print("Returned to the main till (tillDrinks)")
+                        current_key = TILL_HOME
+                        print(f"Returned to the main till ({TILL_HOME})")
                     # ESC does nothing else (quit is now Ctrl+Q only)
+                    continue
+
+                # W from any till screen → customer; remember which till to return to.
+                if current_key.startswith("till") and event.key in (pygame.K_w, pygame.K_UP):
+                    till_return_key = current_key
+                    current_key = "customer"
+                    print(f"Facing the customer (return: {till_return_key})")
+                    continue
+
+                # S from any till screen → leave to bar; next till visit defaults to tillDrinks.
+                if current_key.startswith("till") and event.key in (pygame.K_s, pygame.K_DOWN):
+                    current_key = TILL_BAR_EXIT
+                    till_return_key = TILL_HOME
+                    print(f"Left the till (back to bar; re-opens at {TILL_HOME})")
+                    continue
+
+                if current_key == "customer":
+                    if event.key in (pygame.K_s, pygame.K_DOWN, pygame.K_b):
+                        current_key = till_return_key
+                        customer_awaiting_continue = False
+                        finish_report_lines = []
+                        print(f"Back to {till_return_key}")
+                        continue
+                    # No left, right, turning, or crouch/stand capability from customer screen
                     continue
 
                 if current_key.startswith("till") and current_key not in TILL_HOMES:
                     # In till sub-menu: ignore bar movement/turn/crouch keys
-                    # (only escape handled above; clicks handle returning)
-                    continue
-
-                if current_key == "tillDrinks":
-                    if event.key in (pygame.K_w, pygame.K_UP):
-                        view = get_view(current_key)
-                        nxt = view.go("forward")
-                        if nxt:
-                            current_key = nxt
-                            print("Facing the customer")
-                        else:
-                            print("  [No view forward from here]")
-                        continue
-
-                if current_key == "customer":
-                    if event.key in (pygame.K_s, pygame.K_DOWN, pygame.K_b):
-                        view = get_view(current_key)
-                        nxt = view.go("back")
-                        if nxt:
-                            current_key = nxt
-                            print("Back to the till")
-                        continue
-                    # No left, right, turning, or crouch/stand capability from customer screen
+                    # (W→customer handled above; ESC returns to tillDrinks)
                     continue
 
                 # General forward/back using W/S (or arrows up/down) for position views.
@@ -1664,7 +2341,7 @@ def run_demo() -> None:
                 # Support left click (1) for most actions, and right click (3) specifically for
                 # take: and pour: and thimble: buttons (to choose which hand to affect).
                 # For pour: click with hand holding BASE/BASEHalf.
-                # For thimble: click with hand holding a wine (red/white/rose* item) .
+                # For thimble: click with hand holding a wine or spirit item.
                 # craft: / crafting: only use left click.
                 # Other buttons (order, send, switch, grades, etc.) only respond to left click.
                 button = event.button
@@ -1674,13 +2351,9 @@ def run_demo() -> None:
 
                 if current_key == "customer":
                     # Handle grade buttons, reset, finish only on left click.
-                    # Grade buttons place from right_hand if present, else left_hand.
                     if button != 1:
                         continue
-                    # Handle grade buttons (these replace the old single PLACE).
-                    # Clicking a grade while holding something in a hand "places" it
-                    # (prefers right_hand, falls back to left_hand) and records the user's
-                    # self-reported ease of recall (for placed items in review).
+                    # PLACE grade buttons — both hands placed with the chosen grade.
                     grade_clicks = [
                         (GRADE_AGAIN_RECT, 1, "Again"),
                         (GRADE_HARD_RECT,  2, "Hard"),
@@ -1691,16 +2364,19 @@ def run_demo() -> None:
                     for rect, g, label in grade_clicks:
                         if (rect[0] <= mx < rect[0] + rect[2] and
                             rect[1] <= my < rect[1] + rect[3]):
-                            if right_hand:
-                                placed.append(right_hand)
-                                placed_grades[right_hand] = g
-                                print(f"Placed {right_hand} on the counter (user grade={g}).")
-                                right_hand = None
-                            elif left_hand:
-                                placed.append(left_hand)
-                                placed_grades[left_hand] = g
-                                print(f"Placed {left_hand} on the counter (user grade={g}).")
-                                left_hand = None
+                            placed_any = False
+                            for hand_name, item in (("right", right_hand), ("left", left_hand)):
+                                if item:
+                                    placed.append(item)
+                                    placed_grades[item] = g
+                                    print(f"Placed {item} on the counter ({label}, grade={g}).")
+                                    placed_any = True
+                                    if hand_name == "right":
+                                        right_hand = None
+                                    else:
+                                        left_hand = None
+                            if not placed_any:
+                                print(f"PLACE ({label}): both hands empty.")
                             grade_handled = True
                             break
                     if grade_handled:
@@ -1712,60 +2388,48 @@ def run_demo() -> None:
                         placed_grades.clear()
                         print("Placed items reset.")
                         continue
+                    if (RESET_TILL_BUTTON_RECT[0] <= mx < RESET_TILL_BUTTON_RECT[0] + RESET_TILL_BUTTON_RECT[2] and
+                        RESET_TILL_BUTTON_RECT[1] <= my < RESET_TILL_BUTTON_RECT[1] + RESET_TILL_BUTTON_RECT[3]):
+                        sent_orders.clear()
+                        sent_grades.clear()
+                        orders.clear()
+                        pending_send_items = None
+                        print("Till reset (sent items + pending order cleared).")
+                        continue
                     if (FINISH_BUTTON_RECT[0] <= mx < FINISH_BUTTON_RECT[0] + FINISH_BUTTON_RECT[2] and
                         FINISH_BUTTON_RECT[1] <= my < FINISH_BUTTON_RECT[1] + FINISH_BUTTON_RECT[3]):
-                        # Compute success per demand using the exact rules:
-                        # - beer (glass demands): BOTH glass placed AND matching drink sent from till
-                        # - burger: only sent from till
-                        # - other (wine/spirit/etc): only placed by customer
-                        total = len(current_demands)
-                        success = 0
-                        succeeded = set()
-                        for demand in current_demands:
-                            ok = False
-                            if demand in BEER_GLASS_TO_DRINK:
-                                drink = BEER_GLASS_TO_DRINK[demand]
-                                if (drink in sent_orders or demand in sent_orders) and demand in placed:
-                                    ok = True
-                            elif demand in BURGER_DEMANDS:
-                                if demand in sent_orders:
-                                    ok = True
-                            else:
-                                # other drink: only needs to be placed
-                                if demand in placed:
-                                    ok = True
-                            if ok:
-                                success += 1
-                                succeeded.add(demand)
+                        if customer_awaiting_continue:
+                            finish_report_lines = []
+                            customer_awaiting_continue = False
+                            placed.clear()
+                            placed_grades.clear()
+                            sent_orders.clear()
+                            sent_grades.clear()
+                            left_hand = None
+                            right_hand = None
+                            current_demands = _sample_next_demands()
+                            prev_name = (
+                                current_customer.display_name
+                                if current_customer is not None else None)
+                            _pick_new_customer(exclude_name=prev_name)
+                            print("A new customer has arrived with fresh demands!")
+                        else:
+                            success, total, succeeded, finish_report_lines = _score_customer_demands(
+                                current_demands, placed, sent_orders,
+                                BEER_GLASS_TO_DRINK, BURGER_DEMANDS)
+                            print("=== CUSTOMER FINISHED ===")
+                            for line in finish_report_lines:
+                                print(line)
 
-                        finish_message = f"{success}/{total} orders were successful"
-                        print("=== CUSTOMER FINISHED ===")
-                        print(finish_message)
-
-                        # --- Bar review / FSRS integration ---
-                        # Only demands the customer actually asked for (in current_demands) get reviewed.
-                        # - If a demanded item was NOT correctly fulfilled (missing what was asked):
-                        #     force grade=1 (Again). Mistakes always cost the lowest grade.
-                        # - If correctly fulfilled (placed/sent per the rules for beer/burger/other):
-                        #     use the user-defined grade from the place-grade buttons or the new send-grade
-                        #     buttons (Easy/Good/Hard/Again) if one was assigned for that item.
-                        #     This lets the user rate how hard it was to find/recall the item (even if correct).
-                        # - Extras the user sent/placed that the customer did NOT ask for are not reviewed
-                        #   (their grades are recorded but ignored for FSRS, since we only look at demanded items).
-                        if _review_mode:
-                            for demand in list(current_demands):
-                                if demand in _due_map:
+                            if _review_mode and not _practice_mode:
+                                for demand in list(current_demands):
+                                    if demand not in _due_map:
+                                        continue
                                     if demand not in succeeded:
-                                        # missing what customer asked -> Again (1), regardless of any grade assigned
                                         grade = 1
                                     else:
-                                        # correctly placed/sent for this demand -> prefer user grade (place or send)
-                                        if demand in placed_grades:
-                                            grade = placed_grades[demand]
-                                        elif demand in sent_grades:
-                                            grade = sent_grades[demand]
-                                        else:
-                                            grade = 3  # correct but no user grade given -> default Good
+                                        grade = _grade_for_fulfilled_demand(
+                                            demand, placed_grades, sent_grades, BEER_GLASS_TO_DRINK)
                                     adapt_id = _due_map.pop(demand)
                                     try:
                                         from ..core.db import getAdaptData, updateDB
@@ -1773,24 +2437,30 @@ def run_demo() -> None:
                                         full, _, _ = getAdaptData(adapt_id)
                                         if full:
                                             sched_dict, new_due = schedulerReview(full, grade=grade)
-                                            updateDB(adapt_id=adapt_id, scheduling_dict=sched_dict, newDue=new_due)
-                                            print(f"  [review] {demand} -> grade {grade} (adapt_id={adapt_id})")
+                                            updateDB(
+                                                adapt_id=adapt_id,
+                                                scheduling_dict=sched_dict,
+                                                newDue=new_due)
+                                            print(
+                                                f"  [review] {demand} -> {grade_label(grade)} "
+                                                f"({grade}) adapt_id={adapt_id}")
                                     except Exception as ex:
                                         print(f"  [review] FSRS update error for {demand}: {ex}")
 
-                            if not _due_map and not _practice_mode:
-                                _practice_mode = True
-                                finish_message += "   All cards reviewed. Exit or keep playing."
+                                if not _due_map and not _practice_mode:
+                                    _practice_mode = True
+                                    pygame.display.set_caption(_window_caption())
+                                    finish_report_lines.append("")
+                                    finish_report_lines.append(
+                                        "All cards reviewed. Exit or keep playing.")
 
-                        # Clear states for new customer, generate new demands, stay on customer screen
-                        placed.clear()
-                        placed_grades.clear()
-                        sent_orders.clear()
-                        sent_grades.clear()
-                        left_hand = None
-                        right_hand = None
-                        current_demands = _sample_next_demands()
-                        print("A new customer has arrived with fresh demands!")
+                            customer_awaiting_continue = True
+                            placed.clear()
+                            placed_grades.clear()
+                            sent_orders.clear()
+                            sent_grades.clear()
+                            left_hand = None
+                            right_hand = None
                         continue
                     # Other clicks on customer screen: ignore for now
                     continue
@@ -1801,8 +2471,14 @@ def run_demo() -> None:
                 # We need the current scaled + blit position.
                 # Recompute it here (cheap) so we don't have to store it.
                 current_surf = surface_cache[current_key]
-                scaled, (bx, by) = scale_and_center(current_surf, (win_w, win_h))
-                sw, sh = scaled.get_size()
+                photo_layout = layout_view_photo(
+                    current_key, current_surf, win_w, win_h,
+                    is_fullscreen=is_fullscreen,
+                    frame_surface=till_frame_surf,
+                    pygame_module=pygame,
+                )
+                bx, by = photo_layout.blit_x, photo_layout.blit_y
+                sw, sh = photo_layout.width, photo_layout.height
 
                 ix, iy = screen_to_image_coords(mx, my, bx, by, sw, sh, orig_w, orig_h)
 
@@ -1838,12 +2514,28 @@ def run_demo() -> None:
                                             print(f"Invalid switch target: {value}")
                                 elif prefix == "take":
                                     # Left click (1) -> left hand; right click (3) -> right hand.
-                                    if button == 3:
-                                        right_hand = value
-                                        print(f"Took {value} into right hand (overwrote previous).")
+                                    # Spirit shot pour: shotsGlass/shotGlass + take:spirit → spiritSingle;
+                                    # same spirit again → spiritDouble; after Double, no further pour.
+                                    if not value:
+                                        pass
+                                    elif button == 3:
+                                        new_item, handled = try_spirit_shot_pour(right_hand, value)
+                                        if handled:
+                                            if new_item != right_hand:
+                                                print(f"Spirit shot pour (right): {right_hand} + {value} → {new_item}")
+                                            right_hand = new_item
+                                        else:
+                                            right_hand = value
+                                            print(f"Took {value} into right hand (overwrote previous).")
                                     else:
-                                        left_hand = value
-                                        print(f"Took {value} into left hand (overwrote previous).")
+                                        new_item, handled = try_spirit_shot_pour(left_hand, value)
+                                        if handled:
+                                            if new_item != left_hand:
+                                                print(f"Spirit shot pour (left): {left_hand} + {value} → {new_item}")
+                                            left_hand = new_item
+                                        else:
+                                            left_hand = value
+                                            print(f"Took {value} into left hand (overwrote previous).")
                                 elif prefix == "pour":
                                     # New multi-stage pour: button action "pour:BASE" (e.g. pour:madriGlass)
                                     # Click *with the specific hand* (button 1 = left, button 3 = right) that holds the item.
@@ -1896,82 +2588,78 @@ def run_demo() -> None:
                                             print(f"Cannot craft '{target}' with hands ({left_hand}, {right_hand}). "
                                                   f"Required: {required or 'unknown recipe'}.")
                                 elif prefix == "craft":
-                                    # Dynamic wine combine "craft:" button (generic action like "craft:" or "craft:combine").
-                                    # Left-click only (button==1).
-                                    # Requires BOTH hands to hold *measured* wines (i.e. thimbled with amount suffix like redXXX25 or redXXX125)
-                                    # of the EXACT same base name. Plain wines without amount (e.g. just "redWineX") do not combine.
-                                    # Combines the amounts into one item in the right hand, left cleared.
-                                    # e.g. redWineX125 (right) + redWineX25 (left) → redWineX150 (right)
+                                    # craft: / craft:combine — merge thimble pours in both hands.
+                                    # Both must be measured (suffix ml); same base name; result → right hand.
                                     if button == 1:
-                                        left_base, left_amt = _parse_wine_amount(left_hand)
-                                        right_base, right_amt = _parse_wine_amount(right_hand)
-                                        if (left_base is not None and right_base is not None and
-                                                left_base == right_base and left_amt is not None and right_amt is not None):
-                                            combined_amt = left_amt + right_amt
-                                            combined = left_base + str(combined_amt)
-                                            print(f"Combined wines: {left_hand} + {right_hand} → {combined} (in right hand)")
+                                        combined = combine_measured_pours(left_hand, right_hand)
+                                        if combined:
+                                            print(f"Combined pours: {left_hand} + {right_hand} → {combined} (in right hand)")
                                             left_hand = None
                                             right_hand = combined
                                         else:
-                                            print(f"Cannot combine wines with hands ({left_hand}, {right_hand}). "
-                                                  "Need same measured wine (with amount suffix) in each hand.")
+                                            print(f"Cannot combine pours with hands ({left_hand}, {right_hand}). "
+                                                  "Need the same thimble-measured wine or spirit in each hand "
+                                                  "(e.g. redWineX25 + redWineX125; unmeasured bottles do not work).")
+                                elif prefix == "opener":
+                                    if button == 1:
+                                        new_item, ok = try_open_bottle(left_hand)
+                                        if ok and new_item:
+                                            print(f"Opened bottle (left): {left_hand} → {new_item}")
+                                            left_hand = new_item
+                                        else:
+                                            print(
+                                                f"Cannot open with opener (left hand: {left_hand or 'empty'}). "
+                                                "Need a sealed bottle (j20, soft, *Zero, etc.).")
+                                    elif button == 3:
+                                        new_item, ok = try_open_bottle(right_hand)
+                                        if ok and new_item:
+                                            print(f"Opened bottle (right): {right_hand} → {new_item}")
+                                            right_hand = new_item
+                                        else:
+                                            print(
+                                                f"Cannot open with opener (right hand: {right_hand or 'empty'}). "
+                                                "Need a sealed bottle (j20, soft, *Zero, etc.).")
                                 elif prefix == "thimble":
-                                    # Thimble measure for wines: thimble:25 / thimble:50 / thimble:125
-                                    # Click *with the hand holding the wine item* (button 1=left, 3=right).
-                                    # Only acts on wine items (start with red/white/rose*, not redbull).
-                                    # Replaces in the chosen hand: redFlagstonePoetryMerlot -> redFlagstonePoetryMerlot25
-                                    # Previous size suffix is stripped if present (allows re-measuring).
+                                    # Thimble measure: thimble:25 / thimble:50 / thimble:125
+                                    # Works on wines and spirits (not softs, cans, beer, crisps, kids drinks, etc.).
                                     size_str = value.strip()
                                     try:
                                         sz = int(size_str)
                                     except ValueError:
                                         print(f"Invalid thimble size: {size_str}")
                                     else:
-                                        if button == 1:  # left hand
-                                            if _is_wine_item(left_hand):
-                                                old = left_hand
-                                                left_hand = _apply_thimble(old, sz)
-                                                print(f"Thimbled left hand to {sz}: {old} → {left_hand}")
-                                            # else: no wine in hand or not applicable -> do nothing
-                                        elif button == 3:  # right hand
-                                            if _is_wine_item(right_hand):
-                                                old = right_hand
-                                                right_hand = _apply_thimble(old, sz)
-                                                print(f"Thimbled right hand to {sz}: {old} → {right_hand}")
-                                            # else: silent
+                                        if button == 1 and can_thimble(left_hand):
+                                            old = left_hand
+                                            left_hand = _apply_thimble(old, sz)
+                                            print(f"Thimbled left hand to {sz}: {old} → {left_hand}")
+                                        elif button == 3 and can_thimble(right_hand):
+                                            old = right_hand
+                                            right_hand = _apply_thimble(old, sz)
+                                            print(f"Thimbled right hand to {sz}: {old} → {right_hand}")
                             elif action == "send_order":
                                 if button == 1:
                                     if orders:
-                                        sent_orders.extend(orders)
+                                        pending_send_items = list(orders)
+                                        send_popup_selection = 2
+                                        print("Choose send grade (↑/↓ + Enter, click, or Esc to cancel)")
+                                    else:
+                                        print("No items in current order.")
+                            elif action in SEND_GRADE_MAP:
+                                if button == 1:
+                                    send_grade = SEND_GRADE_MAP[action]
+                                    if orders:
+                                        for item in orders:
+                                            sent_orders.append(item)
+                                            sent_grades[item] = send_grade
                                         print("=== SENDING ORDER ===")
                                         for item in orders:
-                                            print(f"  - {item}")
+                                            print(f"  - {item} ({grade_label(send_grade)})")
                                         print("Order sent to kitchen!")
                                         orders.clear()
                                     else:
                                         print("No items in current order.")
                             else:
-                                # Support for split Send button: top is just "Send" text (no action or unknown),
-                                # lower 4 parts use sendAgain/sendHard/sendGood/sendEasy (or variants)
-                                # to send the orders AND record a user grade for the sent items.
-                                if button == 1:
-                                    send_grade = None
-                                    if action == "send_order":
-                                        send_grade = 3  # legacy default
-                                    elif action in SEND_GRADE_MAP:
-                                        send_grade = SEND_GRADE_MAP[action]
-                                    if send_grade is not None:
-                                        if orders:
-                                            sent_orders.extend(orders)
-                                            for item in orders:
-                                                sent_grades[item] = send_grade
-                                            print("=== SENDING ORDER ===")
-                                            for item in orders:
-                                                print(f"  - {item} (user grade {send_grade})")
-                                            print("Order sent to kitchen!")
-                                            orders.clear()
-                                        else:
-                                            print("No items in current order.")
+                                pass
                             button_handled = True
 
                     if not button_handled and button == 1:
@@ -1996,152 +2684,278 @@ def run_demo() -> None:
                         print(f"Click outside photo area on '{current_key}'")
 
         # ---------------- Rendering ----------------
-        screen.fill((20, 20, 25))  # dark background for letterboxing
+        screen.fill(ui_theme.BG_LETTERBOX)
 
         photo_rect = None
         if current_key == "customer":
-            # Blank customer screen with text boxes and buttons
-            # No photo, just placeholder UI
-            # Ensure no overlaps: demands center, placed LEFT, sent RIGHT upper, buttons RIGHT lower
+            AIdrawCustomerBackground(
+                screen, customer_frame_surf, win_w, win_h, pygame)
+            if current_customer is not None and current_customer_surf is not None:
+                AIdrawCustomerPortrait(
+                    screen,
+                    current_customer_surf,
+                    current_customer.display_name,
+                    small_font,
+                    win_w,
+                    win_h,
+                    pygame,
+                    viewport=(cv_x, cv_y, cv_w, cv_h),
+                    name_gap=cv_name_gap,
+                    name_height=cv_name_height,
+                )
 
-            # Demands box in center (moved slightly to avoid overlaps)
-            dem_w, dem_h = 580, 180
-            dem_x = (win_w - dem_w) // 2
-            # Try to keep demands clear of the left (placed) and right (sent+buttons) panels
-            placed_right = PLACED_ITEMS_BOX[0] + PLACED_ITEMS_BOX[2] + 20
-            sent_left = SENT_ITEMS_BOX[0] - 20
-            if dem_x < placed_right:
-                dem_x = placed_right
-            if dem_x + dem_w > sent_left and sent_left > placed_right + 100:
-                dem_x = max(placed_right, sent_left - dem_w)
-            dem_y = 40
-            pygame.draw.rect(screen, (30, 30, 40), (dem_x, dem_y, dem_w, dem_h))
-            pygame.draw.rect(screen, (180, 180, 180), (dem_x, dem_y, dem_w, dem_h), 2)
+            dem_x, dem_y, dem_w, layout_dem_h = DEMANDS_BOX
+            dem_pad_x = 12
+            dem_pad_y = 12
+            dem_line_h = 18
+            text_width = cust_layout.demands_text_width
+            panel_alpha = ui_theme.TRANSLUCENT_PANEL_ALPHA
+            btn_alpha = ui_theme.TRANSLUCENT_BUTTON_ALPHA
 
-            # Auto-generated customer demands (3-6 items from takeables and sendables)
-            formatted_demands = [format_demand(d) for d in current_demands]
-            demands = ["Customer demands:"] + [""] + [f"• {d}" for d in formatted_demands] + [
-                "",
-                "Left-click take buttons (on position views) to put glass in left hand; right-click for right hand.",
-                "On customer: click a grade button to place from hand (prefers right hand, then left) + rate recall."
-            ]
-            y = dem_y + 12
-            for line in demands:
-                txt = small_font.render(line, True, (255, 255, 200))
-                screen.blit(txt, (dem_x + 12, y))
-                y += 18
+            bottom_margin = max(14, int(min(win_w, win_h) * 0.022))
+            dem_top = dem_y
+            max_dem_h = win_h - dem_top - bottom_margin
+            content_h = _customer_demands_content_height(
+                small_font=small_font,
+                console_font=console_font,
+                text_width=text_width,
+                demand_keys=current_demands,
+                report_lines=finish_report_lines,
+                showing_report=customer_awaiting_continue,
+                line_h=dem_line_h,
+                pad_y=dem_pad_y,
+            )
+            dem_h = min(max_dem_h, max(content_h, 96))
+            dem_y = win_h - bottom_margin - dem_h
+            if dem_y < dem_top:
+                dem_y = dem_top
+                dem_h = win_h - bottom_margin - dem_y
 
-            # Placed items text box on LEFT side
-            pygame.draw.rect(screen, (30, 30, 40), PLACED_ITEMS_BOX)
-            pygame.draw.rect(screen, (180, 180, 180), PLACED_ITEMS_BOX, 2)
+            demand_hover_regions: list[tuple[tuple[int, int, int, int], str]] = []
+            hovered_demand_key: str | None = None
+
+            demands_rect = (dem_x, dem_y, dem_w, dem_h)
+            dem_hovered = ui_theme.point_in_rect(mx, my, demands_rect)
+            ui_theme.draw_panel(
+                screen, demands_rect, hovered=dem_hovered, alpha=panel_alpha)
+
+            y = dem_y + dem_pad_y
+            clip_rect = pygame.Rect(dem_x + 1, dem_y + 1, dem_w - 2, dem_h - 2)
+            prev_clip = screen.get_clip()
+            screen.set_clip(clip_rect)
+
+            def _blit_dem_line(
+                line: str,
+                color: tuple[int, int, int] = ui_theme.PANEL_BODY,
+                *,
+                use_console_font: bool = False,
+            ) -> None:
+                nonlocal y
+                if y + dem_line_h > dem_y + dem_h - dem_pad_y:
+                    return
+                fnt = console_font if use_console_font else small_font
+                txt = fnt.render(line, True, color)
+                screen.blit(txt, (dem_x + dem_pad_x, y))
+                y += dem_line_h
+
+            if customer_awaiting_continue and finish_report_lines:
+                for line in finish_report_lines:
+                    for wrapped in _wrap_text_lines(console_font, line, text_width):
+                        col = ui_theme.YELLOW_BRIGHT
+                        if wrapped.startswith("MISSING"):
+                            col = (255, 90, 90)
+                        elif wrapped.startswith("EXTRA"):
+                            col = (255, 165, 70)
+                        elif wrapped.startswith("OK"):
+                            col = (160, 255, 160)
+                        elif "/" in wrapped and "successful" in wrapped:
+                            col = ui_theme.YELLOW
+                        _blit_dem_line(wrapped, col, use_console_font=True)
+            else:
+                for line in _wrap_text_lines(small_font, "Customer demands:", text_width):
+                    _blit_dem_line(line, ui_theme.PANEL_HEADER)
+                _blit_dem_line("")
+
+                for demand_key in current_demands:
+                    block_top = y
+                    for line in _wrap_bullet_lines(
+                            small_font, format_demand(demand_key), text_width):
+                        _blit_dem_line(line)
+                    if y > block_top:
+                        demand_hover_regions.append(
+                            ((dem_x, block_top, dem_w, y - block_top), demand_key))
+
+                _blit_dem_line("")
+                for paragraph in (
+                    "Left-click take buttons (on position views) to put glass in left hand; "
+                    "right-click for right hand.",
+                    "On customer: grade buttons place both hands on the counter + rate recall.",
+                ):
+                    for line in _wrap_text_lines(small_font, paragraph, text_width):
+                        _blit_dem_line(line, ui_theme.HELP_FOOTER)
+                    _blit_dem_line("")
+
+            screen.set_clip(prev_clip)
+
+            for rect, demand_key in demand_hover_regions:
+                rx, ry, rw, rh = rect
+                if rx <= mx < rx + rw and ry <= my < ry + rh:
+                    hovered_demand_key = demand_key
+                    break
+
+            placed_hovered = ui_theme.point_in_rect(mx, my, PLACED_ITEMS_BOX)
+            ui_theme.draw_panel(
+                screen, PLACED_ITEMS_BOX, hovered=placed_hovered, alpha=panel_alpha)
             py = PLACED_ITEMS_BOX[1] + 10
-            ptxt = small_font.render("Placed on counter:", True, (255, 255, 200))
+            ptxt = small_font.render("Placed on counter:", True, ui_theme.PANEL_HEADER)
             screen.blit(ptxt, (PLACED_ITEMS_BOX[0] + 8, py))
             py += 20
             if placed:
                 for item in placed:
                     g = placed_grades.get(item)
-                    label = f"- {format_demand(item)}"
+                    label = f"- {format_item_label(item)}"
                     if g is not None:
-                        label += f" [{g}]"
-                    itxt = small_font.render(label, True, (255, 255, 255))
+                        label += f" ({grade_label(g)})"
+                    itxt = small_font.render(label, True, ui_theme.PANEL_BODY)
                     screen.blit(itxt, (PLACED_ITEMS_BOX[0] + 8, py))
                     py += 16
             else:
-                itxt = small_font.render("(none)", True, (180, 180, 180))
+                itxt = small_font.render("(none)", True, ui_theme.PANEL_MUTED)
                 screen.blit(itxt, (PLACED_ITEMS_BOX[0] + 8, py))
 
-            # Sent from till text box on RIGHT side (upper)
-            pygame.draw.rect(screen, (30, 30, 40), SENT_ITEMS_BOX)
-            pygame.draw.rect(screen, (180, 180, 180), SENT_ITEMS_BOX, 2)
+            # Sent from till — right side, same size as placed box
+            sent_hovered = ui_theme.point_in_rect(mx, my, SENT_ITEMS_BOX)
+            ui_theme.draw_panel(
+                screen, SENT_ITEMS_BOX, hovered=sent_hovered, alpha=panel_alpha)
             py = SENT_ITEMS_BOX[1] + 10
-            stxt = small_font.render("Sent from till:", True, (255, 255, 200))
+            stxt = small_font.render("Sent from till:", True, ui_theme.PANEL_HEADER)
             screen.blit(stxt, (SENT_ITEMS_BOX[0] + 8, py))
             py += 20
             if sent_orders:
                 for item in sent_orders:
-                    itxt = small_font.render(f"- {format_demand(item)}", True, (255, 255, 255))
+                    g = sent_grades.get(item)
+                    label = f"- {format_item_label(item)}"
+                    if g is not None:
+                        label += f" ({grade_label(g)})"
+                    itxt = small_font.render(label, True, ui_theme.PANEL_BODY)
                     screen.blit(itxt, (SENT_ITEMS_BOX[0] + 8, py))
                     py += 16
             else:
-                itxt = small_font.render("(none)", True, (180, 180, 180))
+                itxt = small_font.render("(none)", True, ui_theme.PANEL_MUTED)
                 screen.blit(itxt, (SENT_ITEMS_BOX[0] + 8, py))
 
-            # Buttons on right side (lower, below sent box to avoid overlap)
-            # "PLACE" label above the grade buttons (user request)
-            place_label = small_font.render("PLACE", True, (255, 220, 100))
-            place_label_x = GRADE_AGAIN_RECT[0] + (GRADE_AGAIN_RECT[2] - place_label.get_width()) // 2
-            place_label_y = GRADE_AGAIN_RECT[1] - 22  # just above the "Again" button (dynamic)
+            # Left side below placed box: PLACE label + grade buttons + reset
+            place_label = small_font.render("PLACE", True, ui_theme.PANEL_ACCENT)
+            place_label_x = PLACED_ITEMS_BOX[0] + 8
+            place_label_y = PLACED_ITEMS_BOX[1] + PLACED_ITEMS_BOX[3] + 12
             screen.blit(place_label, (place_label_x, place_label_y))
 
             # Hover for customer action buttons (sets tooltip for the action-on-hover feature)
             if (GRADE_AGAIN_RECT[0] <= mx < GRADE_AGAIN_RECT[0] + GRADE_AGAIN_RECT[2] and
                     GRADE_AGAIN_RECT[1] <= my < GRADE_AGAIN_RECT[1] + GRADE_AGAIN_RECT[3]):
-                tooltip_text = "Place item from hand (prefers right; self-grade: Again)"
+                tooltip_text = "Place both hands on counter (self-grade: Again)"
             elif (GRADE_HARD_RECT[0] <= mx < GRADE_HARD_RECT[0] + GRADE_HARD_RECT[2] and
                     GRADE_HARD_RECT[1] <= my < GRADE_HARD_RECT[1] + GRADE_HARD_RECT[3]):
-                tooltip_text = "Place item from hand (prefers right; self-grade: Hard)"
+                tooltip_text = "Place both hands on counter (self-grade: Hard)"
             elif (GRADE_GOOD_RECT[0] <= mx < GRADE_GOOD_RECT[0] + GRADE_GOOD_RECT[2] and
                     GRADE_GOOD_RECT[1] <= my < GRADE_GOOD_RECT[1] + GRADE_GOOD_RECT[3]):
-                tooltip_text = "Place item from hand (prefers right; self-grade: Good)"
+                tooltip_text = "Place both hands on counter (self-grade: Good)"
             elif (GRADE_EASY_RECT[0] <= mx < GRADE_EASY_RECT[0] + GRADE_EASY_RECT[2] and
                     GRADE_EASY_RECT[1] <= my < GRADE_EASY_RECT[1] + GRADE_EASY_RECT[3]):
-                tooltip_text = "Place item from hand (prefers right; self-grade: Easy)"
+                tooltip_text = "Place both hands on counter (self-grade: Easy)"
             elif (RESET_BUTTON_RECT[0] <= mx < RESET_BUTTON_RECT[0] + RESET_BUTTON_RECT[2] and
                     RESET_BUTTON_RECT[1] <= my < RESET_BUTTON_RECT[1] + RESET_BUTTON_RECT[3]):
                 tooltip_text = "Reset placed items"
+            elif (RESET_TILL_BUTTON_RECT[0] <= mx < RESET_TILL_BUTTON_RECT[0] + RESET_TILL_BUTTON_RECT[2] and
+                    RESET_TILL_BUTTON_RECT[1] <= my < RESET_TILL_BUTTON_RECT[1] + RESET_TILL_BUTTON_RECT[3]):
+                tooltip_text = "Reset sent items and clear pending till order"
             elif (FINISH_BUTTON_RECT[0] <= mx < FINISH_BUTTON_RECT[0] + FINISH_BUTTON_RECT[2] and
                     FINISH_BUTTON_RECT[1] <= my < FINISH_BUTTON_RECT[1] + FINISH_BUTTON_RECT[3]):
-                tooltip_text = "Finish: score this customer and get the next one"
+                if customer_awaiting_continue:
+                    tooltip_text = "Continue: next customer"
+                else:
+                    tooltip_text = "Finish: score this customer"
 
-            # 4 grade buttons. These place from hand (right then left) and record the user's
-            # self-grade for recall difficulty (used for placed demands in review mode).
+            # 4 grade buttons. These place both hands and record the user's self-grade
+            # (used for placed demands in review mode on FINISH).
             grade_buttons = [
-                (GRADE_AGAIN_RECT, "Again"),
-                (GRADE_HARD_RECT, "Hard"),
-                (GRADE_GOOD_RECT, "Good"),
-                (GRADE_EASY_RECT, "Easy"),
+                (GRADE_AGAIN_RECT, 1),
+                (GRADE_HARD_RECT, 2),
+                (GRADE_GOOD_RECT, 3),
+                (GRADE_EASY_RECT, 4),
             ]
-            for rect, label in grade_buttons:
-                pygame.draw.rect(screen, (0, 0, 0), rect)
-                gtxt = small_font.render(label, True, (255, 255, 255))
-                gx = rect[0] + (rect[2] - gtxt.get_width()) // 2
-                gy = rect[1] + (rect[3] - gtxt.get_height()) // 2
-                screen.blit(gtxt, (gx, gy))
+            for rect, grade in grade_buttons:
+                g_hover = ui_theme.point_in_rect(mx, my, rect)
+                g_blend = hover_grow.update(f"grade:{grade}", g_hover, dt_seconds)
+                g_rect = ui_theme.AIscaleRectAroundCenter(
+                    rect, hover_grow.scale(g_blend))
+                _draw_grade_button(
+                    screen, g_rect, grade, GRADE_LABELS[grade], small_font,
+                    hover_blend=g_blend)
 
-            # Reset placed button
-            pygame.draw.rect(screen, (0, 0, 0), RESET_BUTTON_RECT)
-            reset_txt = small_font.render("RESET PLACED", True, (255, 255, 255))
-            rx = RESET_BUTTON_RECT[0] + (RESET_BUTTON_RECT[2] - reset_txt.get_width()) // 2
-            ry = RESET_BUTTON_RECT[1] + (RESET_BUTTON_RECT[3] - reset_txt.get_height()) // 2
-            screen.blit(reset_txt, (rx, ry))
+            # Reset placed (left column, below grade buttons)
+            reset_hover = ui_theme.point_in_rect(mx, my, RESET_BUTTON_RECT)
+            reset_blend = hover_grow.update("reset_placed", reset_hover, dt_seconds)
+            ui_theme.draw_action_button(
+                screen,
+                ui_theme.AIscaleRectAroundCenter(
+                    RESET_BUTTON_RECT, hover_grow.scale(reset_blend)),
+                "RESET PLACED", small_font,
+                hover_blend=reset_blend,
+                alpha=btn_alpha,
+            )
 
-            # Finish button
-            pygame.draw.rect(screen, (0, 0, 0), FINISH_BUTTON_RECT)
-            finish_txt = small_font.render("FINISH", True, (255, 255, 255))
-            fx = FINISH_BUTTON_RECT[0] + (FINISH_BUTTON_RECT[2] - finish_txt.get_width()) // 2
-            fy = FINISH_BUTTON_RECT[1] + (FINISH_BUTTON_RECT[3] - finish_txt.get_height()) // 2
-            screen.blit(finish_txt, (fx, fy))
+            till_reset_hover = ui_theme.point_in_rect(mx, my, RESET_TILL_BUTTON_RECT)
+            till_reset_blend = hover_grow.update("reset_till", till_reset_hover, dt_seconds)
+            ui_theme.draw_action_button(
+                screen,
+                ui_theme.AIscaleRectAroundCenter(
+                    RESET_TILL_BUTTON_RECT, hover_grow.scale(till_reset_blend)),
+                "RESET TILL", small_font,
+                hover_blend=till_reset_blend,
+                alpha=btn_alpha,
+            )
+            finish_label = "CONTINUE" if customer_awaiting_continue else "FINISH"
+            finish_hover = ui_theme.point_in_rect(mx, my, FINISH_BUTTON_RECT)
+            finish_blend = hover_grow.update("finish", finish_hover, dt_seconds)
+            ui_theme.draw_action_button(
+                screen,
+                ui_theme.AIscaleRectAroundCenter(
+                    FINISH_BUTTON_RECT, hover_grow.scale(finish_blend)),
+                finish_label, small_font,
+                hover_blend=finish_blend,
+                accent=True,
+                alpha=btn_alpha,
+            )
 
-            # Left + right hand boxes also show here (for non-till / customer views)
-
-            # Finish message box at the bottom (only after finish, for the previous customer)
-            if finish_message:
-                msg_surf = small_font.render(finish_message, True, (255, 255, 100))
-                msg_w = msg_surf.get_width() + 20
-                msg_h = 30
-                msg_x = (win_w - msg_w) // 2
-                msg_y = win_h - 70
-                pygame.draw.rect(screen, (50, 50, 30), (msg_x, msg_y, msg_w, msg_h))
-                pygame.draw.rect(screen, (200, 200, 100), (msg_x, msg_y, msg_w, msg_h), 1)
-                screen.blit(msg_surf, (msg_x + 10, msg_y + 5))
+            if hovered_demand_key:
+                tooltip_text = hovered_demand_key
         else:
             current_view = get_view(current_key)
             current_surf = surface_cache[current_key]
 
-            scaled, (bx, by) = scale_and_center(current_surf, (win_w, win_h))
-            screen.blit(scaled, (bx, by))
-            photo_rect = (bx, by, scaled.get_width(), scaled.get_height())
+            photo_layout = layout_view_photo(
+                current_key, current_surf, win_w, win_h,
+                is_fullscreen=is_fullscreen,
+                frame_surface=till_frame_surf,
+                pygame_module=pygame,
+            )
+            if photo_layout.frame_scaled is not None:
+                screen.blit(
+                    photo_layout.frame_scaled,
+                    (photo_layout.frame_blit_x, photo_layout.frame_blit_y),
+                )
+            blit_rounded_surface(
+                screen,
+                photo_layout.scaled,
+                photo_layout.blit_x,
+                photo_layout.blit_y,
+                photo_layout.clip_radius,
+                pygame_module=pygame,
+            )
+            scaled = photo_layout.scaled
+            bx, by = photo_layout.blit_x, photo_layout.blit_y
+            photo_rect = (bx, by, photo_layout.width, photo_layout.height)
 
         # (Left category tabs removed - now managed via the till_button_tool + JSON for all photo buttons)
         # (The previous hardcoded blue/orange BAR/FOOD top buttons have been removed;
@@ -2157,48 +2971,30 @@ def run_demo() -> None:
             y_scale = img_h / orig_h
 
             btns = TILL_PHOTO_BUTTON_DATA.get(current_key, [])
-            for btn in btns:
+            bar_photo_view = not current_key.startswith("till")
+            for btn_index, btn in enumerate(btns):
                 tx, ty, tw, th = btn["rect"]
                 sx = bx + int(tx * x_scale)
                 sy = by + int(ty * y_scale)
                 sw = int(tw * x_scale)
                 sh = int(th * y_scale)
 
-                # Hover: show action (mirrors the till_button_tool behaviour)
-                if sx <= mx <= sx + sw and sy <= my <= sy + sh:
+                is_hovered = sx <= mx <= sx + sw and sy <= my <= sy + sh
+                if is_hovered:
                     action = btn.get("action", "")
                     if action:
                         tooltip_text = f"Action: {action}"
 
-                color_name = btn.get("color", "blue")
-                rgb = _BUTTON_COLORS.get(color_name, (0, 0, 0))
+                photo_blend = 0.0
+                if bar_photo_view:
+                    photo_blend = hover_grow.update(
+                        f"photo:{current_key}:{btn_index}", is_hovered, dt_seconds)
 
-                # Very slightly rounded corners for all till buttons (subtle, modern look)
-                radius = max(2, min(6, sw // 2, sh // 2))
-
-                if color_name == "transparent border":
-                    # Completely transparent fill + soft greyish/somewhat opaque border.
-                    # No text/label for this variant (pure action hotspot).
-                    border_surf = pygame.Surface((sw, sh), pygame.SRCALPHA)
-                    # Greyish + alpha for softer look over photos instead of harsh solid black
-                    pygame.draw.rect(border_surf, (70, 70, 75, 190), (0, 0, sw, sh), width=2, border_radius=radius)
-                    screen.blit(border_surf, (sx, sy))
-                    text_color = None
-                elif color_name == "transparent black":
-                    s = pygame.Surface((sw, sh), pygame.SRCALPHA)
-                    pygame.draw.rect(s, (0, 0, 0, 128), (0, 0, sw, sh), border_radius=radius)
-                    screen.blit(s, (sx, sy))
-                    text_color = (255, 255, 255)
-                else:
-                    pygame.draw.rect(screen, rgb, (sx, sy, sw, sh), border_radius=radius)
-                    text_color = (0, 0, 0) if color_name != "black" else (255, 255, 255)
-
-                # Center the text in the button (skip entirely for "transparent border")
-                if text_color is not None:
-                    label_surf = small_font.render(btn.get("label", "?"), True, text_color)
-                    text_x = sx + (sw - label_surf.get_width()) // 2
-                    text_y = sy + (sh - label_surf.get_height()) // 2
-                    screen.blit(label_surf, (text_x, text_y))
+                _draw_photo_button(
+                    screen, sx, sy, sw, sh, btn, small_font,
+                    hover_blend=photo_blend,
+                    bar_view=bar_photo_view,
+                )
 
         # Hand item icons displayed at bottom corners (over the background image).
         # Left hand icon at bottom-left, right hand at bottom-right.
@@ -2216,10 +3012,10 @@ def run_demo() -> None:
             if show_hand_icons and (r_icon or l_icon):
                 r_str = str(r_item or "").lower()
                 l_str = str(l_item or "").lower()
-                r_is_thimble_wine = r_str.endswith(("25", "125")) or (r_str.endswith("50") and not r_str.endswith("250"))
-                l_is_thimble_wine = l_str.endswith(("25", "125")) or (l_str.endswith("50") and not l_str.endswith("250"))
-                r_size = 28 if (any(x in r_str for x in ["shot", "thimble", "shots_glass"]) or r_is_thimble_wine) else (288 if any(x in r_str for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not any(x in r_str for x in ["shot", "thimble", "shots_glass"]) else 48)
-                l_size = 28 if (any(x in l_str for x in ["shot", "thimble", "shots_glass"]) or l_is_thimble_wine) else (288 if any(x in l_str for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not any(x in l_str for x in ["shot", "thimble", "shots_glass"]) else 48)
+                r_is_measured = is_measured_pour(r_item)
+                l_is_measured = is_measured_pour(l_item)
+                r_size = 28 if (any(x in r_str for x in ["shot", "thimble", "shots_glass"]) or r_is_measured) else (288 if any(x in r_str for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not any(x in r_str for x in ["shot", "thimble", "shots_glass"]) else 48)
+                l_size = 28 if (any(x in l_str for x in ["shot", "thimble", "shots_glass"]) or l_is_measured) else (288 if any(x in l_str for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not any(x in l_str for x in ["shot", "thimble", "shots_glass"]) else 48)
                 max_size = max(r_size, l_size, 48)
                 y = win_h - max_size - 25
             else:
@@ -2228,7 +3024,7 @@ def run_demo() -> None:
             # Right hand (bottom right corner)
             if show_hand_icons and r_icon:
                 r_str2 = str(r_item or "").lower()
-                is_shot = any(x in r_str2 for x in ["shot", "thimble", "shots_glass"]) or (r_str2.endswith(("25", "125")) or (r_str2.endswith("50") and not r_str2.endswith("250")))
+                is_shot = any(x in r_str2 for x in ["shot", "thimble", "shots_glass"]) or is_measured_pour(r_item)
                 is_glass = any(x in r_str2 for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not is_shot
                 size = 28 if is_shot else (288 if is_glass else 48)
                 scaled = pygame.transform.smoothscale(r_icon, (size, size))
@@ -2237,24 +3033,28 @@ def run_demo() -> None:
                 if r_item:
                     lbl = console_font.render(
                         str(r_item).replace("_", " ").replace("glass", "").strip()[:14],
-                        True, (200, 200, 180)
+                        True, ui_theme.YELLOW_MUTED,
                     )
                     screen.blit(lbl, (rx, y + size + 1))
             else:
                 # fallback text mode (icons off via Shift+I or no icon for this item)
                 text = f"Right hand: {r_item if r_item else 'empty'}"
-                surf = small_font.render(text, True, (255, 255, 200))
+                surf = small_font.render(text, True, ui_theme.PANEL_HEADER)
                 bw = surf.get_width() + 10
                 bh = surf.get_height() + 6
                 bx = win_w - bw - margin
-                pygame.draw.rect(screen, (40, 40, 50), (bx, y, bw, bh))
-                pygame.draw.rect(screen, (100, 100, 100), (bx, y, bw, bh), 1)
+                ui_theme.draw_panel(
+                    screen, (bx, y, bw, bh),
+                    fill=ui_theme.HAND_BADGE_FILL,
+                    border=ui_theme.HAND_BADGE_BORDER,
+                    radius=4,
+                )
                 screen.blit(surf, (bx + 5, y + 3))
 
             # Left hand (bottom left corner)
             if show_hand_icons and l_icon:
                 l_str2 = str(l_item or "").lower()
-                is_shot = any(x in l_str2 for x in ["shot", "thimble", "shots_glass"]) or (l_str2.endswith(("25", "125")) or (l_str2.endswith("50") and not l_str2.endswith("250")))
+                is_shot = any(x in l_str2 for x in ["shot", "thimble", "shots_glass"]) or is_measured_pour(l_item)
                 is_glass = any(x in l_str2 for x in ["beer_glass", "wine_glass", "glass", "white_", "red_", "rose_"]) and not is_shot
                 size = 28 if is_shot else (288 if is_glass else 48)
                 scaled = pygame.transform.smoothscale(l_icon, (size, size))
@@ -2263,25 +3063,30 @@ def run_demo() -> None:
                 if l_item:
                     lbl = console_font.render(
                         str(l_item).replace("_", " ").replace("glass", "").strip()[:14],
-                        True, (200, 200, 180)
+                        True, ui_theme.YELLOW_MUTED,
                     )
                     screen.blit(lbl, (lx, y + size + 1))
             else:
                 # fallback text mode (icons off via Shift+I or no icon for this item)
                 text = f"Left hand: {l_item if l_item else 'empty'}"
-                surf = small_font.render(text, True, (255, 255, 200))
+                surf = small_font.render(text, True, ui_theme.PANEL_HEADER)
                 bw = surf.get_width() + 10
                 bh = surf.get_height() + 6
                 bx = margin
-                pygame.draw.rect(screen, (40, 40, 50), (bx, y, bw, bh))
-                pygame.draw.rect(screen, (100, 100, 100), (bx, y, bw, bh), 1)
+                ui_theme.draw_panel(
+                    screen, (bx, y, bw, bh),
+                    fill=ui_theme.HAND_BADGE_FILL,
+                    border=ui_theme.HAND_BADGE_BORDER,
+                    radius=4,
+                )
                 screen.blit(surf, (bx + 5, y + 3))
 
         # Overlay info (hidden on till views per user request)
         # current_view is always defined for other uses (e.g. in image drawing)
         current_view = get_view(current_key)
         if not current_key.startswith("till"):
-            label = font.render(f"{current_view.name}   (key: {current_key})", True, (255, 255, 200))
+            label = font.render(
+                f"{current_view.name}   (key: {current_key})", True, ui_theme.VIEW_LABEL)
             screen.blit(label, (20, 20))
 
         # --- Minimal minimap (only on position views, not till or customer) ---
@@ -2300,9 +3105,9 @@ def run_demo() -> None:
                 sy = minimap_y
                 r = (sx, sy, msize, msize)
                 if i == spot:
-                    pygame.draw.rect(screen, (40, 40, 45), r)
-                    pygame.draw.rect(screen, (95, 95, 100), r, 1)
-                    hl = (210, 195, 130)  # warm highlight for facing side
+                    pygame.draw.rect(screen, ui_theme.HAND_BADGE_FILL, r)
+                    pygame.draw.rect(screen, ui_theme.PANEL_BORDER, r, 1)
+                    hl = ui_theme.PANEL_ACCENT
                     t = 2
                     if facing == 'N':
                         pygame.draw.line(screen, hl, (sx+1, sy+1), (sx + msize-2, sy+1), t)
@@ -2313,7 +3118,7 @@ def run_demo() -> None:
                     elif facing == 'W':
                         pygame.draw.line(screen, hl, (sx+1, sy+1), (sx+1, sy + msize-2), t)
                 else:
-                    pygame.draw.rect(screen, (85, 85, 90), r, 1)
+                    pygame.draw.rect(screen, ui_theme.PANEL_MUTED, r, 1)
 
             # Crouch/stand indicator: single pixelated icon right below the minimap.
             # Shows only the current stance. Bigger, with a little more vertical gap below the minimap
@@ -2328,34 +3133,34 @@ def run_demo() -> None:
             if is_stand:
                 # Standing icon (tall pixelated figure)
                 # head
-                pygame.draw.rect(screen, (210, 210, 190), (icon_x + 2*px, ind_y + 0*px, 3*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BRIGHT, (icon_x + 2*px, ind_y + 0*px, 3*px, 2*px))
                 # torso
-                pygame.draw.rect(screen, (190, 190, 170), (icon_x + 2*px, ind_y + 2*px, 3*px, 3*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW, (icon_x + 2*px, ind_y + 2*px, 3*px, 3*px))
                 # arms
-                pygame.draw.rect(screen, (175, 175, 155), (icon_x + 1*px, ind_y + 3*px, 1*px, 2*px))
-                pygame.draw.rect(screen, (175, 175, 155), (icon_x + 5*px, ind_y + 3*px, 1*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_MUTED, (icon_x + 1*px, ind_y + 3*px, 1*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_MUTED, (icon_x + 5*px, ind_y + 3*px, 1*px, 2*px))
                 # legs
-                pygame.draw.rect(screen, (160, 160, 140), (icon_x + 2*px, ind_y + 5*px, 1*px, 4*px))
-                pygame.draw.rect(screen, (160, 160, 140), (icon_x + 4*px, ind_y + 5*px, 1*px, 4*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BORDER, (icon_x + 2*px, ind_y + 5*px, 1*px, 4*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BORDER, (icon_x + 4*px, ind_y + 5*px, 1*px, 4*px))
             else:
                 # Crouching icon (short/wide pixelated figure)
                 # head
-                pygame.draw.rect(screen, (210, 210, 190), (icon_x + 2*px, ind_y + 2*px, 3*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BRIGHT, (icon_x + 2*px, ind_y + 2*px, 3*px, 2*px))
                 # wider crouched torso
-                pygame.draw.rect(screen, (190, 190, 170), (icon_x + 1*px, ind_y + 4*px, 5*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW, (icon_x + 1*px, ind_y + 4*px, 5*px, 2*px))
                 # short bent legs
-                pygame.draw.rect(screen, (160, 160, 140), (icon_x + 1*px, ind_y + 6*px, 2*px, 2*px))
-                pygame.draw.rect(screen, (160, 160, 140), (icon_x + 4*px, ind_y + 6*px, 2*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BORDER, (icon_x + 1*px, ind_y + 6*px, 2*px, 2*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_BORDER, (icon_x + 4*px, ind_y + 6*px, 2*px, 2*px))
                 # tiny arms
-                pygame.draw.rect(screen, (175, 175, 155), (icon_x + 0*px, ind_y + 5*px, 1*px, 1*px))
-                pygame.draw.rect(screen, (175, 175, 155), (icon_x + 6*px, ind_y + 5*px, 1*px, 1*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_MUTED, (icon_x + 0*px, ind_y + 5*px, 1*px, 1*px))
+                pygame.draw.rect(screen, ui_theme.YELLOW_MUTED, (icon_x + 6*px, ind_y + 5*px, 1*px, 1*px))
 
         if not current_key.startswith("till") and current_key != "customer":
             # Do not show movement directions or controls on till views or customer screen
             help_text = small_font.render(
                 "WASD = move  |  Q/E = turn  |  Ctrl = crouch/stand  |  Shift+O = console  |  Shift+I = toggle hand icons (text default)",
                 True,
-                (180, 180, 180),
+                ui_theme.PANEL_HINT,
             )
             screen.blit(help_text, (20, win_h - 30))
 
@@ -2371,36 +3176,42 @@ def run_demo() -> None:
             margin_below = 36 if current_key != "customer" else 6
             box_y = win_h - box_h - margin_below
 
-            pygame.draw.rect(screen, (15, 15, 18), (box_x, box_y, box_w, box_h))
-            pygame.draw.rect(screen, (50, 50, 58), (box_x, box_y, box_w, box_h), 1)
+            ui_theme.draw_panel(
+                screen, (box_x, box_y, box_w, box_h),
+                fill=ui_theme.CONSOLE_FILL,
+                border=ui_theme.CONSOLE_BORDER,
+                radius=4,
+            )
 
             ty = box_y + 2
             for line in lines:
-                txt = console_font.render(line[:72], True, (185, 185, 190))
+                txt = console_font.render(line[:72], True, ui_theme.CONSOLE_TEXT)
                 screen.blit(txt, (box_x + 4, ty))
                 ty += line_h
 
+        # Send-grade modal (after send_order on till)
+        if pending_send_items is not None:
+            _draw_send_grade_popup(
+                screen, font, small_font, win_w, win_h,
+                pending_send_items, send_popup_selection,
+                mx=mx, my=my, hover_grow=hover_grow, dt_seconds=dt_seconds)
+
         # --- Tooltip for hovered photo-button action (or top-nav / customer UI actions) ---
         # Mirrors the style and behaviour from the till_button_tool editor.
-        if tooltip_text:
-            # Use fresh mouse position for tooltip placement (defensive against any earlier rebinding of mx/my, and for accuracy)
+        if tooltip_text and pending_send_items is None:
             curr_mx, curr_my = pygame.mouse.get_pos()
-            tip_surf = small_font.render(tooltip_text, True, (255, 255, 255))
-            tip_x = curr_mx + 12
-            tip_y = curr_my + 8
-            # Nudge to stay on-screen
-            if tip_x + tip_surf.get_width() + 4 > win_w:
-                tip_x = curr_mx - tip_surf.get_width() - 14
-            if tip_y + tip_surf.get_height() + 4 > win_h:
-                tip_y = curr_my - tip_surf.get_height() - 14
-            bg = pygame.Rect(tip_x - 3, tip_y - 3, tip_surf.get_width() + 6, tip_surf.get_height() + 6)
-            pygame.draw.rect(screen, (25, 25, 30), bg)
-            pygame.draw.rect(screen, (90, 90, 100), bg, 1)
-            screen.blit(tip_surf, (tip_x, tip_y))
+            ui_theme.draw_tooltip(
+                screen, tooltip_text, small_font, curr_mx, curr_my, win_w, win_h)
 
         # --- Mouse cursor: hand when over any clickable (photo buttons, top tabs, customer buttons, photo area) ---
         is_clickable = tooltip_text is not None
-        if photo_rect is not None:
+        if pending_send_items is not None:
+            for rect, _grade in send_popup_option_rects:
+                rx, ry, rw, rh = rect
+                if rx <= mx < rx + rw and ry <= my < ry + rh:
+                    is_clickable = True
+                    break
+        if photo_rect is not None and pending_send_items is None:
             bx, by, bw, bh = photo_rect
             if bx <= mx <= bx + bw and by <= my <= by + bh:
                 is_clickable = True
@@ -2410,7 +3221,6 @@ def run_demo() -> None:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
 
         pygame.display.flip()
-        clock.tick(60)
 
     pygame.quit()
     print("Bar movement demo exited cleanly.")
@@ -2422,15 +3232,16 @@ def run_bar_review_session() -> None:
     - Loads all currently due cards that have content type "bar".
     - Uses their "response" field (the demand key) to drive customer orders
       while any remain.
-    - On each customer FINISH:
-        * For demands that were due: successful ones get FSRS grade=3,
-          unsuccessful ones get grade=2 (updates S/R/due in DB via schedulerReview + updateDB).
-        * Removes them from the due pool.
+    - On each customer FINISH (while not in practice mode):
+        * Only demands that were actually on the customer's list and still due are reviewed.
+        * Successful demands use the user's place/send self-grade; failed ones get Again.
+        * Extras placed or sent that were not demanded are never reviewed.
+        * Removes reviewed demands from the due pool.
     - When the last due bar card has been processed, shows
       "All cards reviewed. Exit or keep playing" and subsequent customers
-      are generated from the button-derived potentialOrders list (practice mode,
+      are generated from the button-derived BarGame list (practice mode,
       no further database writes or FSRS updates). See load_potential_orders() and
-      NeuroMods/Bar/potentialOrders.nm (regenerated by src/bar/genOrders.py; weighted by type).
+      NeuroMods/Bar/BarGame.nm (regenerated by src/bar/genOrders.py; weighted by type).
     - The normal pygame controls and customer UI remain available.
     - Closing the window or ESC returns to the CLI.
     """

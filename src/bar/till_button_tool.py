@@ -25,11 +25,13 @@ Images loaded from:
 Actions supported in game:
 - "order:ItemName" or "order:wordNewThing&Another"  -> adds to orders (note: take: use the required camel& scheme)
 - "take:wordNewThing&AnotherThing"  -> take item (all take: buttons must follow this naming)
+  (holding shotsGlass/shotGlass + take:spirit → spiritSingle; repeat → spiritDouble)
 - "send_order"            -> prints full order and clears
 - "switch:tillFoodBurgers" or "switch:tillLager" -> changes to that till screen (till names use camelCase)
 - "pour:BASE"             -> pour beer glass in hand (BASE -> BASEHalf -> BASEFull)
-- "crafting:RESULT"       -> craft using items in both hands
-- "thimble:25" / "thimble:50" / "thimble:125" -> measure wine in clicked hand (e.g. redFoo -> redFoo25)
+- "crafting:RESULT"       -> craft using items in both hands (fixed recipe)
+- "craft:" / "craft:combine" -> combine thimble-measured wines/spirits of same base in both hands
+- "thimble:25" / "thimble:50" / "thimble:125" -> measure wine or spirit in clicked hand (e.g. vodkaAbsolut -> vodkaAbsolut25)
 - "void:" or "void"       -> removes the most recently added order item
 - New send grades etc. also supported if defined in json
 
@@ -232,8 +234,10 @@ def main():
     screen = pygame.display.set_mode((1280, 800), pygame.RESIZABLE)
     pygame.display.set_caption("Till Button Editor - Drag to draw, click to edit | F11: fullscreen")
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont(None, 24)
-    small_font = pygame.font.SysFont(None, 20)
+    from .ui_fonts import ui_font
+
+    font = ui_font(24)
+    small_font = ui_font(20)
 
     def _wrap_text(text, font, max_width):
         """Word-wrap text to fit within max_width pixels using the given font."""
@@ -354,6 +358,8 @@ def main():
                 if "thimble" in lower_curr or lower_curr.startswith("thi") or lower_curr.startswith("th"):
                     for tsize in ("25", "50", "125"):
                         cross.append("thimble:" + tsize)
+                if "opener" in lower_curr or lower_curr.startswith("op"):
+                    cross.append("opener:")
             else:
                 direct = sorted(all_actions)
 
@@ -375,6 +381,7 @@ def main():
         # Instructions (no sidebar list) — left margin, line-wrapped so they don't get hidden by the image area
         inst = [
             "Left/Right arrows: switch view",
+            "Scroll wheel up/down: prev/next view (or suggestion list when editing Action)",
             "Bottom list: click any till name to switch view",
             "Ctrl+click a switch: button: jump to that screen (instead of select)",
             "Drag on image: create new button (now defaults to blank label + order:)",
@@ -589,6 +596,7 @@ def main():
                 "order:Madri",
                 "switch:tillFoodBurgers",
                 "void:",
+                "opener:",
                 "send_order"
             ]
             hy = panel_y + 300
@@ -712,6 +720,35 @@ def main():
                             selected_idx = (selected_idx + 1) % n
                             editing_label = editing_action = False
                             sugg_selected = 0
+
+            elif event.type == pygame.MOUSEWHEEL:
+                # Scroll up = arrow up, scroll down = arrow down.
+                if event.y > 0:
+                    if editing_action and current_suggestions:
+                        sugg_selected = max(0, sugg_selected - 1)
+                    else:
+                        try:
+                            idx = view_keys.index(current_view)
+                            current_view = view_keys[(idx - 1) % len(view_keys)]
+                            current_img = load_image(current_view)
+                            selected_idx = None
+                            editing_label = editing_action = False
+                            sugg_selected = 0
+                        except ValueError:
+                            pass
+                elif event.y < 0:
+                    if editing_action and current_suggestions:
+                        sugg_selected = min(len(current_suggestions) - 1, sugg_selected + 1)
+                    else:
+                        try:
+                            idx = view_keys.index(current_view)
+                            current_view = view_keys[(idx + 1) % len(view_keys)]
+                            current_img = load_image(current_view)
+                            selected_idx = None
+                            editing_label = editing_action = False
+                            sugg_selected = 0
+                        except ValueError:
+                            pass
 
             if event.type == pygame.MOUSEBUTTONDOWN and current_img:
                 mx, my = event.pos

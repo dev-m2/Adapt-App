@@ -1,0 +1,288 @@
+content,source
+### BarText.nm:
+# Missing: peach iced tea, and raspberry iced tea mocktails; HS pints; sodas by themselves? glass image-text cards;
+
+# Cocktail Methods text
+"{""cue"": ""Describe the Shake & (Double) Strain cocktail method:"", ""response"": ""\nWhy: shaking gives a colder temperature than other methods;\n1. Add ingredients to a shaker glass, then add ice;\n2. Top with shaker tin at an angle and shake until tin is chilled;\n3. Tap the shaker to break the seal;\n4. Use a hawthorn strainer (or tea strainer for a double strain) to pass the cocktail into the glass;"", ""type"": ""text""}",Bar.nm
+"{""cue"": ""Describe the Stir (& Strain) cocktail method:"", ""response"": ""\nWhy: minimizes dilution, by allowing for less ice water to mix;\n1. Pour ingredients and ice into glass together;\n2. Place a bar spoon into the bottom;\n3. Rotate spoon circularly for up to 15 seconds;"", ""type"": ""text""}",Bar.nm
+"{""cue"": ""Describe the Build (& Stir) cocktail method:"", ""response"": ""\nWhy: simplest; when flavours are best left as they are;\n1. Add ice;\n2. Pour ingredients over ice;\n3. When needed, place a bar spoon into the bottom of the glass and stir gently;"", ""type"": ""text""}",Bar.nm
+"{""cue"": ""Describe the Muddle cocktail method:"", ""response"": ""\nWhy: for gently mashing herbs or fruit to release their juices\n1. Put a clean muddler into the shaker or glass contents\n2. Grasp the muddler, and put it in and out of the drink, ensuring all ingredients are mixed together; ensure any fruits are muddled to a pulp;"", ""type"": ""text""}",Bar.nm
+
+# Cocktails text
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/889888739/aa44777051"", ""cue"": ""How to make an Aperol Spritz cocktail?"", ""response"": ""\nIngredients: 50ml Aperol, 100ml Prosecco, 25ml Soda Water, 1 orange slice;\nItems: Vina Juliette Wine Glass\nSteps: 1. Add ice; 2. Add Aperol, Prosecco and soda water; 3. Stir; 4. Add slice"",""type"": ""text""}","Bar.nm"
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/973041699/473a3ff5b6"", ""cue"": ""How to make a Passionfruit Martini cocktail?"", ""response"": ""\nIngredients: 125ml Tails Passionfruit Martini, 50ml Prosecco, 2g Raspberry Dust;\nItems: Martini glass, Boston shaker & tin, Hawthorn strainer, shot glass;\nSteps: 1. Fill with ice; 2. Add Tails and ice to shaker; 3. Remove ice from Martini glass; 4. Shake and strain; 5. Add Prosecco to the shot glass, add garnish to the Martini, and serve both"",""type"": ""text""}",Bar.nm
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/1019789636/8aae57929e"", ""cue"": ""How to make a Blue Lagoon cocktail?"", ""response"": ""\nIngredients: 50ml JJ Artisanal Vodka, 12.5ml Disco Blue Syrup, 100ml Schweppes Slimline Lemonade, 1 Lemon Slice;\nItems: Broadway Hi Ball glass, Bar Spoon\nSteps: 1. Add ice; 2. Add vodka and syrup; 3. Stir; 4. Top with lemonade; 5. Stir again, add garnish, and serve"",""type"": ""text""}",Bar.nm
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/900124687/4b899e3d65"", ""cue"": ""How to make a Pina Colada cocktail?"", ""response"": ""\nIngredients: 125ml Tails Pina Colada, 1 orange slice;\nItems: Capri glass, Boston Shaker glass & tin, Hawthorn Strainer;\nSteps: 1. Add ice; 2. Fill shaker with ice and Tails; 3. Shake and strain; 4. Add garnish and serve;"",""type"": ""text""}",Bar.nm
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/889888102/3a450fc56c"", ""cue"": ""How to make a Rum Punch cocktail?"", ""response"": ""\nIngredients: 125ml Tails Rum Punch, 1 orange slice, 1 cherry\nItems: Capri glass, Boston shaker & tin, Hawthorn strainer\nSteps: 1. Add ice; 2. Fill shaker with ice and Tails; 3. Shake and strain; 4. Add garnish and serve;"",""type"": ""text""}",Bar.nm
+"{""cue"": ""How to make classic Mojito + Flavour cocktail?"", ""response"": ""\nIngredients: 125ml Tails Mojito, 50ml soda water, 25ml Raspberry/Passionfruit or other syrup, 1 lemon slice;\nItems: Broadway Hi Ball glass, Boston shaker glass & tin, hawthorn strainer;\nSteps: 1. Add ice; 2. Fill shaker with ice and Tails mix; 3. Shake & strain; 4. Top with soda (no flavour) or add flavour and then top; 5. Add garnish and serve;"",""type"": ""text""}",Bar.nm
+"{""cue"": ""How to make a Tropical Woo Woo cocktail?"", ""response"":""\nIngredients: 25ml JJ Raspberry Vodka, 25ml Archers Peach Schnapps, 100ml Schweppes Tropical Soda, lemon slice;\nItems: Broadway Hi Ball glass, bar spoon;\nSteps: 1. Add ice; 2. Add spirits and soda; 3. Stir; 4. Add garnish and serve;"", ""type"": ""text""}",Bar.nm
+
+# Mocktails text
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/1013159355/f5cf5d6157"", ""cue"": ""How to make a Schweppes Aperitivo Spritz mocktail?"", ""response"": ""\nIngredients: 1 can of Schweppes Aperitivo Spritz mocktail, 1 orange slice;\nItems: Vina Juliette Wine glass;\nSteps: 1. Add ice; 2. Pour can contents over ice; 3. Add garnish and serve;"", ""type"": ""text""}",Bar.nm
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/1013159821/b1df0e0500"", ""cue"": ""How to make a Schweppes Mojito mocktail?"", ""response"": ""\nIngredients: 1 can of Schweppes Mojito mocktail, 1 lime slice\nItems: Broadway Hi Ball glass\nSteps: 1. Add ice; 2. Pour can contents over ice; 3. Add garnish and serve"", ""type"": ""text""}",Bar.nm
+
+# Softs text
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/1019789559/322bb9abc6"", ""cue"": ""How to make a house soda?"", ""response"": ""\nIngredients: 25ml syrup of lemon & lime sherbet (12.5ml each) / Grapefruit Sherbet / Peach & Raspberry / Cherry & Vanilla / Passionfruit\n150ml soda water, 1 lime slice;\nItems: Hi Ball Can glass, bar spoon;\nSteps: 1. Add ice; 2. Add syrup and soda water; 3. Stir; 4. Add garnish and serve;"", ""type"": ""text""}",Bar.nm
+
+# Hot Drinks text
+"{""cue"": ""How to make a Baileys Latte?"", ""response"": ""\nIngredients: 25ml Baileys Irish Cream, 14g Whitbread Espresso Beans, 195ml Semi-Skimmed Milk, 12g Aerosol Cream;\nItems: Barrel Hot Drinks Mug, Teaspoon, White Saucer;\nSteps: 1. Fill with hot water halfway (to warm up), then discard; 2. Add Baileys; 3. Pour latte via coffee machine; 4. Remove mug once latte reaches two fingers from the top; 5. Add aerosol swirl and serve;"", ""type"": ""text""}",Bar.nm
+"{""cue"": ""How to make an Irish Coffee?"", ""response"": ""\nIngredients: 25ml Jameson Whiskey, 14g Whitbread Espresso Beans, 100ml Hot Water, 12g Aerosol Cream, 2 Demerara Sugars;\nItems: Barrel Hot Drinks Mug, Teaspoon, White Saucer;\nSteps: 1. Fill with hot water halfway (to warm up), then discard; 2. Add sugar and whiskey; 3. Pour double espresso via coffee machine; 4. Stir sugar, whiskey and espresso, and top with hot water up to two fingers from the top; 5. Add aerosol swirl and serve;"", ""type"": ""text""}",Bar.nm
+"{""cue"": ""How to make a S'Mores Hot Chocolate?"", ""response"": ""\nIngredients: 25ml Sweetbird S'mores Syrup, 30g Whitbread Hot Chocolate Powder, 227ml Hot Milk, 12g Aerosol Cream, 1 Choc Stix;\nItems: Barrel Glass;\nSteps: 1. Fill halway with hot water (to warm up), then discard; 2. Add syrup; 3. Pour hot chocolate via coffee machine; 4. Add aerosol cream in a spiral peak; 5. Add Stix and serve;"", ""type"": ""text""}",Bar.nm
+
+# Shot Bombs text
+"{""helpType"": ""link"", ""help"": ""https://vimeo.com/1040751564/16d99eaf12"", ""cue"": ""How to make a Baby Guinness?"", ""response"": ""\nIngredients: 37.5ml  Tia Maria (3/4 Shot Glass), 12.5ml Baileys Original Irish Cream (1/4 Shot Glass);\nItems: Shot Glass, Bar Spoon;\nSteps: 1. Pour Tia Maria into 3/4 glass; 2. Use back of bar spoon to slowly layer Baileys on top; 3. Serve"", ""type"": ""text""}",Bar.nm
+
+# Cocktails images
+#"{""cue"": ""How to make a Tropical Woo Woo cocktail?"", ""response"":"""", ""type"":""text-image"", ""path"":""NeuroMods/Bar/Recipe Images/tropical_woo_woo.jpg""}",Bar.nm
+
+### BarGame.nm:
+"{""type"": ""bar"", ""cue"": ""a Pimm's Single"", ""response"": ""aperitifPimm'sSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an appletiser Apple Juice"", ""response"": ""appletiserAppleJuiceOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an aqualibra Can Sparkling"", ""response"": ""aqualibraCanSparkling""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a beavertown Brewery Lazer Crush Zero"", ""response"": ""beavertownBreweryLazerCrushZeroOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a brixton Reliance Pale Ale Can"", ""response"": ""brixtonReliancePaleAleCan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Carling Pint"", ""response"": ""carlingGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Walkers Cheese & Onion"", ""response"": ""chipsWalkersCheese&Onion""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Walkers Prawn Coctail"", ""response"": ""chipsWalkersPrawnCoctail""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Walkers Ready Salted"", ""response"": ""chipsWalkersReadySalted""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Walkers Salt & Vinegar"", ""response"": ""chipsWalkersSalt&Vinegar""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a cider Bulmers Original"", ""response"": ""ciderBulmersOriginal""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""cider Old Mout Berries & Cherries"", ""response"": ""ciderOldMoutBerries&Cherries""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a cider Rekorderlig Strawberry Lime"", ""response"": ""ciderRekorderligStrawberryLime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a cider Rekorderlig Strawberry Lime Zero"", ""response"": ""ciderRekorderligStrawberryLimeZeroOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""cider Rekorderlig Wild Berries"", ""response"": ""ciderRekorderligWildBerries""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a coke Can"", ""response"": ""cokeCan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Coors Pint"", ""response"": ""coorsGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cognac Single"", ""response"": ""courvoisierCognacSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cruzcampo Pint"", ""response"": ""cruzcampoGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a diet Coke Can"", ""response"": ""dietCokeCan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Doom Bar Pint"", ""response"": ""doombarGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a fever Tree Raspberry Lemonade"", ""response"": ""feverTreeRaspberryLemonadeOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a 7oz Gammon"", ""response"": ""food7ozGammon""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a 8oz Rump"", ""response"": ""food8ozRump""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a 8oz Sirlloin"", ""response"": ""food8ozSirlloin""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Apple Betty"", ""response"": ""foodAppleBetty""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Daytime BBQChicken Wings"", ""response"": ""foodBBQChickenWingsDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a BBQPizza"", ""response"": ""foodBBQPizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Bacon"", ""response"": ""foodBaconExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Banoffee Cheese Cake"", ""response"": ""foodBanoffeeCheeseCake""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Beans"", ""response"": ""foodBeansExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Beef & Ale Pie"", ""response"": ""foodBeef&AlePie""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Beef Lasagne"", ""response"": ""foodBeefLasagne""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Berry Blast Sundae"", ""response"": ""foodBerryBlastSundaeKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Bigstack Burger"", ""response"": ""foodBigstackBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Bombay Burger"", ""response"": ""foodBombayBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Bombay Hash"", ""response"": ""foodBombayHash""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Bombay Hash"", ""response"": ""foodBombayHashVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Bread & Butter"", ""response"": ""foodBread&ButterExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Breaded Mushrooms"", ""response"": ""foodBreadedMushrooms""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Daytime Breaded Mushrooms"", ""response"": ""foodBreadedMushroomsDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Brownie"", ""response"": ""foodBrownie""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Burger Chips"", ""response"": ""foodBurgerChipsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Burrito Bowl"", ""response"": ""foodBurritoBowl""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Burrito Chicken"", ""response"": ""foodBurritoChicken""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Burrito Rump"", ""response"": ""foodBurritoRump""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cadbury Sundae"", ""response"": ""foodCadburySundae""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Cadbury Sundae"", ""response"": ""foodCadburySundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Calamari"", ""response"": ""foodCalamari""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Caramel Apple Betty"", ""response"": ""foodCaramelAppleBettyDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Carvery"", ""response"": ""foodCarvery""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Carvery"", ""response"": ""foodCarveryKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Carvery Large"", ""response"": ""foodCarveryLarge""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Carvery"", ""response"": ""foodCarveryVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Carvery Vegetarian"", ""response"": ""foodCarveryVegetarian""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Cheese"", ""response"": ""foodCheeseExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Chicken Breast"", ""response"": ""foodChickenBreastExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Chicken Goujon"", ""response"": ""foodChickenGoujon""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Chicken Tikka Curry"", ""response"": ""foodChickenTikkaCurryDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Chips"", ""response"": ""foodChipsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Chocolate Brownie"", ""response"": ""foodChocolateBrownieDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Chocolate Brownie"", ""response"": ""foodChocolateBrownieKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Chocolate Cake"", ""response"": ""foodChocolateCake""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Chocolate Cake"", ""response"": ""foodChocolateCakeVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cinamon Sundae"", ""response"": ""foodCinamonSundae""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Cinnamon Sundae"", ""response"": ""foodCinnamonSundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Classic Burger"", ""response"": ""foodClassicBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Classic Cheeseburger"", ""response"": ""foodClassicCheeseburgerDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cobb Salad"", ""response"": ""foodCobbSalad""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Cobb Salad"", ""response"": ""foodCobbSaladVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Coleslaw"", ""response"": ""foodColeslawSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Continental Breakfast"", ""response"": ""foodContinentalBreakfast""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cowboy Burger"", ""response"": ""foodCowboyBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Crispy Prawns"", ""response"": ""foodCrispyPrawns""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Crumble Sundae"", ""response"": ""foodCrumbleSundae""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Crumble Sundae"", ""response"": ""foodCrumbleSundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Custard"", ""response"": ""foodCustardExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Egg"", ""response"": ""foodEggExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Falafel"", ""response"": ""foodFalafel""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Falafel"", ""response"": ""foodFalafelDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Daytime Fish & Chips"", ""response"": ""foodFish&ChipsDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Fish Cake"", ""response"": ""foodFishCake""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Fish Cake"", ""response"": ""foodFishCakeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Flatbread Breakfast"", ""response"": ""foodFlatbreadBreakfastDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Flatbread Chicken"", ""response"": ""foodFlatbreadChickenDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Fruit Salad"", ""response"": ""foodFruitSalad""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Fruit Salad"", ""response"": ""foodFruitSaladDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Fruit Salad"", ""response"": ""foodFruitSaladKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Full Breakfast"", ""response"": ""foodFullBreakfast""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Gammon"", ""response"": ""foodGammonDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Gammon Upgraded"", ""response"": ""foodGammonUpgradedDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Garlic Bread"", ""response"": ""foodGarlicBread""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Garlic Bread Cheese"", ""response"": ""foodGarlicBreadCheese""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Garlic Bread Cheese"", ""response"": ""foodGarlicBreadCheeseDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Garlic Bread Cheese"", ""response"": ""foodGarlicBreadCheeseSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Garlic Bread"", ""response"": ""foodGarlicBreadSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Gravy"", ""response"": ""foodGravyExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Haddock & Chips"", ""response"": ""foodHaddock&Chips""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Haddock"", ""response"": ""foodHaddockDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Honeyracha"", ""response"": ""foodHoneyrachaSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Ice Cream"", ""response"": ""foodIceCreamExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Ice Cream"", ""response"": ""foodIceCreamKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Vegan Ice Cream"", ""response"": ""foodIceCreamVeganSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Indian Nibbles"", ""response"": ""foodIndianNibbles""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Indian Nibbles"", ""response"": ""foodIndianNibblesSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Vegan Indian Nibbles"", ""response"": ""foodIndianNibblesVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Katsu Chips"", ""response"": ""foodKatsuChipsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Katsu Curry"", ""response"": ""foodKatsuCurry""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Katsu Curry Sauce"", ""response"": ""foodKatsuCurrySauceExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Beef Burger"", ""response"": ""foodKidsBYBeefBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Chicken Breast Burger"", ""response"": ""foodKidsBYChickenBreastBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Fish Bites"", ""response"": ""foodKidsBYFishBites""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Margherita Pizza"", ""response"": ""foodKidsBYMargheritaPizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Spag Bowl"", ""response"": ""foodKidsBYSpagBowl""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Berry Blast Sundae"", ""response"": ""foodKidsBerryBlastSundae""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Chocolate Brownie"", ""response"": ""foodKidsChocolateBrownie""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Fish Bites"", ""response"": ""foodKidsFishBites""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Fruit Salad"", ""response"": ""foodKidsFruitSalad""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Garlic Flatbread"", ""response"": ""foodKidsGarlicFlatbread""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Pancakes"", ""response"": ""foodKidsPancakes""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Rainbow Lolly"", ""response"": ""foodKidsRainbowLolly""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Chicken Breast"", ""response"": ""foodKidsSTChickenBreast""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Fish Bites"", ""response"": ""foodKidsSTFishBites""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Poppin Chicken"", ""response"": ""foodKidsSTPoppinChicken""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Pork Sausage & Mash"", ""response"": ""foodKidsSTPorkSausage&Mash""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Vegan Pork Sausage & Mash"", ""response"": ""foodKidsSTPorkSausage&MashVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Sausage & Mash"", ""response"": ""foodKidsSTSausage&Mash""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Vegan Sausage & Mash"", ""response"": ""foodKidsSTSausage&MashVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Tomato Pasta"", ""response"": ""foodKidsSTTomatoPasta""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Tortilla Chips"", ""response"": ""foodKidsTortillaChips""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Vegan Tortilla Chips"", ""response"": ""foodKidsTortillaChipsVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Kids Vanilla Ice Cream"", ""response"": ""foodKidsVanillaIceCream""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Veggie Sticks"", ""response"": ""foodKidsVeggieSticks""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Korean Burger"", ""response"": ""foodKoreanBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Korean Chilli"", ""response"": ""foodKoreanChilliSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Korean Chips"", ""response"": ""foodKoreanChipsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Korean Grilled Burger"", ""response"": ""foodKoreanGrilledBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Lamb Kofta"", ""response"": ""foodLambKofta""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Lasagne"", ""response"": ""foodLasagneDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Loaded Nachos"", ""response"": ""foodLoadedNachos""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Mac & Cheese Bites"", ""response"": ""foodMac&CheeseBites""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Margherita Pizza"", ""response"": ""foodMargheritaPizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Margherita Pizza"", ""response"": ""foodMargheritaPizzaDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Mexican Chips"", ""response"": ""foodMexicanChipsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Mini Cadbury Sundae"", ""response"": ""foodMiniCadburySundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Mini Cinamon Sundae"", ""response"": ""foodMiniCinamonSundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Mini Crumble Sundae"", ""response"": ""foodMiniCrumbleSundaeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Mixed Grill"", ""response"": ""foodMixedGrill""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Mixed Grill Upgrade"", ""response"": ""foodMixedGrillUpgrade""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Naan Bread"", ""response"": ""foodNaanBreadSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Onion Rings"", ""response"": ""foodOnionRingsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Kids Pancakes"", ""response"": ""foodPancakesKids""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Peperoni Pizza"", ""response"": ""foodPeperoniPizzaDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Peppercorn Sauce"", ""response"": ""foodPeppercornSauceExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Pepperoni Pizza"", ""response"": ""foodPepperoniPizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Pigs In Blankets?"", ""response"": ""foodPigsInBlankets?Side""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""extra Poppadom"", ""response"": ""foodPoppadomExtra""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Salad"", ""response"": ""foodSaladSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Daytime Sausage & Mash"", ""response"": ""foodSausage&MashDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""Daytime Vegan Sausage & Mash"", ""response"": ""foodSausage&MashVeganDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Sausage1 X"", ""response"": ""foodSausage1XSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Semifreddo"", ""response"": ""foodSemifreddo""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Sharing Platter"", ""response"": ""foodSharingPlatter""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Smothered Chicken"", ""response"": ""foodSmotheredChicken""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Smothered Chicken"", ""response"": ""foodSmotheredChickenDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Smothered Chicken Upgrade"", ""response"": ""foodSmotheredChickenUpgradeDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Smothered Platter"", ""response"": ""foodSmotheredPlatter""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Smothered Platter Upgrade"", ""response"": ""foodSmotheredPlatterUpgrade""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Spinash Lasagne"", ""response"": ""foodSpinashLasagne""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""side Sprouts"", ""response"": ""foodSproutsSide""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Thai Curry"", ""response"": ""foodThaiCurry""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Thai Curry"", ""response"": ""foodThaiCurryDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Tikka Curry"", ""response"": ""foodTikkaCurry""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Tikka Pizza"", ""response"": ""foodTikkaPizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Tomato Soup"", ""response"": ""foodTomatoSoup""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Tomato Soup"", ""response"": ""foodTomatoSoupDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Daytime Vegan Tomato Soup"", ""response"": ""foodTomatoSoupVeganDaytime""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Tomatosoup"", ""response"": ""foodTomatosoupVegan""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vegan Burger"", ""response"": ""foodVeganBurger""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Veggie Pizza"", ""response"": ""foodVeggiePizza""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Wing Roulette"", ""response"": ""foodWingRoulette""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a fruit Shoot Apple & Blackberry"", ""response"": ""fruitShootApple&Blackberry""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a fruit Shoot Orange"", ""response"": ""fruitShootOrange""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Bombay Sapphire Single"", ""response"": ""ginBombaySapphireSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a JJ London Dry Single"", ""response"": ""ginJjLondonDrySingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a JJ Whitley Pink Single"", ""response"": ""ginJjWhitleyPinkSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a guiness Can Zero"", ""response"": ""guinessCanZero""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Guinness Pint"", ""response"": ""guinessGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a heineken Bottle"", ""response"": ""heinekenBottleOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a heineken Zero"", ""response"": ""heinekenZeroOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a j20 Apple & Mango"", ""response"": ""j20Apple&MangoOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a j20 Dragon Berry"", ""response"": ""j20DragonBerryOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a j20 Orange & Passionfruit"", ""response"": ""j20Orange&PassionfruitOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Antica Sambuca Classic Single"", ""response"": ""liqueurAnticaSambucaClassicSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Antica Sambuca Liquorice Single"", ""response"": ""liqueurAnticaSambucaLiquoriceSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Aperol Single"", ""response"": ""liqueurAperolSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Archers Peach Schnapps Single"", ""response"": ""liqueurArchersPeachSchnappsSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Cointreau Single"", ""response"": ""liqueurCointreauSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jägermeister Single"", ""response"": ""liqueurJagermeisterSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Southern Comfort Single"", ""response"": ""liqueurSouthernComfortSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Tia Maria Single"", ""response"": ""liqueurTiaMariaSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Madri Pint"", ""response"": ""madriGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a madri Zero"", ""response"": ""madriZeroOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Moretti Pint"", ""response"": ""morettiGlassFull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a peroni Bottle"", ""response"": ""peroniBottleOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a peroni Zero"", ""response"": ""peroniZeroOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a pip Apple"", ""response"": ""pipApple""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a pip Strawberry & Blackcurrent"", ""response"": ""pipStrawberry&Blackcurrent""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Andrew Peace Silhouette Shiraz 125ml"", ""response"": ""redAndrewPeaceSilhouetteShiraz125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Andrew Peace Silhouette Shiraz 250ml"", ""response"": ""redAndrewPeaceSilhouetteShiraz250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Campo Viejo Rioja Tempranillo 125ml"", ""response"": ""redCampoViejoRiojaTempranillo125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Campo Viejo Rioja Tempranillo 250ml"", ""response"": ""redCampoViejoRiojaTempranillo250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Finca Del Alta Malbec 125ml"", ""response"": ""redFincaDelAltaMalbec125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Finca Del Alta Malbec 250ml"", ""response"": ""redFincaDelAltaMalbec250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Flagstone Poetry Merlot 250ml"", ""response"": ""redFlagstonePoetryMerlot250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jam Shed Shiraz 125ml"", ""response"": ""redJamShedShiraz125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jam Shed Shiraz 250ml"", ""response"": ""redJamShedShiraz250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Viña Arroba Tempranillo 125ml"", ""response"": ""redVinaArrobaTempranillo125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Viña Arroba Tempranillo 250ml"", ""response"": ""redVinaArrobaTempranillo250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a redbull"", ""response"": ""redbull""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jack Rabbit White Zinfandel 125ml"", ""response"": ""roseJackRabbitWhiteZinfandel125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jack Rabbit White Zinfandel 250ml"", ""response"": ""roseJackRabbitWhiteZinfandel250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Ned Marlborough Pinot 125ml"", ""response"": ""roseNedMarlboroughPinot125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Ned Marlborough Pinot 250ml"", ""response"": ""roseNedMarlboroughPinot250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vina Arroba Tempranillo Rosado 125ml"", ""response"": ""roseVinaArrobaTempranilloRosado125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vina Arroba Tempranillo Rosado 250ml"", ""response"": ""roseVinaArrobaTempranilloRosado250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vino Pomona Pinot Grigio Rosé 125ml"", ""response"": ""roseVinoPomonaPinotGrigio125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Vino Pomona Pinot Grigio Rosé 250ml"", ""response"": ""roseVinoPomonaPinotGrigio250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Captain Morgan Dark Single"", ""response"": ""rumCaptainMorganDarkSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Captain Morgan Spiced Gold Single"", ""response"": ""rumCaptainMorganSpicedGoldSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Captain Morgan White Single"", ""response"": ""rumCaptainMorganWhiteSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Dead Man's Fingers Single"", ""response"": ""rumDeadMan'sFingersSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Malibu Original Coconut Single"", ""response"": ""rumMalibuOriginalCoconutSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a schweppes Orange Juice"", ""response"": ""schweppesOrangeJuiceOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a schweppes Pineapple Juice"", ""response"": ""schweppesPineappleJuiceOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a schweppes Slimline Tonic Water"", ""response"": ""schweppesSlimlineTonicWaterOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a sol Bottle"", ""response"": ""solBottleOpened""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an El Jimador Blanco Single"", ""response"": ""tequilaElJimadorBlancoSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an El Jimador Reposado Single"", ""response"": ""tequilaElJimadorReposadoSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Rose Single"", ""response"": ""tequilaRoseSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Absolut Single"", ""response"": ""vodkaAbsolutSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jack Daniel's Single"", ""response"": ""whiskeyJackDaniel'sSingle""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Andrew Peace Silhouette Chardonnay 125ml"", ""response"": ""whiteAndrewPeaceSilhouetteChardonnay125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""an Andrew Peace Silhouette Chardonnay 250ml"", ""response"": ""whiteAndrewPeaceSilhouetteChardonnay250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jack Rabbit Pinot Grigio 125ml"", ""response"": ""whiteJackRabbitPinotGrigio125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jack Rabbit Pinot Grigio 250ml"", ""response"": ""whiteJackRabbitPinotGrigio250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jam Shed Chardonnay 125ml"", ""response"": ""whiteJamShedChardonnay125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Jam Shed Chardonnay 250ml"", ""response"": ""whiteJamShedChardonnay250""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Ned Sauvignon Blanc 125ml"", ""response"": ""whiteNedSauvignonBlanc125""}",BarGame.nm
+"{""type"": ""bar"", ""cue"": ""a Ned Sauvignon Blanc 250ml"", ""response"": ""whiteNedSauvignonBlanc250""}",BarGame.nm

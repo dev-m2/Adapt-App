@@ -1,6 +1,7 @@
 fsrs
 chafa.py
 pandas
+pygame
 
 [dev]
 pyinstaller

@@ -1,0 +1,10 @@
+# Customer roster — edit display name or image file per line.
+# Format: Display Name=image filename (inside Customer Images/)
+# Lines starting with # are ignored.
+
+Wyatt Calhoun=Wyatt Calhoun.png
+Rhett Donovan=Rhett Donovan.png
+Karen Mitchell=Karen Mitchell.png
+Brian Forsyth=Brian Forsyth.png
+Harold Pemberton=Harold Pemberton.png
+Margaret Sloan=Margaret Sloan.png

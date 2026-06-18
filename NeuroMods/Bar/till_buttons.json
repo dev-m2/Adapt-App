@@ -1174,9 +1174,9 @@
         249,
         177
       ],
-      "label": "Take",
+      "label": "125ml",
       "color": "transparent black",
-      "action": "take:125mlThimble"
+      "action": "thimble:125"
     },
     {
       "rect": [
@@ -1185,9 +1185,9 @@
         222,
         140
       ],
-      "label": "Take",
+      "label": "50ml",
       "color": "transparent black",
-      "action": "take:50mlThimble"
+      "action": "thimble:50"
     },
     {
       "rect": [
@@ -1196,9 +1196,9 @@
         208,
         122
       ],
-      "label": "Take",
+      "label": "25ml",
       "color": "transparent black",
-      "action": "take:25mlThimble"
+      "action": "thimble:25"
     },
     {
       "rect": [
@@ -2381,7 +2381,7 @@
       ],
       "label": "Pour",
       "color": "transparent black",
-      "action": "pour:alpalypseGlass"
+      "action": "pour:alpacalypseGlass"
     }
   ],
   "1W1": [
@@ -8029,6 +8029,20 @@
       "label": "Pour",
       "color": "transparent black",
       "action": "pour:alpalypseGlass"
+    }
+  ],
+  "5N1": [],
+  "6N1": [
+    {
+      "rect": [
+        578,
+        1730,
+        512,
+        306
+      ],
+      "label": "Open",
+      "color": "transparent black",
+      "action": "opener:"
     }
   ]
 }

@@ -1,4 +1,4 @@
-from .utils import CONTENT_EMPTY, SCHEDULING_DEFAULT, STATE_DEFAULT # for updateDB()
+from .utils import CONTENT_EMPTY, SCHEDULING_DEFAULT, STATE_DEFAULT, PROJECT_ROOT # for updateDB()
 import sqlite3
 from contextlib import contextmanager # for connectDB()
 import json         # for updateDB()
@@ -6,7 +6,7 @@ import pandas as pd # for dbDataFrame()
 
 
 
-DATABASE_PATH = "../adaptations.db"
+DATABASE_PATH = PROJECT_ROOT / "src/adaptations.db"
 MAIN_TABLE = "adaptations"
 
 @contextmanager
@@ -23,7 +23,7 @@ def initDB():
         conn.execute(f"""
             CREATE TABLE IF NOT EXISTS {MAIN_TABLE} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                content TEXT,
+                content TEXT UNIQUE,
                 scheduling TEXT,
                 state TEXT,
                 due TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%f+00:00', 'now')),

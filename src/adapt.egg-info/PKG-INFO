@@ -5,6 +5,7 @@ License-File: LICENSE
 Requires-Dist: fsrs
 Requires-Dist: chafa.py
 Requires-Dist: pandas
+Requires-Dist: pygame
 Provides-Extra: dev
 Requires-Dist: pyinstaller; extra == "dev"
 Dynamic: license-file

@@ -10,8 +10,12 @@ import shutil
 # from chafa.loader import Loader
 import subprocess
 
+import json
 import sys
+import webbrowser
 from pathlib import Path
+
+import pandas as pd
 
 if getattr(sys, 'frozen', False):
     base_path = Path(sys._MEIPASS)
@@ -72,6 +76,57 @@ def inputCode(opening_text = ""):
             break
     
     return '\n'.join(lines) # joins into one string
+
+
+def AIhasValidReviewHelp(content_dict: dict) -> bool:
+    """True when content has a supported helpType and non-empty help value."""
+    help_type = content_dict.get("helpType")
+    if help_type is None or not str(help_type).strip():
+        return False
+    if str(help_type).strip().lower() != "link":
+        return False
+    return bool(str(content_dict.get("help") or "").strip())
+
+
+def AIreviewAnswerPrompt(content_dict: dict) -> str:
+    """Answer input prompt — mentions HELP only when help is configured."""
+    if AIhasValidReviewHelp(content_dict):
+        return 'Answer (or "HELP"): '
+    return "Answer: "
+
+
+def AIpromptReviewAnswer(content_dict: dict, prompt_text: str) -> str:
+    """Prompt for a review answer; typing HELP uses optional help / helpType content keys."""
+    while True:
+        answer = input(prompt_text).strip()
+        if answer.upper() != "HELP":
+            return answer
+
+        help_type = content_dict.get("helpType")
+        if help_type is None or not str(help_type).strip():
+            print("helpType is missing.")
+            continue
+
+        help_type = str(help_type).strip().lower()
+        if help_type != "link":
+            print(f'Unsupported helpType: "{help_type}" (only "link" is supported).')
+            continue
+
+        url = str(content_dict.get("help") or "").strip()
+        if not url:
+            print("help is empty.")
+            continue
+
+        if not webbrowser.open(url):
+            print(f"Could not open URL in browser: {url}")
+
+
+def AIreadNeuromodCSV(file_path: str | Path) -> pd.DataFrame:
+    """Load a .nm file (content,source CSV), ignoring lines that start with #."""
+    df = pd.read_csv(file_path, comment="#")
+    df = df.dropna(subset=["content", "source"], how="any")
+    df["content"] = df["content"].apply(json.loads)
+    return df
 
 # All 3 for createAdaptation(), as starting points
 CONTENT_EMPTY = {
